@@ -1,3 +1,3 @@
-public class Reposición{
+public class Reposicion{
 
 }
