@@ -32,25 +32,5 @@ public class Caja{
     }
 
 
-        // para el cierre del dia 
-    public String resumenDelDia() {
-        return "=== Cierre del día ===\n"
-                + "Facturas emitidas: " + facturasEmitidas + "\n"
-                + "Vendido: $" + totalVendido + "\n"
-                + "Ganancia: $" + gananciaTotal + "\n"
-                + "Reposiciones: " + reposicionesRealizadas + "\n"
-                + "Invertido: $" + totalInvertido + "\n"
-                + "Ticket promedio: $" + calcularTicketPromedio();
-    }
-
-
-        // los getters de caja
-     public int getFacturasEmitidas() { return facturasEmitidas; }
-    public double getTotalVendido() { return totalVendido; }
-    public double getGananciaTotal() { return gananciaTotal; }
-    public double getTotalInvertido() { return totalInvertido; }
-    public int getReposicionesRealizadas() { return reposicionesRealizadas; }
-
-
 
 }
