@@ -1,6 +1,12 @@
 public class Producto{
-
-    private static int id=0;
+    /* Pruebas ejemplos
+    new Producto("Bafle1","Sonido","Estante 1",10_000, 15_000, 10, 3, 0);
+    new Producto("Xbox360","Consolas","Estante 1",500_000, 600_000, 5, 2, 6);
+    new Producto("Radio1","Sonido","Repisa",70_000, 100_000, 4, 0, 3);
+    new Producto("Bafle2","Sonido","Mostrador",600_000, 900_000, 8, 2, 6);
+    new Producto("Power Bank","Otros","Colgado",50_000, 70_000, 3, 0, 1);
+    */
+    private static int id=1;
 
     private String nombre;
     private String categoria;
@@ -13,6 +19,8 @@ public class Producto{
     private int garantia=0;
     private int precioMinimo;
     private int ID;
+
+    private boolean deSobra=false;
     
     //Revisar si a futuro los parametros del contructor se puede pasar como una lista o array.
 
@@ -51,7 +59,7 @@ public void setCostoCompra(int nuevoCosto){costoCompra=nuevoCosto>=0?nuevoCosto:
 //=====================GANANCIA MINIMA====================
 public int getGananciaMinima(){ return gananciaMinima;}
 
-public void setGananciaMinima(int nuevaGanancia){gananciaMinima = nuevaGanancia>=0?nuevaGanancia:gananciaMinima; setPrecioMinimo(gananciaMinima+costoCompra);}
+public void setGananciaMinima(int nuevaGanancia){gananciaMinima = nuevaGanancia>=0?nuevaGanancia:gananciaMinima; precioMinimo=gananciaMinima+costoCompra;}
 
 //=====================STOCK====================
 public int getStock(){ return stock;}
@@ -71,7 +79,7 @@ public void setGarantia(int nuevaGarantia){ garantia = nuevaGarantia>=0?nuevaGar
 //=====================PRECIO MINIMO====================
 public int getPrecioMinimo(){ return precioMinimo;}
 
-public void setPrecioMinimo(int nuevoPrecio){ precioMinimo =nuevoPrecio; setGananciaMinima(precioMinimo-costoCompra);}
+public void setPrecioMinimo(int nuevoPrecio){ precioMinimo =nuevoPrecio; gananciaMinima=precioMinimo-costoCompra;}
 
 //=====================ID====================
 public int getID(){return ID;}
@@ -92,5 +100,19 @@ public void descontar(int cantidad){
     stock-=cantidad>0?cantidad:0;
 }
 
+public boolean hayStock(){
+    return stock>0;
+}
+public boolean hayStockSobra(){
+    //Para mostrar alerta sobre si hay que reponer o no
+    deSobra = stock>stockMinimo;
+    return deSobra;
+}
+
+public String toString(){
+    
+    String texto= ID+". "+nombre+"("+stock+") -- "+precioMinimo+"$ c/u. En " +ubicacion;
+    return texto;
+}
 
 }
