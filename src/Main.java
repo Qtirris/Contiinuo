@@ -2,60 +2,41 @@ import java.util.Scanner;
 
 
 public class Main{
-    //Clase que contiene unicamente el menu en consola
-    public static void main(String[] args){
-        //Nuestro Scanner
-        Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
-        enum Rol{
-            CAJERO,
-            ADMINISTRADOR,
-            DISTRIBIUDOR,
-            NULL
-        }
-
-        System.out.println("Bienvenido a Contiinuo.");
-        System.out.println();
-        System.out.println();
+    public static void main(String[] args) {
         
-        System.out.println("Por favor ingrese su rol: ");
-        System.out.println();
-        System.out.println("1. Cajero");
-        System.out.println("2. Administrador ");
-        System.out.println("3. Distribuidor");
+        System.out.println("Bienvenido :)");
+        System.out.println("Seleccione una opción");
 
-        //Escuchamos al usuario
-        int eleccion = sc.nextInt();
+        System.out.println("    1. Administrar Inventario");
+        System.out.println("    2. Registrar Venta");
+        System.out.println("    3. Buscar Producto");
+        System.out.println("    4. Cerrar Dia");
 
-        Rol rol; //Será mas legible con un enum
+        int opcion = sc.nextInt();
 
-        switch (eleccion) {
+        switch (opcion) {
             case 1:
-                System.out.println("Bienvenido cajero/a.");
-                rol= Rol.CAJERO;
-                System.out.println(rol);
-                break;
-
+            Contiinuo.administrarInventario();
+            break;
             case 2:
-                    
-                System.out.println("Bienvenido administrador/a.");
-                rol= Rol.ADMINISTRADOR;
-                System.out.println(rol);
-                break;
-
+                
+            Contiinuo.regisitrarVenta();
+            break;
             case 3:
-                
-                System.out.println("Bienvenido distribuidor/a.");
-                rol = Rol.DISTRIBIUDOR;
-                System.out.println(rol);
-                break;
-
+            
+            Contiinuo.buscarProducto();;
+            break;
+            case 4:
+            Contiinuo.cerrarDia();
+            break;
+        
             default:
-                
-                System.out.println("Opción inválida.");
-                rol = Rol.NULL; //No se si lo usaremos despues pero por si las moscas
-                System.out.println(rol);
-                break;
+            break;
         }
+
+    
     }
-}
+    //Clase que contiene unicamente el menu en consola
+    }
