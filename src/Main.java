@@ -12,7 +12,7 @@ public class Main{
 
         int opcion = -1;
         while (opcion != 0) {
-            System.out.println("Seleccione una opción");
+            System.out.println("Seleccione una opción:");
 
             System.out.println("    1. Administrar Inventario");
             System.out.println("    2. Registrar Venta");
