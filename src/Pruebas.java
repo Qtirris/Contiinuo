@@ -61,8 +61,24 @@ public class Pruebas {
     
     Inventario.mostrar();
     
-
     
+    System.out.println("============================================");
+    Inventario.checkStock();
+    System.out.println("============================================");
+
+    Factura Factura1 = new Factura("Johan","3112557310","Nequi");
+    Factura1.agregaritem(Inventario.producto1, 15, 250_000);
+    Factura1.agregaritem(Inventario.producto3, 2, 20_000);
+    Factura1.agregaritem(Inventario.producto4, 6, 70_000);
+    
+    Factura1.imprimir();
+    
+    System.out.println(Factura1.getNombreCliente());
+    System.out.println(Factura1.getDetalle());
+    System.out.println(Factura1.getGanancia());
+    System.out.println(Factura1.getMedioDePago());
+    System.out.println(Factura1.getNumero());
+    System.out.println(Factura1.getTotal());
     }
     //Aparentemente todo va bien :)
 }

@@ -4,7 +4,7 @@ public class Inventario{
     vamos a definir una cantidad maxima de porductos en 10.
     */
     
-    public static int productosRestantes=10;
+    private static int productosRestantes=10;
     
     //Es necesario que sean publicos en orden de poder acceder a dud metodos desde Contiinuo o Main
     public static Producto producto1;
@@ -70,6 +70,7 @@ public class Inventario{
     }
 
     public static boolean retirarProducto(int numeroProducto){
+        //Usamos el numero dle producto ya que aun no tenemos una lista o unaforma de acceder directamente al producto
         switch (numeroProducto) {
             case 1:
             producto1=null;
@@ -109,15 +110,32 @@ public class Inventario{
 
     public static void mostrar(){
         //Poner si hay Stock y Stock de sobra
-        System.out.println(Inventario.producto1!=null?Inventario.producto1:"No hay producto");
-        System.out.println(Inventario.producto2!=null?Inventario.producto2:"No hay producto");
-        System.out.println(Inventario.producto3!=null?Inventario.producto3:"No hay producto");
-        System.out.println(Inventario.producto4!=null?Inventario.producto4:"No hay producto");
-        System.out.println(Inventario.producto5!=null?Inventario.producto5:"No hay producto");
-        System.out.println(Inventario.producto6!=null?Inventario.producto6:"No hay producto");
-        System.out.println(Inventario.producto7!=null?Inventario.producto7:"No hay producto");
-        System.out.println(Inventario.producto8!=null?Inventario.producto8:"No hay producto");
-        System.out.println(Inventario.producto9!=null?Inventario.producto9:"No hay producto");
-        System.out.println(Inventario.producto10!=null?Inventario.producto10:"No hay producto");
+        System.out.println(producto1!=null?producto1:"");
+        System.out.println(producto2!=null?producto2:"");
+        System.out.println(producto3!=null?producto3:"");
+        System.out.println(producto4!=null?producto4:"");
+        System.out.println(producto5!=null?producto5:"");
+        System.out.println(producto6!=null?producto6:"");
+        System.out.println(producto7!=null?producto7:"");
+        System.out.println(producto8!=null?producto8:"");
+        System.out.println(producto9!=null?producto9:"");
+        System.out.println(producto10!=null?producto10:"");
+    }
+
+    public static void checkStock(){
+        //Revisa que tal vamos de stock (Si necesita o no reposición o si no hay)
+        //Se piensa cambiar a que devuelva un array de boolean con cada indice siendo el estado del stock de un producto (de pronto)
+        System.out.println("Nombre  -- Stock/Stock Minimo (Necesita reposición?)"+"\n");
+        System.out.println(producto1!=null?(producto1.hayStockSobra()?producto1.getNombre()+" -- "+producto1.getStock()+"/"+producto1.getStockMinimo()+" (NO necesita reposoción)":producto1.getNombre()+" -- "+producto1.getStock()+"/"+producto1.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto2!=null?(producto2.hayStockSobra()?producto2.getNombre()+" -- "+producto2.getStock()+"/"+producto2.getStockMinimo()+" (NO necesita reposoción)":producto2.getNombre()+" -- "+producto2.getStock()+"/"+producto2.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto3!=null?(producto3.hayStockSobra()?producto3.getNombre()+" -- "+producto3.getStock()+"/"+producto3.getStockMinimo()+" (NO necesita reposoción)":producto3.getNombre()+" -- "+producto3.getStock()+"/"+producto3.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto4!=null?(producto4.hayStockSobra()?producto4.getNombre()+" -- "+producto4.getStock()+"/"+producto4.getStockMinimo()+" (NO necesita reposoción)":producto4.getNombre()+" -- "+producto4.getStock()+"/"+producto4.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto5!=null?(producto5.hayStockSobra()?producto5.getNombre()+" -- "+producto5.getStock()+"/"+producto5.getStockMinimo()+" (NO necesita reposoción)":producto5.getNombre()+" -- "+producto5.getStock()+"/"+producto5.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto6!=null?(producto6.hayStockSobra()?producto6.getNombre()+" -- "+producto6.getStock()+"/"+producto6.getStockMinimo()+" (NO necesita reposoción)":producto6.getNombre()+" -- "+producto6.getStock()+"/"+producto6.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto7!=null?(producto7.hayStockSobra()?producto7.getNombre()+" -- "+producto7.getStock()+"/"+producto7.getStockMinimo()+" (NO necesita reposoción)":producto7.getNombre()+" -- "+producto7.getStock()+"/"+producto7.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto8!=null?(producto8.hayStockSobra()?producto8.getNombre()+" -- "+producto8.getStock()+"/"+producto8.getStockMinimo()+" (NO necesita reposoción)":producto8.getNombre()+" -- "+producto8.getStock()+"/"+producto8.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto9!=null?(producto9.hayStockSobra()?producto9.getNombre()+" -- "+producto9.getStock()+"/"+producto9.getStockMinimo()+" (NO necesita reposoción)":producto9.getNombre()+" -- "+producto9.getStock()+"/"+producto9.getStockMinimo()+" (Necesita reposoción)"):"");
+        System.out.println(producto10!=null?(producto10.hayStockSobra()?producto10.getNombre()+" -- "+producto10.getStock()+"/"+producto10.getStockMinimo()+" (NO necesita reposoción)":producto10.getNombre()+" -- "+producto10.getStock()+"/"+producto10.getStockMinimo()+" (Necesita reposoción)"):"");
+        
     }
 }
