@@ -1,6 +1,6 @@
 public class Factura{
   private String nombreCliente;
-  private int numero=0;
+  private static numero=0;
   private int total=0;
   private int ganancia=0;
   private String medioDePago;
@@ -24,14 +24,17 @@ public Factura(String nombreCliente, int numero, int total, int ganancia, String
  public String getmedioDePago(){return this.medioDePago;}
  public String getDetalle(){return this.detalle;}
 //parametros temporales hasta crear la clase producto
-public void agregaritem(Producto punto){//me acorde de vectores :v
-detalle = punto.
+public void agregaritem(Producto punto,int canti){//me acorde de vectores :v
+  detalle = punto.nombre + " " + "\n";
+  numero += canti;
+  total+=punto.preciominimo*canti;
+  
 }
 public void imprimir(){
   System.out.println("cliente: " + this.nombreCliente;
   System.out.println("Forma de pago: " + this.medioDePago);
   System.out.println(this.detalle);
-  System.out.println("total a pagar: " + this.gettotal());
+  System.out.println("total a pagar: " + this.total);
 }
 
 }
