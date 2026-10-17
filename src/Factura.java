@@ -27,11 +27,20 @@ public class Factura{
  public String getMedioDePago(){return this.medioDePago;}
  public String getDetalle(){return this.detalle;}
   public void agregaritem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
+    verificador = false;
+    while (!verificador){
+      if(precioVenta<0){
+        System.out.println("precio invalido");
+          }
+      else{
     detalle += "-"+punto.getNombre()+" ---- ("+canti+")"+" $ "+precioVenta+" c/u ---->"+" $"+canti*precioVenta+""+"\n";
     numeroProductos += canti;
     //punto.stockVendido+=canti;
     total+=precioVenta*canti;
     setGanancia(punto.calcularGanancia(precioVenta),canti);
+        verificador=true
+      }
+    }
   }
   public void imprimir(){
     System.out.println("Cliente: " + this.nombreCliente);
