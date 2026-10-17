@@ -62,7 +62,8 @@ public class Pruebas {
     Inventario.mostrar();
     
     
-    
+    System.out.println("============================================");
+    Inventario.checkStock();
     System.out.println("============================================");
 
     Factura Factura1 = new Factura("Johan","3112557310","Nequi");

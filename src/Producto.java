@@ -16,6 +16,7 @@ public class Producto{
     private int gananciaMinima=0;
     private int stock;
     private int stockMinimo=0;
+    private int stockVendido=0;
     private int garantia=0;
     private int precioMinimo;
     private int ID;
@@ -46,7 +47,7 @@ public void setNombre(String nuevoNombre){nombre=nuevoNombre;}
 //=====================CATEGORIA====================
 public String getCategoria(){return categoria;}
 
-//=====================NOMBRE====================
+//=====================UBICACION====================
 public String getUbicacion(){return ubicacion;}
 
 public void setUbicacion(String nuevaUbicacion){ ubicacion =nuevaUbicacion;}
@@ -64,12 +65,17 @@ public void setGananciaMinima(int nuevaGanancia){gananciaMinima = nuevaGanancia>
 //=====================STOCK====================
 public int getStock(){ return stock;}
 
-public void setStock(int nuevoStock){ stock = nuevoStock>0?nuevoStock:stock;}
+public void setStock(int nuevoStock){ stock = nuevoStock>=0?nuevoStock:stock;}
 
 //=====================STOCK MINIMO====================
 public int getStockMinimo(){ return stockMinimo;}
 
-public void setStockMinimo(int nuevoStockMinimo){stockMinimo = nuevoStockMinimo>0?nuevoStockMinimo:stockMinimo;}
+public void setStockMinimo(int nuevoStockMinimo){stockMinimo = nuevoStockMinimo>=0?nuevoStockMinimo:stockMinimo;}
+
+//=====================STOCK VENDIDO====================
+public int getStockVendido(){ return stockVendido;}
+
+public void setStockVendido(int vendido){ stockVendido = vendido>=0?vendido:stock;}
 
 //=====================GARANTIA====================
 public int getGarantia(){ return garantia;}

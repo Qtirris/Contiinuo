@@ -27,7 +27,7 @@ public class Factura{
   public void agregaritem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
     detalle += "-"+punto.getNombre()+" ---- ("+canti+")"+" $ "+precioVenta+" c/u ---->"+" $"+canti*precioVenta+""+"\n";
     numero += canti;
-    punto.stockVendido+=canti;
+    //punto.stockVendido+=canti;
     total+=precioVenta*canti;
     setGanancia(punto.calcularGanancia(precioVenta),canti);
   }
