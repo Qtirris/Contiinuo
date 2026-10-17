@@ -41,7 +41,7 @@ public class Factura{
     System.out.println("Total a pagar: " + "$"+ this.total);
 
   private void guardar(){
-    registroFacturas= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total + "\n=========================================================================================="+"";
+    registroFacturas += "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total + "\n=========================================================================================="+"";
     }
   private void acabarDia(){
     registroFacturas = "";
