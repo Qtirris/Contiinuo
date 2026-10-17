@@ -5,35 +5,48 @@ public class Main{
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+
+        Tienda mitienda = new Tienda(sc);
         
         System.out.println("Bienvenido :)");
-        System.out.println("Seleccione una opción");
 
-        System.out.println("    1. Administrar Inventario");
-        System.out.println("    2. Registrar Venta");
-        System.out.println("    3. Buscar Producto");
-        System.out.println("    4. Cerrar Dia");
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("Seleccione una opción");
 
-        int opcion = sc.nextInt();
+            System.out.println("    1. Administrar Inventario");
+            System.out.println("    2. Registrar Venta");
+            System.out.println("    3. Buscar Producto");
+            System.out.println("    4. Cerrar Dia");
+            System.out.println("    0. Salir");
 
-        switch (opcion) {
-            case 1:
-            Contiinuo.administrarInventario();
-            break;
-            case 2:
-                
-            Contiinuo.regisitrarVenta();
-            break;
-            case 3:
-            
-            Contiinuo.buscarProducto();;
-            break;
-            case 4:
-            Contiinuo.cerrarDia();
-            break;
-        
-            default:
-            break;
+            opcion = Integer.parseInt(sc.nextLine());
+
+            switch (opcion) {
+                case 1:
+                    mitienda.administrarInventario();
+                    break;
+                case 2:
+
+                    mitienda.regisitrarVenta();
+                    break;
+                case 3:
+
+                    mitienda.buscarProducto();
+                    break;
+                case 4:
+                    mitienda.cerrarDia();
+                    break;
+                case 0:
+                    System.out.print("¡Hasta luego!");
+                    break;
+                default:
+                    System.out.print("opción no válida, intenta de nuevo.");
+                    break;
+
+
+            }
+
         }
 
     
