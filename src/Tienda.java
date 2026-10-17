@@ -43,7 +43,7 @@ public class Tienda {
         System.out.print(nombre);
         int valor = Integer.parseInt(sc.nextLine());
         while ( valor < 0){
-            System.out.print("El valor no puede ser negativo");
+            System.out.print("El valor no puede ser negativo.");
             valor=Integer.parseInt(sc.nextLine());
         }
 
