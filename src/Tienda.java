@@ -48,8 +48,8 @@ public class Tienda {
     public void buscarProducto(){
         System.out.println("===BUSCAR PRODUCTO===");
         System.out.print("Ingrese el nombre del producto: ");
-        String nombreproducto= sc.nextLine().trim();
-        Producto prdt=inventario.buscarNombre(nombreproducto);
+        String nombreprdt= sc.nextLine().trim();
+        Producto prdt=inventario.buscarNombre(nombreprdt);
     }
 
     //Llama a caja para obtener los datos del cierre del dia e imprimirlos.
