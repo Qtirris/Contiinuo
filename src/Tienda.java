@@ -37,6 +37,18 @@ public class Tienda {
         return consecutivoreposicion;
     }
 
+    //Creamos el ayudante para leer números enteros.
+
+    private int leerEnteros(String nombre){
+        System.out.print(nombre);
+        int valor = Integer.parseInt(sc.nextLine());
+        while ( valor < 0){
+            System.out.print("El valor no puede ser negativo");
+            valor=Integer.parseInt(sc.nextLine());
+        }
+
+        return valor;
+    }
 
     //registrar un producto nuevo.
 
