@@ -10,12 +10,9 @@ public class Factura{
   // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
   public Factura(String nombreCliente,String telefono,String medioDePago){
     this.nombreCliente = nombreCliente;
-    //this.numero = numero;
-    //this.total = total;
-    //this.ganancia = ganancia;
     this.medioDePago=medioDePago;
     this.telefono=telefono;
-    //this.detalle=detalle;
+
   }
   //getters y setters
  public String getNombreCliente(){return this.nombreCliente;}
@@ -27,10 +24,10 @@ public class Factura{
  public int getGanancia(){return this.ganancia;}
  public String getMedioDePago(){return this.medioDePago;}
  public String getDetalle(){return this.detalle;}
-  //parametros temporales hasta crear la clase producto
   public void agregaritem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
     detalle += "-"+punto.getNombre()+" ---- ("+canti+")"+" $ "+precioVenta+" c/u ---->"+" $"+canti*precioVenta+""+"\n";
     numero += canti;
+    punto.stockVendido+=canti;
     total+=precioVenta*canti;
     setGanancia(punto.calcularGanancia(precioVenta),canti);
   }
@@ -39,6 +36,6 @@ public class Factura{
     System.out.println("Telefono: " + this.telefono);
     System.out.println("Forma de pago: " + this.medioDePago);
     System.out.println(this.detalle);
-    System.out.println("Total a pagar: " + this.total);
+    System.out.println("Total a pagar: " + "$"+ this.total);
   }
 }
