@@ -38,6 +38,25 @@ public class Tienda {
     }
 
 
+    //registrar un producto nuevo.
+
+    public void registrarProducto(){
+        System.out.println("===REGISTRAR PRODUCTO===");
+
+        String nombre="";
+        while (nombre.equals("")){
+            System.out.print("Nombre: ");
+            nombre=sc.nextLine();
+
+            System.out.print("Categoria: ");
+            String Categoria=sc.nextLine();
+
+            System.out.print("Ubicación: ");
+            String Ubicacion=sc.nextLine();
+        }
+    }
+
+
 
     //Aplica las reglas
 
