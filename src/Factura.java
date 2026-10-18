@@ -73,24 +73,34 @@ public class Factura{
     switch(cr){
       case 1:
         registro1= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 2:
         registro2= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 3:
         registro3= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 4:
         registro4= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 5:
         registro5= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 6:
         registro6= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 7:
         registro7= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 8:
         registro8= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 9:
         registro9= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       case 10:
         registro10= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        break;
       default:
         break;
     }
