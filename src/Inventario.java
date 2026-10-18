@@ -99,7 +99,7 @@ public class Inventario{
         return false;   //El inventario esta lleno llenisimo
     }
 
-    public boolean retirarProducto(int id) {
+    public boolean retirarProducto(int id) {//Mirar si es mejor retirarlo por ID o por casilla
         for (int casilla = 1; casilla <= MAXIMO; casilla++) {
             Producto p = getProducto(casilla);
             if (p!= null && p.getID()==id) {
@@ -139,33 +139,39 @@ public class Inventario{
     }
     
     public void mostrar(){
-        //Poner si hay Stock y Stock de sobra
-        System.out.println(producto1!=null?producto1:"");
-        System.out.println(producto2!=null?producto2:"");
-        System.out.println(producto3!=null?producto3:"");
-        System.out.println(producto4!=null?producto4:"");
-        System.out.println(producto5!=null?producto5:"");
-        System.out.println(producto6!=null?producto6:"");
-        System.out.println(producto7!=null?producto7:"");
-        System.out.println(producto8!=null?producto8:"");
-        System.out.println(producto9!=null?producto9:"");
-        System.out.println(producto10!=null?producto10:"");
+        for (int casilla=1;casilla<=MAXIMO;casilla++){
+            Producto producto = getProducto(casilla);
+
+            if (producto==null){continue;}
+
+            System.out.println(producto);
+        }
     }
 
-    public void checkStock(){
+    public void porAgotarse(){
+        String porAgotarse="Productos por agotarse:\n";
+        for (int casilla=1;casilla<=MAXIMO;casilla++){
+            Producto producto = getProducto(casilla);
+
+            if (producto==null|| producto.hayStockSobra()){continue;}
+
+            porAgotarse+="\t--"+producto.getNombre()+"\n";
+        }
+        System.out.println(porAgotarse);
+    }
+
+    public void revisarStock(){
         //Revisa que tal vamos de stock (Si necesita o no reposición o si no hay)
         //Se piensa cambiar a que devuelva un array de boolean con cada indice siendo el estado del stock de un producto (de pronto)
-        System.out.println("Nombre  -- Stock/Stock Minimo (Necesita reposición?)"+"\n");
-        System.out.println(producto1!=null?(producto1.hayStockSobra()?producto1.getNombre()+" -- "+producto1.getStock()+"/"+producto1.getStockMinimo()+" (NO necesita reposoción)":producto1.getNombre()+" -- "+producto1.getStock()+"/"+producto1.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto2!=null?(producto2.hayStockSobra()?producto2.getNombre()+" -- "+producto2.getStock()+"/"+producto2.getStockMinimo()+" (NO necesita reposoción)":producto2.getNombre()+" -- "+producto2.getStock()+"/"+producto2.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto3!=null?(producto3.hayStockSobra()?producto3.getNombre()+" -- "+producto3.getStock()+"/"+producto3.getStockMinimo()+" (NO necesita reposoción)":producto3.getNombre()+" -- "+producto3.getStock()+"/"+producto3.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto4!=null?(producto4.hayStockSobra()?producto4.getNombre()+" -- "+producto4.getStock()+"/"+producto4.getStockMinimo()+" (NO necesita reposoción)":producto4.getNombre()+" -- "+producto4.getStock()+"/"+producto4.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto5!=null?(producto5.hayStockSobra()?producto5.getNombre()+" -- "+producto5.getStock()+"/"+producto5.getStockMinimo()+" (NO necesita reposoción)":producto5.getNombre()+" -- "+producto5.getStock()+"/"+producto5.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto6!=null?(producto6.hayStockSobra()?producto6.getNombre()+" -- "+producto6.getStock()+"/"+producto6.getStockMinimo()+" (NO necesita reposoción)":producto6.getNombre()+" -- "+producto6.getStock()+"/"+producto6.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto7!=null?(producto7.hayStockSobra()?producto7.getNombre()+" -- "+producto7.getStock()+"/"+producto7.getStockMinimo()+" (NO necesita reposoción)":producto7.getNombre()+" -- "+producto7.getStock()+"/"+producto7.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto8!=null?(producto8.hayStockSobra()?producto8.getNombre()+" -- "+producto8.getStock()+"/"+producto8.getStockMinimo()+" (NO necesita reposoción)":producto8.getNombre()+" -- "+producto8.getStock()+"/"+producto8.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto9!=null?(producto9.hayStockSobra()?producto9.getNombre()+" -- "+producto9.getStock()+"/"+producto9.getStockMinimo()+" (NO necesita reposoción)":producto9.getNombre()+" -- "+producto9.getStock()+"/"+producto9.getStockMinimo()+" (Necesita reposoción)"):"");
-        System.out.println(producto10!=null?(producto10.hayStockSobra()?producto10.getNombre()+" -- "+producto10.getStock()+"/"+producto10.getStockMinimo()+" (NO necesita reposoción)":producto10.getNombre()+" -- "+producto10.getStock()+"/"+producto10.getStockMinimo()+" (Necesita reposoción)"):"");
-        
+        for (int casilla=1;casilla<=MAXIMO;casilla++){
+            Producto producto = getProducto(casilla);
+
+            if (producto==null){continue;}
+
+            String reposicion = producto.hayStockSobra()?" -(No necesita reposición)":" -(Necesita reposición)";
+
+            System.out.println(producto.getNombre()+"--> "
+            +producto.getStock()+"/"+producto.getStockMinimo()+reposicion);
+        }
     }
 }
