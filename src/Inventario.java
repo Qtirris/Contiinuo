@@ -4,111 +4,141 @@ public class Inventario{
     vamos a definir una cantidad maxima de porductos en 10.
     */
     
-    private static int productosRestantes=10;
+    private static final int MAXIMO=10;
+    private static int numeroProductos;
     
-    //Es necesario que sean publicos en orden de poder acceder a dud metodos desde Contiinuo o Main
-    public static Producto producto1;
-    public static Producto producto2;
-    public static Producto producto3;
-    public static Producto producto4;
-    public static Producto producto5;
-    public static Producto producto6;
-    public static Producto producto7;
-    public static Producto producto8;
-    public static Producto producto9;
-    public static Producto producto10;
+    //Ya no son staticos ni privados y se agrego getProducto
+    private Producto producto1;
+    private Producto producto2;
+    private Producto producto3;
+    private Producto producto4;
+    private Producto producto5;
+    private Producto producto6;
+    private Producto producto7;
+    private Producto producto8;
+    private Producto producto9;
+    private Producto producto10;
 
-    public static boolean registrarProducto(Producto producto){
-        //Asignar cada producto a una variable
-        //A futuro se cambiará por una arrayList
+    //Devuelve el producto de la casilla correpondiente
+    private Producto getProducto(int casilla) {
+        switch (casilla) {
+            case 1:  
+            return producto1;
+            case 2:  
+            return producto2;
+            case 3:  
+            return producto3;
+            case 4:  
+            return producto4;
+            case 5:  
+            return producto5;
+            case 6:  
+            return producto6;
+            case 7:  
+            return producto7;
+            case 8:  
+            return producto8;
+            case 9:  
+            return producto9;
+            case 10: 
+            return producto10;
 
-        switch (productosRestantes) {
-            case 10:
-            producto1=producto;
-            productosRestantes--;
-            return true;
-            case 9:
-            producto2=producto;
-            productosRestantes--;
-            return true;
-            case 8:
-            producto3=producto;
-            productosRestantes--;
-            return true;
-            case 7:
-            producto4=producto;
-            productosRestantes--;
-            return true;
-            case 6:
-            producto5=producto;
-            productosRestantes--;
-            return true;
-            case 5:
-            producto6=producto;
-            productosRestantes--;
-            return true;
-            case 4:
-            producto7=producto;
-            productosRestantes--;
-            return true;
-            case 3:
-            producto8=producto;
-            productosRestantes--;
-            return true;
-            case 2:
-            producto9=producto;
-            productosRestantes--;
-            return true;
-            case 1:
-            producto10=producto;
-            productosRestantes--;
-            return true;
-        
-            default: //No quedan productos disponibbles
-            return false;
+            default: 
+            return null;
         }
     }
 
-    public static boolean retirarProducto(int numeroProducto){
-        //Usamos el numero dle producto ya que aun no tenemos una lista o unaforma de acceder directamente al producto
-        switch (numeroProducto) {
-            case 1:
-            producto1=null;
-            return true;
-            case 2:
-            producto2=null;
-            return true;
-            case 3:
-            producto3=null;
-            return true;
-            case 4:
-            producto4=null;
-            return true;
-            case 5:
-            producto5=null;
-            return true;
-            case 6:
-            producto6=null;
-            return true;
-            case 7:
-            producto7=null;
-            return true;
-            case 8:
-            producto8=null;
-            return true;
-            case 9:
-            producto9=null;
-            return true;
-            case 10:
-            producto10=null;
-            return true;
-        
-            default: //nos e removio con exito
-            return false;
+    private void asignar(int casilla, Producto producto) {
+        switch (casilla) {
+            case 1:  
+            producto1 = producto;  
+            break;
+            case 2:  
+            producto2 = producto;  
+            break;
+            case 3:  
+            producto3 = producto;  
+            break;
+            case 4:  
+            producto4 = producto;  
+            break;
+            case 5:  
+            producto5 = producto;  
+            break;
+            case 6:  
+            producto6 = producto;  
+            break;
+            case 7:  
+            producto7 = producto;  
+            break;
+            case 8:  
+            producto8 = producto;  
+            break;
+            case 9:  
+            producto9 = producto;  
+            break;
+            case 10: 
+            producto10 = producto; 
+            break;
+
+            default: 
+            break;
         }
     }
+   public boolean registrarProducto(Producto producto) {
+        if (producto ==null) {
+            return false;
+        }
+        for (int casilla=1; casilla<= MAXIMO; casilla++) {
+            if (getProducto(casilla)==null) {
+                asignar(casilla, producto);
+                numeroProductos++;
+                return true;
+            }
+        }
+        return false;   //El inventario esta lleno llenisimo
+    }
 
-    public static void mostrar(){
+    public boolean retirarProducto(int id) {
+        for (int casilla = 1; casilla <= MAXIMO; casilla++) {
+            Producto p = getProducto(casilla);
+            if (p!= null && p.getID()==id) {
+                asignar(casilla, null);
+                numeroProductos--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Producto buscarPorNombre(String nombre) {
+        if (nombre==null) {
+            return null;
+        }
+        String buscado = nombre.trim();
+        for(int casilla=1; casilla<= MAXIMO; casilla++) {
+            Producto producto = getProducto(casilla);
+            if (producto!= null && producto.getNombre().equalsIgnoreCase(buscado)) {
+                return producto;
+            }
+        }
+        return null;
+    }
+
+    public Producto buscarPorId(int id) {
+        for (int casilla=1; casilla<=MAXIMO; casilla++) {
+            Producto producto = getProducto(casilla);
+            if (producto!=null && producto.getID()==id) {
+                return producto;
+            }
+        }
+        return null;
+    }
+    public boolean estaLleno(){
+        return numeroProductos==MAXIMO;
+    }
+    
+    public void mostrar(){
         //Poner si hay Stock y Stock de sobra
         System.out.println(producto1!=null?producto1:"");
         System.out.println(producto2!=null?producto2:"");
@@ -122,7 +152,7 @@ public class Inventario{
         System.out.println(producto10!=null?producto10:"");
     }
 
-    public static void checkStock(){
+    public void checkStock(){
         //Revisa que tal vamos de stock (Si necesita o no reposición o si no hay)
         //Se piensa cambiar a que devuelva un array de boolean con cada indice siendo el estado del stock de un producto (de pronto)
         System.out.println("Nombre  -- Stock/Stock Minimo (Necesita reposición?)"+"\n");

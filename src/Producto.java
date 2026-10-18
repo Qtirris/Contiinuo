@@ -6,35 +6,36 @@ public class Producto{
     new Producto("Bafle2","Sonido","Mostrador",600_000, 900_000, 8, 2, 6);
     new Producto("Power Bank","Otros","Colgado",50_000, 70_000, 3, 0, 1);
     */
-    private static int id=1;
+    private static int contadorId=1;
 
+    private final int ID;
     private String nombre;
     private String categoria;
     private String ubicacion;
 
     private int costoCompra;
-    private int gananciaMinima=0;
+    private int gananciaMinima;
     private int stock;
-    private int stockMinimo=0;
-    private int stockVendido=0;
-    private int garantia=0;
-    private int precioMinimo;
-    private int ID;
+    private int stockMinimo;
+    private int stockVendido;
+    private int garantia;
 
     private boolean deSobra=false;
     
     //Revisar si a futuro los parametros del contructor se puede pasar como una lista o array.
 
     public Producto(String nombre, String categoria, String ubicacion, int costoCompra, int gananciaMinima, int stock, int stockMinimo, int garantia){
+        
+        this.ID=contadorId++;
+        
         this.nombre=nombre;
         this.categoria=categoria;
         this.ubicacion=ubicacion;
         this.costoCompra=costoCompra;
-        this.precioMinimo=gananciaMinima+costoCompra;
+        this.gananciaMinima=gananciaMinima;
         this.stock=stock;
         this.stockMinimo=stockMinimo;
         this.garantia=garantia;
-        this.ID=id++;
     }
 
     //Getters y Setters para los atributos
@@ -42,7 +43,13 @@ public class Producto{
 //=====================NOMBRE====================
 public String getNombre(){return nombre;}
 
-public void setNombre(String nuevoNombre){nombre=nuevoNombre;}
+public boolean setNombre(String nuevoNombre){
+    if (nuevoNombre == null || nuevoNombre.trim().isEmpty()){ //Revisa que no este vacio
+        return false;
+    }
+    nombre=nuevoNombre;
+    return true;
+}
 
 //=====================CATEGORIA====================
 public String getCategoria(){return categoria;}
@@ -50,60 +57,102 @@ public String getCategoria(){return categoria;}
 //=====================UBICACION====================
 public String getUbicacion(){return ubicacion;}
 
-public void setUbicacion(String nuevaUbicacion){ ubicacion =nuevaUbicacion;}
+public boolean setUbicacion(String nuevaUbicacion){ 
+    if (nuevaUbicacion==null || nuevaUbicacion.trim().isEmpty()){
+        return false;
+    }    
+    ubicacion =nuevaUbicacion;
+    return true;
+}
 
 //=====================COSTO COMPRA====================
 public int getCostoCompra(){ return costoCompra;}
 
-public void setCostoCompra(int nuevoCosto){costoCompra=nuevoCosto>=0?nuevoCosto:costoCompra;}
+public boolean setCostoCompra(int nuevoCosto){
+    if (nuevoCosto>=0){
+        costoCompra=nuevoCosto;
+        return true;
+    }
+    return false;
+
+}
 
 //=====================GANANCIA MINIMA====================
 public int getGananciaMinima(){ return gananciaMinima;}
 
-public void setGananciaMinima(int nuevaGanancia){gananciaMinima = nuevaGanancia>=0?nuevaGanancia:gananciaMinima; precioMinimo=gananciaMinima+costoCompra;}
+public boolean setGananciaMinima(int nuevaGanancia){
+    if (nuevaGanancia>=0){
+        gananciaMinima=nuevaGanancia;
+        return true;
+    }
+    return false;
+}
 
 //=====================STOCK====================
 public int getStock(){ return stock;}
 
-public void setStock(int nuevoStock){ stock = nuevoStock>=0?nuevoStock:stock;}
+public boolean setStock(int nuevoStock){ 
+    if (nuevoStock>=0){
+        stock=nuevoStock;
+        return true;
+    }
+    return false;
+}
 
 //=====================STOCK MINIMO====================
 public int getStockMinimo(){ return stockMinimo;}
 
-public void setStockMinimo(int nuevoStockMinimo){stockMinimo = nuevoStockMinimo>=0?nuevoStockMinimo:stockMinimo;}
+public boolean setStockMinimo(int nuevoStockMinimo){
+    if (nuevoStockMinimo>=0){
+        stockMinimo=nuevoStockMinimo;
+        return true;
+    }
+    return false;
+}
 
 //=====================STOCK VENDIDO====================
 public int getStockVendido(){ return stockVendido;}
-
-public void setStockVendido(int vendido){ stockVendido = vendido>=0?vendido:stock;}
+//El setStockVendido se movio automarticamente a cuando se descuenta un producto
 
 //=====================GARANTIA====================
 public int getGarantia(){ return garantia;}
 
-public void setGarantia(int nuevaGarantia){ garantia = nuevaGarantia>=0?nuevaGarantia:garantia;}
+public boolean setGarantia(int nuevaGarantia){ 
+    if (nuevaGarantia>=0){
+        garantia=nuevaGarantia;
+        return true;
+    }
+    return false;
+}
 
 //=====================PRECIO MINIMO====================
-public int getPrecioMinimo(){ return precioMinimo;}
-
-public void setPrecioMinimo(int nuevoPrecio){ precioMinimo =nuevoPrecio; gananciaMinima=precioMinimo-costoCompra;}
+public int getPrecioMinimo(){ return costoCompra+gananciaMinima;}
 
 //=====================ID====================
 public int getID(){return ID;}
     
 
-//Metodos principales de la clase
+//=====================METODOS PRINCIPALES====================
 
 public int calcularGanancia(int precioVenta){
     return precioVenta-costoCompra;
 }
 
-public void reponer(int cantidad){
-    //Mirar a futuro si necesitamos que retorne la cantidad actualizada, o true o false
-    stock+=cantidad>0?cantidad:0;
+public boolean reponer(int cantidad){
+    if (cantidad>=0){
+        stock+=cantidad;
+        return true;
+    }
+    return false;
 }
 
-public void descontar(int cantidad){
-    stock-=cantidad>0?cantidad:0;
+public boolean descontar(int cantidad){
+ if (cantidad>=0 && getStock()>=cantidad){
+        stock-=cantidad;
+        stockVendido-=cantidad; //Modifica el stockVendido
+        return true;
+    }
+    return false;
 }
 
 public boolean hayStock(){
@@ -111,13 +160,13 @@ public boolean hayStock(){
 }
 public boolean hayStockSobra(){
     //Para mostrar alerta sobre si hay que reponer o no
-    deSobra = stock>stockMinimo;
-    return deSobra;
+    return stock<=stockMinimo;
 }
 
 public String toString(){
     
-    String texto= ID+". "+nombre+"("+stock+") -- "+precioMinimo+"$ c/u. En " +ubicacion;
+    String texto= ID+". "+nombre+" ("+categoria+" ) -- Stock: "+stock
+    + "-- Precio Minimo "+getPrecioMinimo()+"$ c/u. En " +ubicacion;
     return texto;
 }
 
