@@ -1,10 +1,10 @@
 public class Producto{
     /* Pruebas ejemplos
-    new Producto("Bafle1","Sonido","Estante 1",10_000, 15_000, 10, 3, 0);
-    new Producto("Xbox360","Consolas","Estante 1",500_000, 600_000, 5, 2, 6);
-    new Producto("Radio1","Sonido","Repisa",70_000, 100_000, 4, 0, 3);
-    new Producto("Bafle2","Sonido","Mostrador",600_000, 900_000, 8, 2, 6);
-    new Producto("Power Bank","Otros","Colgado",50_000, 70_000, 3, 0, 1);
+    new Producto("Bafle1","Sonido","Estante 1",10_000, 5_000, 10, 3, 0);
+    new Producto("Xbox360","Consolas","Estante 1",500_000, 120_000, 5, 2, 6);
+    new Producto("Radio1","Sonido","Repisa",70_000, 30_000, 4, 0, 3);
+    new Producto("Bafle2","Sonido","Mostrador",600_000, 50_000, 8, 2, 6);
+    new Producto("Power Bank","Otros","Colgado",50_000, 10_000, 3, 0, 1);
     */
     private static int contadorId=1;
 
@@ -20,7 +20,7 @@ public class Producto{
     private int stockVendido;
     private int garantia;
 
-    private boolean deSobra=false;
+    private boolean deSobra=false; //Es codigo muerto de momento (Si defintivamente no se va a usar lo returo en otro commit)
     
     //Revisar si a futuro los parametros del contructor se puede pasar como una lista o array.
 
@@ -149,7 +149,7 @@ public boolean reponer(int cantidad){
 public boolean descontar(int cantidad){
  if (cantidad>=0 && getStock()>=cantidad){
         stock-=cantidad;
-        stockVendido-=cantidad; //Modifica el stockVendido
+        stockVendido+=cantidad; //Modifica el stockVendido
         return true;
     }
     return false;
@@ -160,13 +160,14 @@ public boolean hayStock(){
 }
 public boolean hayStockSobra(){
     //Para mostrar alerta sobre si hay que reponer o no
-    return stock<=stockMinimo;
+    return stock>=stockMinimo;
 }
 
+//=============TO STRING==============
 public String toString(){
     
-    String texto= ID+". "+nombre+" ("+categoria+" ) -- Stock: "+stock
-    + "-- Precio Minimo "+getPrecioMinimo()+"$ c/u. En " +ubicacion;
+    String texto= ID+". "+nombre+" -- ("+categoria+") ---> Stock: "+stock
+    + " -- Precio minimo "+getPrecioMinimo()+"$ c/u. En " +ubicacion;
     return texto;
 }
 
