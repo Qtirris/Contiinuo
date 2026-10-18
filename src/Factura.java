@@ -5,9 +5,18 @@ public class Factura{
   private int total=0;
   private int ganancia=0;
   private String medioDePago;
-  private String detalle="";
-  private static String registroFacturas = "";
-
+  private static String detalle="";
+  private static String registro1="";
+  private static String registro2="";
+  private static String registro3="";
+  private static String registro4="";
+  private static String registro5="";
+  private static String registro6="";
+  private static String registro7="";
+  private static String registro8="";
+  private static string registro9="";
+  private static String registro10="";
+  private int cr = 0
   // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
   public Factura(String nombreCliente,String telefono,String medioDePago){
     this.nombreCliente = nombreCliente;
@@ -48,12 +57,34 @@ public class Factura{
     System.out.println("Forma de pago: " + this.medioDePago);
     System.out.println(this.detalle);
     System.out.println("Total a pagar: " + "$"+ this.total);
-
+    cr+=1
+  }
   private void guardar(){
-    registroFacturas += "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total + "\n=========================================================================================="+"";
+    switch(cr){
+      case 1:
+    registro1= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 2:
+    registro2= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 3:
+    registro3= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 4:
+    registro4= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 5:
+    registro5= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 6:
+    registro6= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 7:
+    registro7= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 8:
+    registro8= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 9:
+    registro9= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      case 10:
+    registro10= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+      default
+        
     }
-  private void acabarDia(){
-    registroFacturas = "";
-    }
+
   }
 }
+
