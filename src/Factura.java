@@ -5,7 +5,8 @@ public class Factura{
   private int total=0;
   private int ganancia=0;
   private String medioDePago;
-  private static String detalle="";
+  private String detalle="";
+  //cambiarlas de estaticas tipo string a tipo facturas.........mirar a futuro
   private static String registro1="";
   private static String registro2="";
   private static String registro3="";
@@ -14,7 +15,7 @@ public class Factura{
   private static String registro6="";
   private static String registro7="";
   private static String registro8="";
-  private static string registro9="";
+  private static String registro9="";
   private static String registro10="";
   private int cr = 0
   // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
@@ -25,16 +26,16 @@ public class Factura{
 
   }
   //getters y setters
-  public String getProducto1(){return this.registro1;}
-  public String getProducto2(){return this.registro2;}
-  public String getProducto3(){return this.registro3;}
-  public String getProducto4(){return this.registro4;}
-  public String getProducto5(){return this.registro5;}
-  public String getProducto6(){return this.registro6;}
-  public String getProducto7(){return this.registro7;}
-  public String getProducto8(){return this.registro8;}
-  public String getProducto9(){return this.registro9;}
-  public String getProducto10(){return this.registro10;}
+  public String getRegistro1(){return registro1;}
+  public String getRegistro2(){return registro2;}
+  public String getRegistro3(){return registro3;}
+  public String getRegistro4(){return registro4;}
+  public String getRegistro5(){return registro5;}
+  public String getRegistro6(){return registro6;}
+  public String getRegistro7(){return registro7;}
+  public String getRegistro8(){return registro8;}
+  public String getRegistro9(){return registro9;}
+  public String getRegistro10(){return registro10;}
   public String getNombreCliente(){return this.nombreCliente;}
   public String getTelefono(){return this.telefono;}
   public void setNumero(int nuevoNumero){this.numero=nuevoNumero;}
@@ -57,7 +58,7 @@ public class Factura{
     //punto.stockVendido+=canti;
     total+=precioVenta*canti;
     setGanancia(punto.calcularGanancia(precioVenta),canti);
-        verificador=true
+        boolean verificador=true;
       }
     }
   }
@@ -67,39 +68,39 @@ public class Factura{
     System.out.println("Forma de pago: " + this.medioDePago);
     System.out.println(this.detalle);
     System.out.println("Total a pagar: " + "$"+ this.total);
-    cr+=1
+    cr+=1;
   }
   public void guardar(){
     switch(cr){
       case 1:
-        registro1= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro1= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 2:
-        registro2= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro2= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 3:
-        registro3= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro3= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 4:
-        registro4= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro4= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 5:
-        registro5= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro5= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 6:
-        registro6= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro6= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 7:
-        registro7= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro7= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 8:
-        registro8= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro8= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 9:
-        registro9= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro9= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       case 10:
-        registro10= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\Total a pagar:.................. $" + this.total;
+        registro10= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
         break;
       default:
         break;
