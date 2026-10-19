@@ -1,44 +1,51 @@
 public class Factura{
   private String nombreCliente;
   private int numeroProductos=0;
-  private String telefono;
+  private int telefono;
   private int total=0;
   private int ganancia=0;
   private String medioDePago;
   private String detalle="";
-  //cambiarlas de estaticas tipo string a tipo facturas.........mirar a futuro o ya
-   private Factura registro1;
-   private Factura registro2;
-   private Factura registro3;
-   private Factura registro4;
-   private Factura registro5;
-   private Factura registro6;
-   private Factura registro7;
-   private Factura registro8;
-   private Factura registro9;
-   private Factura registro10;
+  /*
+   private registro registro1;
+   private registro registro2;
+   private registro registro3;
+   private registro registro4;
+   private registro registro5;
+   private registro registro6;
+   private registro registro7;
+   private registro registro8;
+   private registro registro9;
+   private registro registro10;
+  */
+  //cambiarlas de estaticas tipo string a tipo facturas, mirar a futuro..........o ya
+  public class registro{
+    public String nom;
+    public int tel;
+    public String med;
+    public String det;
+    public int tot;
 
+    public registro(String nom, int tel, String med, String det, int tot){
+      this.nom = nom;
+      this.tel=tel;
+      this.med=med;
+      this.det=det;
+      this.tot=tot;
+        
+    }
+  }
   private int cr = 0;
   // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
-  public Factura(String nombreCliente,String telefono,String medioDePago){
+  public Factura(String nombreCliente,int telefono,String medioDePago){
     this.nombreCliente = nombreCliente;
     this.medioDePago=medioDePago;
     this.telefono=telefono;
 
   }
   //getters y setters
-  public String getRegistro1(){return registro1;}
-  public String getRegistro2(){return registro2;}
-  public String getRegistro3(){return registro3;}
-  public String getRegistro4(){return registro4;}
-  public String getRegistro5(){return registro5;}
-  public String getRegistro6(){return registro6;}
-  public String getRegistro7(){return registro7;}
-  public String getRegistro8(){return registro8;}
-  public String getRegistro9(){return registro9;}
-  public String getRegistro10(){return registro10;}
   public String getNombreCliente(){return this.nombreCliente;}
-  public String getTelefono(){return this.telefono;}
+  public int getTelefono(){return this.telefono;}
   public void setNumero(int nuevoNumero){this.numeroProductos=nuevoNumero;}
   public int getNumero(){return this.numeroProductos;}
   public void setTotal(int nuevoTotal){this.total +=nuevoTotal;}
@@ -73,53 +80,40 @@ public class Factura{
   }
   public void guardar(){
     switch(cr){
-        // esta mal, tocaria crear una subclase llamada registro  
       case 1:
-        registro1= new Factura();
+        registro registro1= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 2:
-        registro2= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro2= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 3:
-        registro3= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro3= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 4:
-        registro4= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro4= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 5:
-        registro5= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro5= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 6:
-        registro6= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro6= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 7:
-        registro7= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro7= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 8:
-        registro8= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro8= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 9:
-        registro9= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro9= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 10:
-        registro10= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro registro10= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       default:
         break;
     }
 
-  }
-  public void terminarDia(){
-    registro1="";
-    registro2="";
-    registro3="";
-    registro4="";
-    registro5="";
-    registro6="";
-    registro7="";
-    registro8="";
-    registro8="";
-    registro10="";
   }
 }
 
