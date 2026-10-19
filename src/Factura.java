@@ -6,18 +6,19 @@ public class Factura{
   private int ganancia=0;
   private String medioDePago;
   private String detalle="";
-  //cambiarlas de estaticas tipo string a tipo facturas.........mirar a futuro
-  private static String registro1="";
-  private static String registro2="";
-  private static String registro3="";
-  private static String registro4="";
-  private static String registro5="";
-  private static String registro6="";
-  private static String registro7="";
-  private static String registro8="";
-  private static String registro9="";
-  private static String registro10="";
-  private int cr = 0
+  //cambiarlas de estaticas tipo string a tipo facturas.........mirar a futuro o ya
+   private Factura registro1;
+   private Factura registro2;
+   private Factura registro3;
+   private Factura registro4;
+   private Factura registro5;
+   private Factura registro6;
+   private Factura registro7;
+   private Factura registro8;
+   private Factura registro9;
+   private Factura registro10;
+
+  private int cr = 0;
   // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
   public Factura(String nombreCliente,String telefono,String medioDePago){
     this.nombreCliente = nombreCliente;
@@ -38,8 +39,8 @@ public class Factura{
   public String getRegistro10(){return registro10;}
   public String getNombreCliente(){return this.nombreCliente;}
   public String getTelefono(){return this.telefono;}
-  public void setNumero(int nuevoNumero){this.numero=nuevoNumero;}
-  public int getNumero(){return this.numero;}
+  public void setNumero(int nuevoNumero){this.numeroProductos=nuevoNumero;}
+  public int getNumero(){return this.numeroProductos;}
   public void setTotal(int nuevoTotal){this.total +=nuevoTotal;}
   public int getTotal(){return this.total;}
   public void setGanancia(int gananciaProducto,int cantidad){this.ganancia+=gananciaProducto*cantidad;}
@@ -47,7 +48,7 @@ public class Factura{
   public String getMedioDePago(){return this.medioDePago;}
   public String getDetalle(){return this.detalle;}
   public void agregaritem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
-    verificador = false;
+    boolean verificador = false;
     while (!verificador){
       if(precioVenta<0){
         System.out.println("precio invalido");
@@ -72,8 +73,9 @@ public class Factura{
   }
   public void guardar(){
     switch(cr){
+        // esta mal, tocaria crear una subclase llamada registro  
       case 1:
-        registro1= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
+        registro1= new Factura();
         break;
       case 2:
         registro2= "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
