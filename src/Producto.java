@@ -20,7 +20,6 @@ public class Producto{
     private int stockVendido;
     private int garantia;
 
-    private boolean deSobra=false; //Es codigo muerto de momento (Si defintivamente no se va a usar lo returo en otro commit)
     
     //Revisar si a futuro los parametros del contructor se puede pasar como una lista o array.
 
@@ -146,12 +145,18 @@ public boolean reponer(int cantidad){
     return false;
 }
 
-public boolean descontar(int cantidad){
- if (cantidad>=0 && getStock()>=cantidad){
+
+public boolean descontar(int cantidad, boolean dañado){
+ if (cantidad>=0 && getStock()>=cantidad && !dañado){
         stock-=cantidad;
         stockVendido+=cantidad; //Modifica el stockVendido
         return true;
     }
+    else if(cantidad>=0 && getStock()>=cantidad && dañado){
+        stock-=cantidad;
+        return true;
+    }
+
     return false;
 }
 

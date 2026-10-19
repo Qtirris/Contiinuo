@@ -64,7 +64,7 @@ public class Pruebas {
         productoPorNombre.setGarantia(24);
         productoPorNombre.calcularGanancia(3_000_000);
         productoPorNombre.reponer(2);
-        productoPorNombre.descontar(3); // deberian quedar 5+2-3=4
+        productoPorNombre.descontar(3,false); // deberian quedar 5+2-3=4
         System.out.println("Stock Vendido de Xbox720: "+productoPorNombre.getStockVendido());
         
         System.out.println("\n=========================================================================\n");
