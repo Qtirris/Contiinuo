@@ -1,21 +1,50 @@
 import java.util.Locale;
+import java.util.ArrayList; 
 
 public class Caja{
         //atributos de la caja.
     private int facturasEmitidas;
     private int totalVendido;
     private int gananciaTotal;
-    private int totalInvertido;
-    private int reposicionesRealizadas;
+    private ArrayList<Factura> facturas; 
 
+public String generarReporteVentasPorMedioPago() {
+    int totalEfectivo = 0;
+    int totalNequi = 0;
+    int totalTransferencia = 0;
+    int totalOtros = 0;
+
+    for (Factura factura : facturas) {
+        String medio = factura.getMedioDePago();
+
+        if (medio == null) {
+            totalOtros += factura.getTotal();
+        } else if (medio.equalsIgnoreCase("efectivo")) {
+            totalEfectivo += factura.getTotal();
+        } else if (medio.equalsIgnoreCase("nequi")) {
+            totalNequi += factura.getTotal();
+        } else if (medio.equalsIgnoreCase("transferencia")) {
+            totalTransferencia += factura.getTotal();
+        } else {
+            totalOtros += factura.getTotal();
+        }
+    }
+
+    return "====== VENTAS POR MEDIO DE PAGO ======\n"
+            + "Efectivo: $" + totalEfectivo + "\n"
+            + "Nequi: $" + totalNequi + "\n"
+            + "Transferencia: $" + totalTransferencia + "\n"
+            + "Otros medios de pago: $" + totalOtros + "\n"
+            + "Total vendido: $" + totalVendido + "\n"
+            + "=====================================";
+}
 
         // Este constructor inicia la jornada del dia desde 0
      public Caja() {
         this.facturasEmitidas = 0;
         this.totalVendido = 0;
         this.gananciaTotal = 0;
-        this.totalInvertido = 0;
-        this.reposicionesRealizadas = 0;
+        facturas = new ArrayList<>();
     }
 
               // Suma el total y la ganancia de la factura y cuenta una factura más.
@@ -27,18 +56,7 @@ public class Caja{
         totalVendido += factura.getTotal();
         gananciaTotal += factura.getGanancia();
         facturasEmitidas++;
-        return true;
-    }
-
-
-            // Suma lo gastado en la compra y cuenta una reposición más.
-            // Devuelve false si no recibió reposición.
-    public boolean registrarCompra(Reposicion reposicion) {
-        if (reposicion == null) {
-            return false;
-        }
-        totalInvertido += reposicion.calcularTotal();
-        reposicionesRealizadas++;
+        facturas.add(factura);
         return true;
     }
 
@@ -63,8 +81,6 @@ public class Caja{
                 + "Facturas emitidas: " + facturasEmitidas + "\n"
                 + "Vendido: " + formatoPesos(totalVendido) + "\n"
                 + "Ganancia: " + formatoPesos(gananciaTotal) + "\n"
-                + "Reposiciones: " + reposicionesRealizadas + "\n"
-                + "Invertido: " + formatoPesos(totalInvertido) + "\n"
                 + "Ticket promedio: " + formatoPesos(calcularTicketPromedio());
     }
 
@@ -72,7 +88,4 @@ public class Caja{
     public int getFacturasEmitidas() { return facturasEmitidas; }
     public int getTotalVendido() { return totalVendido; }
     public int getGananciaTotal() { return gananciaTotal; }
-    public int getTotalInvertido() { return totalInvertido; }
-    public int getReposicionesRealizadas() { return reposicionesRealizadas; }
-
 }

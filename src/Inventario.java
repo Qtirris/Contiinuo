@@ -122,7 +122,14 @@ public class Inventario{
         System.out.println(producto10!=null?producto10:"");
     }
 
-    public static void checkStock(){
+public static Producto[] obtenerProductos() {
+    return new Producto[] {
+        producto1, producto2, producto3, producto4, producto5,
+        producto6, producto7, producto8, producto9, producto10
+    };
+}
+
+public static void checkStock(){
         //Revisa que tal vamos de stock (Si necesita o no reposición o si no hay)
         //Se piensa cambiar a que devuelva un array de boolean con cada indice siendo el estado del stock de un producto (de pronto)
         System.out.println("Nombre  -- Stock/Stock Minimo (Necesita reposición?)"+"\n");

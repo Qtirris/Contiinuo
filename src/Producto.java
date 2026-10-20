@@ -75,6 +75,13 @@ public void setStockMinimo(int nuevoStockMinimo){stockMinimo = nuevoStockMinimo>
 //=====================STOCK VENDIDO====================
 public int getStockVendido(){ return stockVendido;}
 
+public void registrarVenta(int cantidad) {
+    if (cantidad > 0 && cantidad <= stock) {
+        stockVendido += cantidad;
+        stock -= cantidad;
+    }
+}
+
 public void setStockVendido(int vendido){ stockVendido = vendido>=0?vendido:stock;}
 
 //=====================GARANTIA====================

@@ -24,12 +24,14 @@ public class Factura{
  public int getGanancia(){return this.ganancia;}
  public String getMedioDePago(){return this.medioDePago;}
  public String getDetalle(){return this.detalle;}
-  public void agregaritem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
+
+ public void agregaritem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
     detalle += "-"+punto.getNombre()+" ---- ("+canti+")"+" $ "+precioVenta+" c/u ---->"+" $"+canti*precioVenta+""+"\n";
     numero += canti;
     //punto.stockVendido+=canti;
     total+=precioVenta*canti;
     setGanancia(punto.calcularGanancia(precioVenta),canti);
+    punto.registrarVenta(canti);
   }
   public void imprimir(){
     System.out.println("Cliente: " + this.nombreCliente);
