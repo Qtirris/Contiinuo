@@ -7,6 +7,7 @@ public class Tienda {
     //atributos de la clase contiinuo, vitales para el funcionamiento del programa.
     private Inventario inventario;
     private Caja caja;
+    private Contabilidad contabilidad; 
     private int consecutivofactura;
     private int consecutivoreposicion;
     private Scanner sc;
@@ -16,6 +17,7 @@ public class Tienda {
         //Constructor y parámetros
         this.inventario= new Inventario();
         this.caja=new Caja();
+        this.contabilidad=new Contabilidad(this.caja, this.inventario, sc);
         this.consecutivofactura=1;
         this.consecutivoreposicion=1;
         this.sc=sc;
@@ -88,4 +90,13 @@ public class Tienda {
         System.out.println("===CIERRE DEL DÍA===");
         System.out.println(caja.resumenDelDia());}
     
+    }
+
+    public void abrirContabilidad() {
+        contabilidad.mostrarMenu();
+    }
+
+    //Llama a contabilidad para obtener el resumen contable e imprimirlo.
+    public void mostrarResumenContable(){
+        System.out.println(contabilidad.generarResumenGeneral());
     }

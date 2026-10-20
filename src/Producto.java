@@ -112,7 +112,22 @@ public boolean setStockMinimo(int nuevoStockMinimo){
 
 //=====================STOCK VENDIDO====================
 public int getStockVendido(){ return stockVendido;}
-//El setStockVendido se movio automarticamente a cuando se descuenta un producto
+
+//Descuenta del stock y suma a lo vendido (la usa Factura.agregaritem)
+public void registrarVenta(int cantidad) {
+    if (cantidad > 0 && cantidad <= stock) {
+        stockVendido += cantidad;
+        stock -= cantidad;
+    }
+}
+
+public boolean setStockVendido(int vendido){
+    if (vendido>=0){
+        stockVendido=vendido;
+        return true;
+    }
+    return false;
+}
 
 //=====================GARANTIA====================
 public int getGarantia(){ return garantia;}
@@ -149,7 +164,7 @@ public boolean reponer(int cantidad){
 public boolean descontar(int cantidad){
  if (cantidad>=0 && getStock()>=cantidad){
         stock-=cantidad;
-        stockVendido-=cantidad; //Modifica el stockVendido
+        stockVendido+=cantidad; //Modifica el stockVendido
         return true;
     }
     return false;

@@ -18,6 +18,7 @@ public class Main{
             System.out.println("    2. Registrar Venta");
             System.out.println("    3. Buscar Producto");
             System.out.println("    4. Cerrar Dia");
+            System.out.println("    5. Consultar Contabilidad");
             System.out.println("    0. Salir");
 
             opcion = Integer.parseInt(sc.nextLine());
@@ -36,6 +37,9 @@ public class Main{
                     break;
                 case 4:
                     mitienda.cerrarDia();
+                    break;
+                case 5:
+                    mitienda.abrirContabilidad();
                     break;
                 case 0:
                     System.out.print("¡Hasta luego!");
