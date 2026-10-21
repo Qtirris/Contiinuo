@@ -5,20 +5,38 @@ public class Factura{
   private int total=0;
   private int ganancia=0;
   private String medioDePago;
-  // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
   private String detalle="";
-  private static String registro1="";
-  private static String registro2="";
-  private static String registro3="";
-  private static String registro4="";
-  private static String registro5="";
-  private static String registro6="";
-  private static String registro7="";
-  private static String registro8="";
-  private static String registro9="";
-  private static String registro10="";
-  private static int cr = 0;
+// atributos de la claseeeeeee
+  private static registro registro1;
+  private static registro registro2;
+  private static registro registro3;
+  private static registro registro4;
+  private static registro registro5;
+  private static registro registro6;
+  private static registro registro7;
+  private static registro registro8;
+  private static registro registro9;
+  private static registro registro10;
 
+  //cambiarlas de estaticas tipo string a tipo facturas, mirar a futuro..........o ya
+  public class registro{
+    public String nom;
+    public String tel;
+    public String med;
+    public String det;
+    public int tot;
+// creacion de la subclase(atributos publicos, preguntar si se puede dejar asi o toca cambiarlo a privado)
+    public registro(String nom, String tel, String med, String det, int tot){
+      this.nom = nom;
+      this.tel=tel;
+      this.med=med;
+      this.det=det;
+      this.tot=tot;
+    }
+  }
+// contador para mantener el orden en el que se guardan las facturas
+  private static int cr = 0;
+  // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
   public Factura(String nombreCliente,String telefono,String medioDePago){
     this.nombreCliente = nombreCliente;
     this.medioDePago=medioDePago;
@@ -26,16 +44,6 @@ public class Factura{
   }
 
   //getters y setters
-  public String getProducto1(){return registro1;}
-  public String getProducto2(){return registro2;}
-  public String getProducto3(){return registro3;}
-  public String getProducto4(){return registro4;}
-  public String getProducto5(){return registro5;}
-  public String getProducto6(){return registro6;}
-  public String getProducto7(){return registro7;}
-  public String getProducto8(){return registro8;}
-  public String getProducto9(){return registro9;}
-  public String getProducto10(){return registro10;}
   public String getNombreCliente(){return this.nombreCliente;}
   public String getTelefono(){return this.telefono;}
   public void setNumero(int nuevoNumero){this.numeroProductos=nuevoNumero;}
@@ -47,7 +55,7 @@ public class Factura{
   public String getMedioDePago(){return this.medioDePago;}
   public String getDetalle(){return this.detalle;}
 
-  public void agregaritem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
+  public void agregarItem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
     if(precioVenta<0){
       System.out.println("precio invalido");
       return;
@@ -68,56 +76,71 @@ public class Factura{
     System.out.println("Total a pagar: " + "$"+ this.total);
     cr+=1;
   }
-
+  //se utiliza para poder llamar al atributo de la subclase seleccionado 
+  public static registro getRegistro(int posRegistro){
+    switch(posRegistro){
+      case 1:
+        return registro1;
+      case 2:
+        return registro2;
+      case 3:
+       return registro3;
+      case 4:
+       return registro4;
+      case 5:
+       return registro5;
+      case 6:
+        return registro6;
+      case 7:
+        return registro7;
+      case 8:
+        return registro8;
+      case 9:
+        return registro9;
+      case 10:
+        return registro10;
+      default:
+        return null;
+    }
+  }
+// metodo para guardar las facturas creadas en una subclase llamada registro, se pueden guardar hasta 10 facturas
   public void guardar(){
-    String texto = "Cliente: " + this.nombreCliente + "\nTelefono: " + this.telefono + "\nForma de pago: " + this.medioDePago + "\n" + this.detalle + "\nTotal a pagar:.................. $" + this.total;
     switch(cr){
       case 1:
-        registro1 = texto;
+        registro1= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 2:
-        registro2 = texto;
+        registro2= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 3:
-        registro3 = texto;
+        registro3= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 4:
-        registro4 = texto;
+        registro4= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 5:
-        registro5 = texto;
+        registro5= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 6:
-        registro6 = texto;
+        registro6= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 7:
-        registro7 = texto;
+        registro7= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 8:
-        registro8 = texto;
+        registro8= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 9:
-        registro9 = texto;
+        registro9= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       case 10:
-        registro10 = texto;
+        registro10= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
         break;
       default:
         break;
     }
   }
-
   public void terminarDia(){
-    registro1="";
-    registro2="";
-    registro3="";
-    registro4="";
-    registro5="";
-    registro6="";
-    registro7="";
-    registro8="";
-    registro9="";
-    registro10="";
     cr=0;
   }
 }
