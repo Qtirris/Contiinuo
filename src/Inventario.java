@@ -5,7 +5,7 @@ public class Inventario{
     */
     
     private static final int MAXIMO=10;
-    private int numeroProductos;
+    private int numeroProductos= 0;
     
     //Ya no son staticos ni privados y se agrego getProducto
     private Producto producto1;
@@ -173,5 +173,11 @@ public class Inventario{
             System.out.println(producto.getNombre()+"--> "
             +producto.getStock()+"/"+producto.getStockMinimo()+reposicion);
         }
+
+    }
+
+        public int getCantidadProductos() {
+            return numeroProductos; 
+        
     }
 }
