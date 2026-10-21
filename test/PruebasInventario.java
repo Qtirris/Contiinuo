@@ -12,7 +12,7 @@ new Producto("Bafle4","Sonido","Mostrador",600_000, 100_000, 8, 2, 6))
 new Producto("Power Bank2","Otros","Colgado",50_000, 10_000, 3, 0, 1))
 */
 
-public class Pruebas {
+public class PruebasInventario {
     public static void main(String[] args) {
         Inventario local= new Inventario();
         //===REGISTRAR PRODUCTOS===
@@ -64,7 +64,7 @@ public class Pruebas {
         productoPorNombre.setGarantia(24);
         productoPorNombre.calcularGanancia(3_000_000);
         productoPorNombre.reponer(2);
-        productoPorNombre.descontar(3,false); // deberian quedar 5+2-3=4
+        productoPorNombre.descontar(0,false); // deberian quedar 1+2-0=3
         System.out.println("Stock Vendido de Xbox720: "+productoPorNombre.getStockVendido());
         
         System.out.println("\n=========================================================================\n");

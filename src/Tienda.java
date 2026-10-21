@@ -75,7 +75,7 @@ public class Tienda {
     //Aplica las reglas
 
 
-// Se crea la regla para buscar productos, en donde se llama a inventario para ver si está.
+    // Se crea la regla para buscar productos, en donde se llama a inventario para ver si está.
     public void administrarInventario(){}
     public void regisitrarVenta(){}
     public void buscarProducto(){
@@ -97,11 +97,12 @@ public class Tienda {
         System.out.println(caja.resumenDelDia());
     
     }
-
+    
+    
     public void abrirContabilidad() {
         contabilidad.mostrarMenu();
     }
-
+    
     //Llama a contabilidad para obtener el resumen contable e imprimirlo.
     public void mostrarResumenContable(){
         System.out.println(contabilidad.generarResumenGeneral());
