@@ -75,28 +75,30 @@ public class Tienda {
     //Aplica las reglas
 
 
-// Se crea la regla para buscar productos, en donde se llama a inventario para ver si está.
+    // Se crea la regla para buscar productos, en donde se llama a inventario para ver si está.
     public void administrarInventario(){}
     public void regisitrarVenta(){}
     public void buscarProducto(){
         System.out.println("===BUSCAR PRODUCTO===");
         System.out.print("Ingrese el nombre del producto: ");
         String nombreproducto= sc.nextLine().trim();
-        Producto prdt=inventario.buscarNombre(nombreproducto);
+        Producto prdt=inventario.buscarPorNombre(nombreproducto);
     }
 
     //Llama a caja para obtener los datos del cierre del dia e imprimirlos.
     public void cerrarDia(){
         System.out.println("===CIERRE DEL DÍA===");
-        System.out.println(caja.resumenDelDia());}
-    
+        System.out.println(caja.resumenDelDia());
     }
-
+    
+    
     public void abrirContabilidad() {
         contabilidad.mostrarMenu();
     }
-
+    
     //Llama a contabilidad para obtener el resumen contable e imprimirlo.
     public void mostrarResumenContable(){
         System.out.println(contabilidad.generarResumenGeneral());
     }
+    
+}

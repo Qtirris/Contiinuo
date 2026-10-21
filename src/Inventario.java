@@ -20,7 +20,7 @@ public class Inventario{
     private Producto producto10;
 
     //Devuelve el producto de la casilla correpondiente
-    private Producto getProducto(int casilla) {
+    public Producto getProducto(int casilla) {
         switch (casilla) {
             case 1:  
             return producto1;
@@ -146,13 +146,6 @@ public class Inventario{
 
             System.out.println(producto);
         }
-    }
-
-    public Producto[] obtenerProductos() {
-        return new Producto[] {
-            producto1, producto2, producto3, producto4, producto5,
-            producto6, producto7, producto8, producto9, producto10
-        };
     }
 
     public void porAgotarse(){
