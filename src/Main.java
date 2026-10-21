@@ -29,7 +29,7 @@ public class Main{
                     break;
                 case 2:
 
-                    mitienda.regisitrarVenta();
+                    mitienda.registrarVenta();
                     break;
                 case 3:
 
