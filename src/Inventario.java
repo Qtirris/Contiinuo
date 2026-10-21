@@ -5,7 +5,7 @@ public class Inventario{
     */
     
     private static final int MAXIMO=10;
-    private int numeroProductos;
+    private int numeroProductos= 0;
     
     //Ya no son staticos ni privados y se agrego getProducto
     private Producto producto1;
@@ -20,7 +20,7 @@ public class Inventario{
     private Producto producto10;
 
     //Devuelve el producto de la casilla correpondiente
-    private Producto getProducto(int casilla) {
+    public Producto getProducto(int casilla) {
         switch (casilla) {
             case 1:  
             return producto1;
@@ -148,13 +148,6 @@ public class Inventario{
         }
     }
 
-    public Producto[] obtenerProductos() {
-        return new Producto[] {
-            producto1, producto2, producto3, producto4, producto5,
-            producto6, producto7, producto8, producto9, producto10
-        };
-    }
-
     public void porAgotarse(){
         String porAgotarse="Productos por agotarse:\n";
         for (int casilla=1;casilla<=MAXIMO;casilla++){
@@ -180,5 +173,11 @@ public class Inventario{
             System.out.println(producto.getNombre()+"--> "
             +producto.getStock()+"/"+producto.getStockMinimo()+reposicion);
         }
+
+    }
+
+        public int getCantidadProductos() {
+            return numeroProductos; 
+        
     }
 }

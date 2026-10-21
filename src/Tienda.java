@@ -58,7 +58,7 @@ public class Tienda {
         System.out.println("====REGISTRAR PRODUCTO====");
 
         String nombre="";
-        while (nombre.equals("")){
+        while (nombre.trim().isEmpty()){
             System.out.print("Nombre: ");
             nombre=sc.nextLine();
 
@@ -82,13 +82,19 @@ public class Tienda {
         System.out.println("===BUSCAR PRODUCTO===");
         System.out.print("Ingrese el nombre del producto: ");
         String nombreproducto= sc.nextLine().trim();
-        Producto prdt=inventario.buscarNombre(nombreproducto);
+        Producto prdt=inventario.buscarPorNombre(nombreproducto);
+
+        if (prdt ==null){
+            System.out.println("Producto no encontrado.");
+        } else {
+            System.out.println(prdt);
+        }
     }
 
     //Llama a caja para obtener los datos del cierre del dia e imprimirlos.
     public void cerrarDia(){
         System.out.println("===CIERRE DEL DÍA===");
-        System.out.println(caja.resumenDelDia());}
+        System.out.println(caja.resumenDelDia());
     
     }
 
@@ -100,3 +106,4 @@ public class Tienda {
     public void mostrarResumenContable(){
         System.out.println(contabilidad.generarResumenGeneral());
     }
+}
