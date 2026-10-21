@@ -1,9 +1,12 @@
 import java.util.Locale;
+import java.util.ArrayList; 
+
 public class Caja{
         //atributos de la caja.
     private int facturasEmitidas;
     private int totalVendido;
     private int gananciaTotal;
+    private ArrayList<Factura> facturas; 
 
 public String generarReporteVentasPorMedioPago() {
     int totalEfectivo = 0;

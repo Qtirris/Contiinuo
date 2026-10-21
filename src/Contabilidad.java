@@ -1,15 +1,17 @@
 import java.util.Scanner;
 
-public class Contabilidad {
+public class Contabilidad{
 
     private Caja caja;
     private Inventario inventario;
-    private Scanner sc;
+    private Scanner sc; 
 
-    public Contabilidad(Caja caja, Inventario inventario, Scanner sc) {
+}
+
+    public Contabilidad(Caja caja, Inventario inventario, Scanner sc){
         this.caja = caja;
         this.inventario = inventario;
-        this.sc = sc;
+        this.sc = sc; 
     }
 
     public void mostrarMenu() {
@@ -30,7 +32,6 @@ public class Contabilidad {
             System.out.print("Seleccione una opción: ");
 
             try {
-
                 opcion = Integer.parseInt(sc.nextLine());
 
                 switch (opcion) {
@@ -44,7 +45,7 @@ public class Contabilidad {
                         break;
 
                     case 3:
-                        System.out.println(generarReporteProductosMenosVendidos());
+                        System.out.println(generarReporteProductosMenosVendidos()); 
                         break;
 
                     case 4:
@@ -72,115 +73,111 @@ public class Contabilidad {
                 }
 
             } catch (NumberFormatException e) {
-
                 System.out.println("Debes ingresar un número.");
             }
         }
     }
-
+    
     public String generarReporteVentasPorMedioPago() {
-
         return caja.generarReporteVentasPorMedioPago();
     }
+        
 
-    public String generarResumenGeneral() {
+public String generarResumenGeneral() {
 
-        return "====== RESUMEN CONTABLE ======\n"
-                + "Facturas emitidas: " + caja.getFacturasEmitidas() + "\n"
-                + "Total vendido: $" + caja.getTotalVendido() + "\n"
-                + "Ganancia total: $" + caja.getGananciaTotal() + "\n"
-                + "Ticket promedio: $" + caja.calcularTicketPromedio() + "\n";
-    }
+    return "Resumen Contable:\n"
+            + "Facturas emitidas: " + caja.getFacturasEmitidas() + "\n"
+            + "Total vendido: $" + caja.getTotalVendido() + "\n"
+            + "Ganancia total: $" + caja.getGananciaTotal() + "\n"
+            + "Ticket promedio: $" + caja.calcularTicketPromedio() + "\n";
+}
 
-    public String generarReporteProductos() {
+public String generarReporteProductos() {
 
-        Producto masVendido = null;
+    Producto[] productos =Inventario.obtenerProductos();
 
-        for (int i = 1; i <= 10; i++) {
+    Producto masVendido = null;
 
-            Producto actual = inventario.getProducto(i);
+    for (int i = 0; i < productos.length; i++) {
 
-            if (actual != null) {
+        if (productos[i] != null) {
 
-                if (masVendido == null
-                        || actual.getStockVendido() > masVendido.getStockVendido()) {
+            if (masVendido == null ||
+                productos[i].getStockVendido() > masVendido.getStockVendido()) {
 
-                    masVendido = actual;
-                }
+                masVendido = productos[i];
             }
         }
-
-        if (masVendido == null || masVendido.getStockVendido() == 0) {
-
-            return "Todavía no hay productos vendidos.";
-        }
-
-        return "====== PRODUCTO MÁS VENDIDO ======\n"
-                + "Producto: " + masVendido.getNombre() + "\n"
-                + "Unidades vendidas: " + masVendido.getStockVendido();
     }
 
-    public String generarReporteProductosMenosVendidos() {
+    if (masVendido == null || masVendido.getStockVendido() == 0) {
+        return "Todavía no hay productos vendidos.";
+    }
 
-        Producto menosVendido = null;
+    return "====== PRODUCTO MÁS VENDIDO ======\n"
+            + "Producto: " + masVendido.getNombre() + "\n"
+            + "Unidades vendidas: " + masVendido.getStockVendido();
 
-        for (int i = 1; i <= 10; i++) {
+}
 
-            Producto actual = inventario.getProducto(i);
+public String generarReporteProductosMenosVendidos() {
 
-            if (actual != null && actual.getStockVendido() > 0) {
+    Producto[] productos =Inventario.obtenerProductos();
 
-                if (menosVendido == null
-                        || actual.getStockVendido() < menosVendido.getStockVendido()) {
+    Producto menosVendido = null;
 
-                    menosVendido = actual;
-                }
+    for (int i = 0; i < productos.length; i++) {
+
+        if (productos[i] != null) {
+
+            if (menosVendido == null ||
+                productos[i].getStockVendido() < menosVendido.getStockVendido()) {
+
+                menosVendido = productos[i];
             }
         }
-
-        if (menosVendido == null) {
-
-            return "Todavía no hay productos vendidos.";
-        }
-
-        return "====== PRODUCTO MENOS VENDIDO ======\n"
-                + "Producto: " + menosVendido.getNombre() + "\n"
-                + "Unidades vendidas: " + menosVendido.getStockVendido();
     }
 
-    public String generarReporteProductosMasRentables() {
+    if (menosVendido == null) {
+        return "No hay productos registrados en el inventario.";
+    }
 
-        Producto masRentable = null;
-        int mayorGanancia = 0;
+    return "====== PRODUCTO MENOS VENDIDO ======\n"
+            + "Producto: " + menosVendido.getNombre() + "\n"
+            + "Unidades vendidas: " + menosVendido.getStockVendido();
+}
 
-        for (int i = 1; i <= 10; i++) {
+public String generarReporteProductosMasRentables() {
 
-            Producto actual = inventario.getProducto(i);
+    Producto[] productos =Inventario.obtenerProductos();
 
-            if (actual != null && actual.getStockVendido() > 0) {
+    Producto masRentable = null;
+    int mayorGanancia = 0;
 
-                int gananciaPorUnidad =
-                        actual.getPrecioMinimo() - actual.getCostoCompra();
+    for (int i = 0; i < productos.length; i++) {
 
-                int gananciaTotal =
-                        gananciaPorUnidad * actual.getStockVendido();
+        if (productos[i] != null) {
 
-                if (masRentable == null || gananciaTotal > mayorGanancia) {
+            int gananciaPorUnidad =
+                    productos[i].getPrecioMinimo()
+                    - productos[i].getCostoCompra();
 
-                    masRentable = actual;
-                    mayorGanancia = gananciaTotal;
-                }
+            int gananciaTotal =
+                    gananciaPorUnidad * productos[i].getStockVendido();
+
+            if (masRentable == null || gananciaTotal > mayorGanancia) {
+                masRentable = productos[i];
+                mayorGanancia = gananciaTotal;
             }
         }
-
-        if (masRentable == null) {
-
-            return "Todavía no hay productos vendidos.";
-        }
-
-        return "====== PRODUCTO QUE GENERA MÁS GANANCIAS ======\n"
-                + "Producto: " + masRentable.getNombre() + "\n"
-                + "Unidades vendidas: " + masRentable.getStockVendido() + "\n"
-                + "Ganancia estimada: $" + mayorGanancia;
     }
+
+    if (masRentable == null) {
+        return "No hay productos registrados en el inventario.";
+    }
+
+    return "====== PRODUCTO QUE GENERA MÁS GANANCIAS ======\n"
+            + "Producto: " + masRentable.getNombre() + "\n"
+            + "Unidades vendidas: " + masRentable.getStockVendido() + "\n"
+            + "Ganancia estimada: $" + mayorGanancia;
 }
