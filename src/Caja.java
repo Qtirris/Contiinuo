@@ -1,6 +1,9 @@
 import java.util.Locale;
+
 public class Caja{
         //atributos de la caja.
+
+    //Atributos de la caja
     private int facturasEmitidas;
     private int totalVendido;
     private int gananciaTotal;
@@ -41,12 +44,12 @@ public String generarReporteVentasPorMedioPago() {
         this.facturasEmitidas = 0;
         this.totalVendido = 0;
         this.gananciaTotal = 0;
-        facturas = new ArrayList<>();
     }
 
               // Suma el total y la ganancia de la factura y cuenta una factura más.
                 // Devuelve false si no recibió factura.
     public boolean registrarVenta(Factura factura) {
+        
         if (factura == null) {
             return false;
         }
