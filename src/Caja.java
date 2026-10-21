@@ -1,5 +1,6 @@
 import java.util.Locale;
 
+
 public class Caja{
         //atributos de la caja.
 
@@ -14,19 +15,20 @@ public String generarReporteVentasPorMedioPago() {
     int totalTransferencia = 0;
     int totalOtros = 0;
 
-    for (Factura factura : facturas) {
-        String medio = factura.getMedioDePago();
+    for (int posRegistro=1;posRegistro<=10;posRegistro++) {
+        Factura.registro factura = Factura.getRegistro(posRegistro);
+        String medio = factura.med;
 
         if (medio == null) {
-            totalOtros += factura.getTotal();
-        } else if (medio.equalsIgnoreCase("efectivo")) {
-            totalEfectivo += factura.getTotal();
-        } else if (medio.equalsIgnoreCase("nequi")) {
-            totalNequi += factura.getTotal();
-        } else if (medio.equalsIgnoreCase("transferencia")) {
-            totalTransferencia += factura.getTotal();
+            totalOtros += factura.tot;
+        } else if (medio.trim().equalsIgnoreCase("efectivo")) {
+            totalEfectivo += factura.tot;
+        } else if (medio.trim().equalsIgnoreCase("nequi")) {
+            totalNequi += factura.tot;
+        } else if (medio.trim().equalsIgnoreCase("transferencia")) {
+            totalTransferencia += factura.tot;
         } else {
-            totalOtros += factura.getTotal();
+            totalOtros += factura.tot;
         }
     }
 
@@ -56,7 +58,7 @@ public String generarReporteVentasPorMedioPago() {
         totalVendido += factura.getTotal();
         gananciaTotal += factura.getGanancia();
         facturasEmitidas++;
-        facturas.add(factura);
+        //facturas.add(factura);
         return true;
     }
 

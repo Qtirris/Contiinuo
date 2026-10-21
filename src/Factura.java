@@ -57,7 +57,7 @@ public class Factura{
 
   public void agregarItem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
     if(precioVenta<0){
-      System.out.println("precio invalido");
+      System.out.println("Precio inválido.");
       return;
     }
     detalle += "-"+punto.getNombre()+" ---- ("+canti+")"+" $ "+precioVenta+" c/u ---->"+" $"+canti*precioVenta+""+"\n";

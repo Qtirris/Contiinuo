@@ -241,7 +241,7 @@ public class Tienda {
 
             //todo valido: la factura anota el producto y el mismo descuenta su stock.
 
-            factura.agregaritem(prdt, cantidad, precio);
+            factura.agregarItem(prdt, cantidad, precio);
             items++;
 
             //REGLA, alerta de reposicion
