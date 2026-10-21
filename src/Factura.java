@@ -1,6 +1,5 @@
 public class Factura{
   private String nombreCliente;
-  private int numero=0;
   private int numeroProductos=0;
   private String telefono;
   private int total=0;
@@ -39,8 +38,8 @@ public class Factura{
   public String getProducto10(){return registro10;}
   public String getNombreCliente(){return this.nombreCliente;}
   public String getTelefono(){return this.telefono;}
-  public void setNumero(int nuevoNumero){this.numero+=nuevoNumero;}
-  public int getNumero(){return this.numero;}
+  public void setNumero(int nuevoNumero){this.numeroProductos=nuevoNumero;}
+  public int getNumero(){return this.numeroProductos;}
   public void setTotal(int nuevoTotal){this.total+=nuevoTotal;}
   public int getTotal(){return this.total;}
   public void setGanancia(int gananciaProducto,int cantidad){this.ganancia+=gananciaProducto*cantidad;}
