@@ -119,12 +119,13 @@ public class Tienda {
             System.out.println("4.  Lista de compras.");
             System.out.println("0.  Volver.");
 
-            opcion= leerEnteros("opcion: ");
+            opcion= leerEnteros("Opción: ");
 
             switch (opcion){
                 case 1: registrarProducto(); break;
-                case 2: inventario.mostrar(); break;
-                case 3: listaDeCompras(); break;
+                case 2: break; // Reponer Stock
+                case 3: inventario.mostrar(); break;
+                case 4: listaDeCompras(); break;
                 case 0: break;
                 default: System.out.println("opción no válida. Intenta de nuevo."); break;
             }
@@ -241,7 +242,7 @@ public class Tienda {
 
             //todo valido: la factura anota el producto y el mismo descuenta su stock.
 
-            factura.agregaritem(prdt, cantidad, precio);
+            factura.agregarItem(prdt, cantidad, precio);
             items++;
 
             //REGLA, alerta de reposicion

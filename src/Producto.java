@@ -186,7 +186,7 @@ public boolean hayStockSobra(){
 //=============TO STRING==============
 public String toString(){
     
-    String texto= ID+". "+nombre+" -- ("+categoria+") ---> Stock: "+stock
+    String texto= ID+". "+nombre+" -- ("+categoria+") ---> Stock: "+stock // + "/" +stockMinimo
     + " -- Precio minimo "+getPrecioMinimo()+"$ c/u. En " +ubicacion;
     return texto;
 }

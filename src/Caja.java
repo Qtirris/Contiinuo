@@ -17,6 +17,7 @@ public String generarReporteVentasPorMedioPago() {
 
     for (int posRegistro=1;posRegistro<=10;posRegistro++) {
         Factura.registro factura = Factura.getRegistro(posRegistro);
+        if (factura ==  null) return "";
         String medio = factura.med;
 
         if (medio == null) {

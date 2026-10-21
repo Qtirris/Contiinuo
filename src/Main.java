@@ -17,7 +17,7 @@ public class Main{
             System.out.println("    1. Administrar Inventario");
             System.out.println("    2. Registrar Venta");
             System.out.println("    3. Buscar Producto");
-            System.out.println("    4. Cerrar Dia");
+            System.out.println("    4. Cerrar día");
             System.out.println("    5. Consultar Contabilidad");
             System.out.println("    0. Salir");
 
