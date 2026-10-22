@@ -20,11 +20,11 @@ public class Factura{
 
   //cambiarlas de estaticas tipo string a tipo facturas, mirar a futuro..........o ya
   public class registro{
-    public String nom;
-    public String tel;
-    public String med;
-    public String det;
-    public int tot;
+    private String nom;
+    private String tel;
+    private String med;
+    private String det;
+    private int tot;
 // creacion de la subclase(atributos publicos, preguntar si se puede dejar asi o toca cambiarlo a privado)
     public registro(String nom, String tel, String med, String det, int tot){
       this.nom = nom;
@@ -33,6 +33,12 @@ public class Factura{
       this.det=det;
       this.tot=tot;
     }
+    //getters
+    public String getNom(){return num;}
+    public String getTel(){return tel;}
+    public String getMed(){return med;}
+    public String getDet(){return det;}
+    public int getTot(){return tot;}
   }
 // contador para mantener el orden en el que se guardan las facturas
   private static int cr = 0;
