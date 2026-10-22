@@ -106,7 +106,7 @@ public class Tienda {
 
     //Reponer sotck, se compra mercancia de un producto para reponer el stock.
 
-    public void reponerProdcuto(){
+    public void reponerProducto(){
         System.out.println("===REPONER STOCK===");
 
         //1. Se busca producto en la bodega.
@@ -200,15 +200,17 @@ public class Tienda {
             System.out.println("===ADMINISTRAR INVENTARIO===");
             System.out.println("1.  Registrar producto.");
             System.out.println("2.  Reponer stock.");
-            System.out.println("3.  Ver inventario.");
-            System.out.println("4.  Lista de compras.");
+            System.out.println("3. Retirar producto.");
+            System.out.println("4.  Ver inventario.");
+            System.out.println("5.  Lista de compras.");
             System.out.println("0.  Volver.");
 
             opcion= leerEnteros("Opción: ");
 
             switch (opcion){
                 case 1: registrarProducto(); break;
-                case 2: break; // Reponer Stock
+                case 2: reponerProducto(); break;// Reponer Stock
+                case 3: retirarProducto(); break;
                 case 3: inventario.mostrar(); break;
                 case 4: listaDeCompras(); break;
                 case 0: break;
