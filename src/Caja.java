@@ -1,70 +1,74 @@
 import java.util.Locale;
 
+public class Caja {
 
-public class Caja{
-        //atributos de la caja.
-
-    //Atributos de la caja
+    // Atributos de la caja
     private int facturasEmitidas;
     private int totalVendido;
     private int gananciaTotal;
 
-public String generarReporteVentasPorMedioPago() {
-    int totalEfectivo = 0;
-    int totalNequi = 0;
-    int totalTransferencia = 0;
-    int totalOtros = 0;
+    // Totales por medio de pago, se quito nequi y solo nos quedamos con tranferencias 
+    private int totalEfectivo;
+    private int totalTransferencia;
+    private int totalOtros;
 
-    for (int posRegistro=1;posRegistro<=10;posRegistro++) {
-        Factura.registro factura = Factura.getRegistro(posRegistro);
-        if (factura ==  null) return "";
-        String medio = factura.med;
-
-        if (medio == null) {
-            totalOtros += factura.tot;
-        } else if (medio.trim().equalsIgnoreCase("efectivo")) {
-            totalEfectivo += factura.tot;
-        } else if (medio.trim().equalsIgnoreCase("nequi")) {
-            totalNequi += factura.tot;
-        } else if (medio.trim().equalsIgnoreCase("transferencia")) {
-            totalTransferencia += factura.tot;
-        } else {
-            totalOtros += factura.tot;
-        }
-    }
-
-    return "====== VENTAS POR MEDIO DE PAGO ======\n"
-            + "Efectivo: $" + totalEfectivo + "\n"
-            + "Nequi: $" + totalNequi + "\n"
-            + "Transferencia: $" + totalTransferencia + "\n"
-            + "Otros medios de pago: $" + totalOtros + "\n"
-            + "Total vendido: $" + totalVendido + "\n"
-            + "=====================================";
-}
-
-        // Este constructor inicia la jornada del dia desde 0
-     public Caja() {
+    // Este constructor inicia la jornada del día desde 0
+    public Caja() {
         this.facturasEmitidas = 0;
         this.totalVendido = 0;
         this.gananciaTotal = 0;
+        this.totalEfectivo = 0;
+        this.totalTransferencia = 0;
+        this.totalOtros = 0;
     }
 
-              // Suma el total y la ganancia de la factura y cuenta una factura más.
-                // Devuelve false si no recibió factura.
+    // Suma el total y la ganancia de la factura, la clasifica por medio de pago
+    // y cuenta una factura más. Devuelve false si no recibió factura.
     public boolean registrarVenta(Factura factura) {
-        
+
         if (factura == null) {
             return false;
         }
-        totalVendido += factura.getTotal();
+
+        int total = factura.getTotal();
+        totalVendido += total;
         gananciaTotal += factura.getGanancia();
         facturasEmitidas++;
-        //facturas.add(factura);
+
+        String medio = factura.getMedioDePago();
+        medio = (medio == null) ? "" : medio.trim().toLowerCase();
+
+        switch (medio) {
+            case "efectivo":
+                totalEfectivo += total;
+                break;
+            case "transferencia":
+                totalTransferencia += total;
+                break;
+            default:
+                totalOtros += total;
+        }
+
         return true;
     }
 
-            // Ticket promedio = lo vendido por factura (NO es la ganancia).
-            // Con cuidado de no dividir por cero.
+    // Reporte de ventas por medio de pago (siempre devuelve texto)
+    public String generarReporteVentasPorMedioPago() {
+
+        if (facturasEmitidas == 0) {
+            return "Todavía no hay ventas registradas.";
+        }
+
+        return "====== VENTAS POR MEDIO DE PAGO ======\n"
+                + "Efectivo: " + formatoPesos(totalEfectivo) + "\n"
+                + "Transferencia: " + formatoPesos(totalTransferencia) + "\n"
+                + "Otros medios de pago: " + formatoPesos(totalOtros) + "\n"
+                + "Total vendido: " + formatoPesos(totalVendido) + "\n"
+                + "=====================================";
+    }
+
+    // Ticket promedio = lo vendido por factura (NO es la ganancia).
+    // Con cuidado de no dividir por cero.
     public int calcularTicketPromedio() {
         if (facturasEmitidas == 0) {
             return 0;
@@ -77,8 +81,7 @@ public String generarReporteVentasPorMedioPago() {
         return "$" + String.format(Locale.forLanguageTag("es-CO"), "%,d", valor);
     }
 
-
-            // Devuelve el cierre del día, esto no lo imprime, quien lo imprime es la tienda 
+    // Devuelve el cierre del día, esto no lo imprime, quien lo imprime es la tienda
     public String resumenDelDia() {
         return "=============== Cierre Del Día ===============\n"
                 + "Facturas emitidas: " + facturasEmitidas + "\n"
@@ -87,8 +90,9 @@ public String generarReporteVentasPorMedioPago() {
                 + "Ticket promedio: " + formatoPesos(calcularTicketPromedio());
     }
 
-            // Los Getters, sin setters. Los totales solo cambian con los métodos de registro
+    // Los getters, sin setters. Los totales solo cambian con los métodos de registro
     public int getFacturasEmitidas() { return facturasEmitidas; }
     public int getTotalVendido() { return totalVendido; }
     public int getGananciaTotal() { return gananciaTotal; }
 }
+
