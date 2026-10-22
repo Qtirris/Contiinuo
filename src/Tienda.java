@@ -211,8 +211,8 @@ public class Tienda {
                 case 1: registrarProducto(); break;
                 case 2: reponerProducto(); break;// Reponer Stock
                 case 3: retirarProducto(); break;
-                case 3: inventario.mostrar(); break;
-                case 4: listaDeCompras(); break;
+                case 4: inventario.mostrar(); break;
+                case 5: listaDeCompras(); break;
                 case 0: break;
                 default: System.out.println("opción no válida. Intenta de nuevo."); break;
             }
