@@ -104,6 +104,65 @@ public class Tienda {
         return valor;
     }
 
+    //Reponer sotck, se compra mercancia de un producto para reponer el stock.
+
+    public void reponerProdcuto(){
+        System.out.println("===REPONER STOCK===");
+
+        //1. Se busca producto en la bodega.
+
+        System.out.print("Nombre del producto: ");
+        String nombre = sc.nextLine();
+        Producto prdt = inventario.buscarPorNombre(nombre);
+
+        if(prdt == null) {
+            System.out.print("Ese producto no existe. ¿Quieres registrarlo ahora? (s/n): ");
+            if (sc.nextLine().equals("s")) {
+                registrarProducto();
+            }
+            return;//se sale de la reposicion y se hace de nuevo con el producto ya creado.
+        }
+
+            //2.Pedir los datos de la compra
+            int cantidad = leerEnteros("Cantidad comprada: ");
+            while(cantidad == 0){
+                System.out.println("Debe ser mayor que 0.");
+                cantidad = leerEnteros("Cantidad comprada: ");
+
+            }
+
+            int costoUnitario =leerEnteros("Costo por unidad: ");
+            while (costoUnitario == 0){
+                System.out.println("Debe ser mayor que 0.");
+                costoUnitario = leerEnteros("Costo por unidad: ");
+            }
+
+            System.out.print("Proveedor: ");
+            String proveedor = sc.nextLine();
+
+            //3. Guardar el costo de antes, para compararlo después.
+            int costoAnterior = prdt.getCostoCompra();
+
+            //4. El producto suma al stock y actualiza su costo
+            prdt.reponer(cantidad);
+            prdt.setCostoCompra(costoUnitario);
+
+            //REGLA, si el costo subió se avisa.
+            if(costoUnitario > costoAnterior){
+                System.out.println("OJO: el costo subió. Conviene revisar la ganancia mínima.");
+            }
+
+            //5. Comprobante de compra.
+            System.out.println("=== COMPROBANTE DE COMPRA ===");
+            System.out.println("Proveedor: "+ proveedor);
+            System.out.println("Producto: "+prdt.getNombre());
+            System.out.println("Cantidad: "+cantidad);
+            System.out.println("Costo por unidad: $"+costoUnitario);
+            System.out.println("Tota: $"+(cantidad * costoUnitario));
+            System.out.println("Stock actual: "+prdt.getStock());
+
+    }
+
 
     //Aplica las reglas
 
