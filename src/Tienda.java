@@ -147,7 +147,7 @@ public class Tienda {
             prdt.reponer(cantidad);
             prdt.setCostoCompra(costoUnitario);
 
-            //REGLA, si el costo subió se avisa.
+            //REGLA, si el costo subió se alerta al usuario.
             if(costoUnitario > costoAnterior){
                 System.out.println("OJO: el costo subió. Conviene revisar la ganancia mínima.");
             }
