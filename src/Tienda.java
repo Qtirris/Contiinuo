@@ -164,9 +164,35 @@ public class Tienda {
     }
 
 
-    //Aplica las reglas
+    //Metodo retirar producto del inventario.
 
+    public void retirarProducto(){
+        System.out.println("===RETIRAR PRODUCTO===");
+        System.out.print("Nombre del producto: ");
+        String nombre = sc.nextLine();
+        Producto prdt = inventario.buscarPorNombre(nombre);
 
+        if(prdt == null){
+            System.out.println("No se encontró ese producto.");
+            return;
+        }
+
+        System.out.println(prdt);
+        System.out.print("¿Seguro que quieres retirarlo del inventario? (s/n): ");
+
+        if(sc.nextLine().equals("s")){
+            //el inventario retira el producto por su ID.
+            if(inventario.retirarProducto(prdt.getID())){
+                System.out.println("Producto retirado: "+prdt.getNombre());
+
+            } else {
+                System.out.println("No se pudo retirar el producto.");
+            }
+
+        } else {
+            System.out.println("Operación cancelada.");
+        }
+    }
 
     public void administrarInventario(){
         int opcion= -1;
