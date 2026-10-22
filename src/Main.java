@@ -8,11 +8,14 @@ public class Main{
 
         Tienda mitienda = new Tienda(sc);
         
+        System.out.println();
         System.out.println("Bienvenido :)");
-
+        System.out.println();
+        
         int opcion = -1;
         while (opcion != 0) {
             System.out.println("Seleccione una opción:");
+            System.out.println();
 
             System.out.println("    1. Administrar Inventario");
             System.out.println("    2. Registrar Venta");
@@ -21,8 +24,12 @@ public class Main{
             System.out.println("    5. Consultar Contabilidad");
             System.out.println("    0. Salir");
 
+            System.out.println();
+            System.out.print(" Ingrese su opción: ");
+            
             opcion = Integer.parseInt(sc.nextLine());
-
+            System.out.println();
+            
             switch (opcion) {
                 case 1:
                     mitienda.administrarInventario();

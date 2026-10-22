@@ -19,6 +19,7 @@ public class Contabilidad {
         while (opcion != 0) {
 
             System.out.println("\n========== CONTABILIDAD ==========");
+            System.out.println();
             System.out.println("1. Resumen general");
             System.out.println("2. Productos más vendidos");
             System.out.println("3. Productos menos vendidos");
@@ -27,10 +28,12 @@ public class Contabilidad {
             System.out.println("6. Consultar total vendido");
             System.out.println("7. Consultar ganancias");
             System.out.println("0. Volver al menú principal");
+            System.out.println();
             System.out.print("Seleccione una opción: ");
-
+            
             try {
                 opcion = Integer.parseInt(sc.nextLine());
+                System.out.println();
 
                 switch (opcion) {
 
@@ -86,11 +89,11 @@ public class Contabilidad {
 //Resumen general
 public String generarResumenGeneral() {
 
-    return "Resumen Contable:\n"
-            + "Facturas emitidas: " + caja.getFacturasEmitidas() + "\n"
-            + "Total vendido: $" + caja.getTotalVendido() + "\n"
-            + "Ganancia total: $" + caja.getGananciaTotal() + "\n"
-            + "Ticket promedio: $" + caja.calcularTicketPromedio() + "\n";
+    return "Resumen Contable:\n\n"
+            + "\tFacturas emitidas: " + caja.getFacturasEmitidas() + "\n"
+            + "\tTotal vendido: $" + caja.getTotalVendido() + "\n"
+            + "\tGanancia total: $" + caja.getGananciaTotal() + "\n"
+            + "\tTicket promedio: $" + caja.calcularTicketPromedio();
 }
 
 //Producto mas vendido
@@ -112,6 +115,7 @@ public String generarReporteProductos() {
     }
 
     if (masVendido == null || masVendido.getStockVendido() == 0) {
+        System.out.println();
         return "Todavía no hay productos vendidos.";
     }
 
@@ -141,6 +145,7 @@ public String generarReporteProductosMenosVendidos() {
     }
 
     if (menosVendido == null) {
+        System.out.println();
         return "Todavía no hay productos vendidos.";
     }
 
@@ -174,6 +179,7 @@ public String generarReporteProductosMasRentables() {
     }
 
     if (masRentable == null) {
+        System.out.println();
         return "Todavía no hay productos vendidos.";
     }
 

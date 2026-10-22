@@ -148,8 +148,8 @@ public class Inventario{
         }
     }
 
-    public void porAgotarse(){
-        String porAgotarse="Productos por agotarse:\n";
+    public String porAgotarse(){
+        String porAgotarse="";
         for (int casilla=1;casilla<=MAXIMO;casilla++){
             Producto producto = getProducto(casilla);
 
@@ -157,7 +157,7 @@ public class Inventario{
 
             porAgotarse+="\t--"+producto.getNombre()+"\n";
         }
-        System.out.println(porAgotarse);
+        return porAgotarse;
     }
 
     public void revisarStock(){

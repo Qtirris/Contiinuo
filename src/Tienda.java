@@ -38,8 +38,12 @@ public class Tienda {
     //listaDeCompras, muestra los productos que se estan acabando y hace una lista en base a ello.
 
     public void listaDeCompras(){
+        System.out.println();
         System.out.println("=== LISTA DE COMPRAS ===");
-        inventario.porAgotarse();
+        System.out.println();
+
+        System.out.println(inventario.porAgotarse().trim().isEmpty()?
+        "No hay productos por agotarse":"Está por agotarse:\n"+inventario.porAgotarse());
     }
 
 
@@ -47,7 +51,9 @@ public class Tienda {
     //registrar un producto nuevo.
 
     public void registrarProducto(){
+        System.out.println();
         System.out.println("====REGISTRAR PRODUCTO====");
+        System.out.println();
 
         //REGLA, la bodega tiene maximo 10 productos.
         if(inventario.estaLleno()){
@@ -84,7 +90,9 @@ public class Tienda {
         Producto prdt= new Producto(nombre,categoria,ubicacion,costo, gananciaMinima, stock, stockMinimo, garantia);
 
         if(inventario.registrarProducto(prdt)){
+            System.out.println();
             System.out.println("Producto registrado: "+prdt);
+            System.out.println();
 
         } else {
             System.out.println("No se pudo registrar el producto.");
@@ -107,7 +115,9 @@ public class Tienda {
     //Reponer sotck, se compra mercancia de un producto para reponer el stock.
 
     public void reponerProducto(){
+        System.out.println();
         System.out.println("===REPONER STOCK===");
+        System.out.println();
 
         //1. Se busca producto en la bodega.
 
@@ -124,17 +134,27 @@ public class Tienda {
         }
 
             //2.Pedir los datos de la compra
+            System.out.println();
             int cantidad = leerEnteros("Cantidad comprada: ");
+            System.out.println();
+
             while(cantidad == 0){
                 System.out.println("Debe ser mayor que 0.");
+
+                System.out.println();
                 cantidad = leerEnteros("Cantidad comprada: ");
+                System.out.println();
 
             }
-
+            
             int costoUnitario =leerEnteros("Costo por unidad: ");
+            System.out.println();
+
             while (costoUnitario == 0){
                 System.out.println("Debe ser mayor que 0.");
+                System.out.println();
                 costoUnitario = leerEnteros("Costo por unidad: ");
+                System.out.println();
             }
 
             System.out.print("Proveedor: ");
@@ -153,7 +173,9 @@ public class Tienda {
             }
 
             //5. Comprobante de compra.
+            System.out.println();
             System.out.println("=== COMPROBANTE DE COMPRA ===");
+            System.out.println();
             System.out.println("Proveedor: "+ proveedor);
             System.out.println("Producto: "+prdt.getNombre());
             System.out.println("Cantidad: "+cantidad);
@@ -167,7 +189,10 @@ public class Tienda {
     //Metodo retirar producto del inventario.
 
     public void retirarProducto(){
+        System.out.println();
         System.out.println("===RETIRAR PRODUCTO===");
+        System.out.println();
+
         System.out.print("Nombre del producto: ");
         String nombre = sc.nextLine();
         Producto prdt = inventario.buscarPorNombre(nombre);
@@ -197,15 +222,20 @@ public class Tienda {
     public void administrarInventario(){
         int opcion= -1;
         while (opcion != 0){
+            System.out.println();
             System.out.println("===ADMINISTRAR INVENTARIO===");
+            System.out.println();
+
             System.out.println("1.  Registrar producto.");
             System.out.println("2.  Reponer stock.");
-            System.out.println("3. Retirar producto.");
+            System.out.println("3.  Retirar producto.");
             System.out.println("4.  Ver inventario.");
             System.out.println("5.  Lista de compras.");
             System.out.println("0.  Volver.");
 
+            System.out.println();
             opcion= leerEnteros("Opción: ");
+            System.out.println();
 
             switch (opcion){
                 case 1: registrarProducto(); break;
@@ -221,7 +251,10 @@ public class Tienda {
 
     // Se crea la regla para buscar productos, en donde se llama a inventario para ver si está.
     public void buscarProducto() {
+        System.out.println();
         System.out.println("===BUSCAR PRODUCTO===");
+        System.out.println();
+
         System.out.print("Nombre del producto: ");
         String nombreproducto = sc.nextLine();
         Producto prdt = inventario.buscarPorNombre(nombreproducto);
@@ -234,7 +267,7 @@ public class Tienda {
 
         System.out.println(prdt); //nombre, stock, ubicacion, garantia
 
-        System.out.print("¿Quiere cambiar su ubicación(s/n: ");
+        System.out.print("¿Quiere cambiar su ubicación(s/n): ");
         if (sc.nextLine().equals("s")) {
             System.out.print("Nueva ubicación: ");
             String nueva = sc.nextLine();
@@ -242,12 +275,16 @@ public class Tienda {
             System.out.println("Ubicación actualizada "+prdt);
 
         }
-
+        else if(!sc.nextLine().equals("n")){System.out.println("Opción inválida.");}
+        System.out.println();
     }
 
     //Llama a caja para obtener los datos del cierre del dia e imprimirlos.
     public void cerrarDia(){
+        System.out.println();
         System.out.println("===CIERRE DEL DÍA===");
+        System.out.println();
+
         System.out.println(caja.resumenDelDia());}
 
 
@@ -261,7 +298,9 @@ public class Tienda {
     }
 
     public void registrarVenta(){
+        System.out.println();
         System.out.println("=== NUEVA VENTA ===");
+        System.out.println();
 
         //1. Datos del cliente.
 
@@ -274,9 +313,12 @@ public class Tienda {
 
         String med = "";
         while(med.equals("")){
+            System.out.println();
             System.out.println("Medio de pago: 1. Efectivo 2. Transferencia");
+            System.out.println();
 
             int opcionPago= leerEnteros("Opción: ");
+            System.out.println();
             if(opcionPago == 1){
                 med = "Efectivo";
             } else if (opcionPago == 2){
@@ -294,6 +336,7 @@ public class Tienda {
         while(true){
             System.out.print("Producto (0 para terminar): ");
             String nombre = sc.nextLine();
+            System.out.println();
             if(nombre.equals("0")){
                 break;
             }
@@ -302,24 +345,34 @@ public class Tienda {
                 System.out.println("Ese producto no existe.");
                 continue;
             }
-
+            System.out.println();
             int cantidad = leerEnteros("Cantidad: ");
+            System.out.println();
             while(cantidad == 0){
                 System.out.println("Debe ser mayor que 0.");
+                System.out.println();
                 cantidad = leerEnteros("Cantidad: ");
+                System.out.println();
             }
 
             //Regla, stock suficiente
             if(prdt.getStock()<cantidad){
+                System.out.println();
                 System.out.println("Stock insuficiente. Disponibles: "+ prdt.getStock());
+                System.out.println();
                 continue;
             }
 
             //REGÑA, ganancia minima (el precio no puede ser menor al precio minimo)
+            System.out.println();
             int precio= leerEnteros("Precio final por unidad(presione 0 para omitir este producto: ");
+            System.out.println();
+
             while(precio !=0 && precio < prdt.getPrecioMinimo()){
                 System.out.println("Precio muy bajo. El mínimo es "+prdt.getPrecioMinimo());
+                System.out.println();
                 precio = leerEnteros("Precio final por unidad ( presione 0 para omitir este producto: ");
+                System.out.println();
 
             }
             if(precio == 0){
@@ -345,7 +398,10 @@ public class Tienda {
         }
 
         //4. Mostrar la factura, guardarla y registrarla en caja
+        System.out.println();
         System.out.println("======= FACTURA #"+ consecutivofactura + " =======" );
+        System.out.println();
+        
         factura.imprimir();
         factura.guardar();
         consecutivofactura++;
