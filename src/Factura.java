@@ -34,7 +34,7 @@ public class Factura{
       this.tot=tot;
     }
     //getters
-    public String getNom(){return num;}
+    public String getNom(){return nom;}
     public String getTel(){return tel;}
     public String getMed(){return med;}
     public String getDet(){return det;}
