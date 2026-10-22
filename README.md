@@ -3,7 +3,7 @@
 
 ### Programación orientada a objetos
 
-Sistema de gestión empresarial, orientado a pequeños negocios dedicados a la comercialización de productos electrónicos, que permita administrar de manera organizada y eficiente la información de las cuentas, el inventario de productos y las ventas, con el fin de facilitar el control de las operaciones comerciales, mejorar el manejo de la información y apoyar la gestión administrativa del negocio
+`Contiinuo` es un sistema de gestión empresarial, orientado a pequeños negocios dedicados a la comercialización de productos electrónicos, que permita administrar de manera organizada y eficiente la información de las cuentas, el inventario de productos y las ventas, con el fin de facilitar el control de las operaciones comerciales, mejorar el manejo de la información y apoyar la gestión administrativa del negocio
 
 ## Integrantes:
 
