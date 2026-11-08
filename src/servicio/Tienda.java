@@ -1,3 +1,4 @@
+package util;
 import java.util.Scanner;
 
 //es de vital importancia para leer los datos proporcionados por el usuario

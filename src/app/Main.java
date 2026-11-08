@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import util.* ;
 
 public class Main{
     static Scanner sc = new Scanner(System.in);

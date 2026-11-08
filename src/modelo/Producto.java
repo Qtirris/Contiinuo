@@ -1,3 +1,4 @@
+package util;
 public class Producto{
     /* Pruebas ejemplos
     new Producto("Bafle1","Sonido","Estante 1",10_000, 5_000, 10, 3, 0);

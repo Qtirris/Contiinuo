@@ -1,3 +1,5 @@
+import util.Factura;
+import util.Producto;
 
 public class PruebasFactura{
     static Producto p1 =new Producto("Bafle1","Sonido","Estante 1",10_000, 5_000, 10, 30, 0);
@@ -26,11 +28,11 @@ public class PruebasFactura{
         f2.guardar();
         System.out.println("==========================================");
 
-        System.out.println(Factura.getRegistro(1).nom);
-        System.out.println(Factura.getRegistro(1).det);
-        System.out.println(Factura.getRegistro(1).tot);
-        System.out.println(Factura.getRegistro(2).nom);
-        System.out.println(Factura.getRegistro(2).det);
-        System.out.println(Factura.getRegistro(2).tot);
+        System.out.println(Factura.getRegistro(1));
+        System.out.println(Factura.getRegistro(1));
+        System.out.println(Factura.getRegistro(1));
+        System.out.println(Factura.getRegistro(2));
+        System.out.println(Factura.getRegistro(2));
+        System.out.println(Factura.getRegistro(2));
     }
 }

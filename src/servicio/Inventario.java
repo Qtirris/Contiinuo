@@ -1,3 +1,4 @@
+package util;
 public class Inventario{
     /*
     Como aun no se puedne usar listas ni arrays ni cosas por el estilo
