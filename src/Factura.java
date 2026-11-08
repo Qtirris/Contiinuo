@@ -1,4 +1,7 @@
+import java.util.Arrays;
+
 public class Factura{
+  private static Factura[] registro = new Factura[10];
   private String nombreCliente;
   private int numeroProductos=0;
   private String telefono;
