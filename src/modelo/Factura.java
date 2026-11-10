@@ -1,7 +1,7 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Factura{
-  private static Factura[] registro = new Factura[10];
+  private static ArrayList<Factura> registro = new ArrayList<>();
   private String nombreCliente;
   private int numeroProductos=0;
   private String telefono;
@@ -10,17 +10,7 @@ public class Factura{
   private String medioDePago;
   private String detalle="";
 // atributos de la claseeeeeee
-  private static registro registro1;
-  private static registro registro2;
-  private static registro registro3;
-  private static registro registro4;
-  private static registro registro5;
-  private static registro registro6;
-  private static registro registro7;
-  private static registro registro8;
-  private static registro registro9;
-  private static registro registro10;
-
+  private static registro reg;
   //cambiarlas de estaticas tipo string a tipo facturas, mirar a futuro..........o ya
   public class registro{
     private String nom;
@@ -43,8 +33,6 @@ public class Factura{
     public String getDet(){return det;}
     public int getTot(){return tot;}
   }
-// contador para mantener el orden en el que se guardan las facturas
-  private static int cr = 0;
   // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
   public Factura(String nombreCliente,String telefono,String medioDePago){
     this.nombreCliente = nombreCliente;
@@ -83,73 +71,18 @@ public class Factura{
     System.out.println("Forma de pago: " + this.medioDePago);
     System.out.println(this.detalle);
     System.out.println("Total a pagar: " + "$"+ this.total);
-    cr+=1;
   }
   //se utiliza para poder llamar al atributo de la subclase seleccionado 
-  public static registro getRegistro(int posRegistro){
-    switch(posRegistro){
-      case 1:
-        return registro1;
-      case 2:
-        return registro2;
-      case 3:
-       return registro3;
-      case 4:
-       return registro4;
-      case 5:
-       return registro5;
-      case 6:
-        return registro6;
-      case 7:
-        return registro7;
-      case 8:
-        return registro8;
-      case 9:
-        return registro9;
-      case 10:
-        return registro10;
-      default:
-        return null;
+  public static int cantidadRegistros(int posRegistro){
+        return registro.size();
     }
-  }
 // metodo para guardar las facturas creadas en una subclase llamada registro, se pueden guardar hasta 10 facturas
-  public void guardar(){
-    switch(cr){
-      case 1:
-        registro1= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 2:
-        registro2= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 3:
-        registro3= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 4:
-        registro4= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 5:
-        registro5= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 6:
-        registro6= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 7:
-        registro7= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 8:
-        registro8= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 9:
-        registro9= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      case 10:
-        registro10= new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-        break;
-      default:
-        break;
+  public static void guardar(Factura r){
+    reg = new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
+      registro.add(reg);
     }
+  public static void terminarDia(){
+    registro.clear();
   }
-  public void terminarDia(){
-    cr=0;
-  }
+  public registro getposition(int eleccion){return registro.get(eleccion - 1);}
 }
