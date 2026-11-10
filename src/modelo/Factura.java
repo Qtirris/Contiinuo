@@ -12,29 +12,7 @@ public class Factura{
   private String medioDePago;
   private String detalle="";
 // atributos de la claseeeeeee
-  private static registro reg;
   //cambiarlas de estaticas tipo string a tipo facturas, mirar a futuro..........o ya
-  public class registro{
-    private String nom;
-    private String tel;
-    private String med;
-    private String det;
-    private int tot;
-// creacion de la subclase(atributos publicos, preguntar si se puede dejar asi o toca cambiarlo a privado)
-    public registro(String nom, String tel, String med, String det, int tot){
-      this.nom = nom;
-      this.tel=tel;
-      this.med=med;
-      this.det=det;
-      this.tot=tot;
-    }
-    //getters
-    public String getNom(){return nom;}
-    public String getTel(){return tel;}
-    public String getMed(){return med;}
-    public String getDet(){return det;}
-    public int getTot(){return tot;}
-  }
   // el atributo detalle es para almacenar los productos en el metodo de agregaritem para que luego se impriman en la factura
   public Factura(String nombreCliente,String telefono,String medioDePago){
     this.nombreCliente = nombreCliente;
@@ -80,8 +58,7 @@ public class Factura{
     }
 // metodo para guardar las facturas creadas en una subclase llamada registro, se pueden guardar hasta 10 facturas
   public static void guardar(Factura r){
-    reg = new registro(this.nombreCliente, this.telefono, this.medioDePago, this.detalle, this.total);
-      registro.add(reg);
+      registro.add(r);
     }
   public static void terminarDia(){
     registro.clear();
