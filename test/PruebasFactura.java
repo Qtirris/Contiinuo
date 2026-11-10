@@ -1,5 +1,5 @@
-import util.Factura;
-import util.Producto;
+import modelo.Factura;
+import modelo.Producto;
 
 public class PruebasFactura{
     static Producto p1 =new Producto("Bafle1","Sonido","Estante 1",10_000, 5_000, 10, 30, 0);

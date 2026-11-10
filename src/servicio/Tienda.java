@@ -1,5 +1,8 @@
-package util;
+package servicio;
 import java.util.Scanner;
+
+import modelo.Factura;
+import modelo.Producto;
 
 //es de vital importancia para leer los datos proporcionados por el usuario
 //y para asi seguir las reglas de las otras clases.

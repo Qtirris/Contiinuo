@@ -1,4 +1,7 @@
-package util;
+package servicio;
+
+import modelo.Producto;
+
 public class Inventario{
     /*
     Como aun no se puedne usar listas ni arrays ni cosas por el estilo

@@ -1,5 +1,7 @@
-package util;
+package servicio;
 import java.util.Scanner;
+
+import modelo.Producto;
 
 public class Contabilidad {
 

@@ -12,8 +12,8 @@ new Producto("Bafle4","Sonido","Mostrador",600_000, 100_000, 8, 2, 6))
 new Producto("Power Bank2","Otros","Colgado",50_000, 10_000, 3, 0, 1))
 */
 
-import util.Inventario;
-import util.Producto;
+import modelo.Producto;
+import servicio.Inventario;
 
 public class PruebasInventario {
     public static void main(String[] args) {

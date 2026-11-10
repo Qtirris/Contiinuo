@@ -1,5 +1,7 @@
-package util;
+package servicio;
 import java.util.Locale;
+
+import modelo.Factura;
 
 public class Caja {
 

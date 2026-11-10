@@ -1,50 +1,38 @@
-package util;
-public class Producto{
-    /* Pruebas ejemplos
-    new Producto("Bafle1","Sonido","Estante 1",10_000, 5_000, 10, 3, 0);
-    new Producto("Xbox360","Consolas","Estante 1",500_000, 120_000, 5, 2, 6);
-    new Producto("Radio1","Sonido","Repisa",70_000, 30_000, 4, 0, 3);
-    new Producto("Bafle2","Sonido","Mostrador",600_000, 50_000, 8, 2, 6);
-    new Producto("Power Bank","Otros","Colgado",50_000, 10_000, 3, 0, 1);
-    */
-    private static int contadorId=1;
+package modelo;
+//ESTA VA A SER LA CLASE ABSTACTA
+public abstract class Producto{
+    protected static int contadorId=1;
 
     private final int ID;
     private String nombre;
-    private String categoria;
     private String ubicacion;
-
+    
     private int costoCompra;
     private int gananciaMinima;
     private int stock;
     private int stockMinimo;
     private int stockVendido;
     private int garantia;
-
     
-    //Revisar si a futuro los parametros del contructor se puede pasar como una lista o array.
-
-    public Producto(String nombre, String categoria, String ubicacion, int costoCompra, int gananciaMinima, int stock, int stockMinimo, int garantia){
+    
+    public Producto(String[] param1, int[] param2){
         
         this.ID=contadorId++;
         
-        this.nombre=nombre;
-        this.categoria=categoria;
-        this.ubicacion=ubicacion;
-        this.costoCompra=costoCompra;
-        this.gananciaMinima=gananciaMinima;
-        this.stock=stock;
-        this.stockMinimo=stockMinimo;
-        this.garantia=garantia;
+        this.nombre=param1[0];
+        this.ubicacion=param1[1];
+        this.costoCompra=param2[0];
+        this.gananciaMinima=param2[1];
+        this.stock=param2[2];
+        this.stockMinimo=param2[3];
+        this.garantia=param2[4];
     }
 
-    //Getters y Setters para los atributos
-
 //=====================NOMBRE====================
-public String getNombre(){return nombre;}
+public final String getNombre(){return nombre;}
 
-public boolean setNombre(String nuevoNombre){
-    if (nuevoNombre == null || nuevoNombre.trim().isEmpty()){ //Revisa que no este vacio
+public final boolean setNombre(String nuevoNombre){
+    if (nuevoNombre == null || nuevoNombre.trim().isEmpty()){
         return false;
     }
     nombre=nuevoNombre;
@@ -52,23 +40,23 @@ public boolean setNombre(String nuevoNombre){
 }
 
 //=====================CATEGORIA====================
-public String getCategoria(){return categoria;}
+public final String getCategoria(){return this.getClass().getSimpleName();}
 
 //=====================UBICACION====================
-public String getUbicacion(){return ubicacion;}
+public final String getUbicacion(){return ubicacion;}
 
-public boolean setUbicacion(String nuevaUbicacion){ 
+public final boolean setUbicacion(String nuevaUbicacion){ 
     if (nuevaUbicacion==null || nuevaUbicacion.trim().isEmpty()){
         return false;
     }    
-    ubicacion =nuevaUbicacion;
+    ubicacion = nuevaUbicacion;
     return true;
 }
 
 //=====================COSTO COMPRA====================
-public int getCostoCompra(){ return costoCompra;}
+public final int getCostoCompra(){ return costoCompra;}
 
-public boolean setCostoCompra(int nuevoCosto){
+public final boolean setCostoCompra(int nuevoCosto){
     if (nuevoCosto>=0){
         costoCompra=nuevoCosto;
         return true;
@@ -78,9 +66,9 @@ public boolean setCostoCompra(int nuevoCosto){
 }
 
 //=====================GANANCIA MINIMA====================
-public int getGananciaMinima(){ return gananciaMinima;}
+public final int getGananciaMinima(){ return gananciaMinima;}
 
-public boolean setGananciaMinima(int nuevaGanancia){
+public final boolean setGananciaMinima(int nuevaGanancia){
     if (nuevaGanancia>=0){
         gananciaMinima=nuevaGanancia;
         return true;
@@ -89,9 +77,9 @@ public boolean setGananciaMinima(int nuevaGanancia){
 }
 
 //=====================STOCK====================
-public int getStock(){ return stock;}
+public final int getStock(){ return stock;}
 
-public boolean setStock(int nuevoStock){ 
+public final boolean setStock(int nuevoStock){ 
     if (nuevoStock>=0){
         stock=nuevoStock;
         return true;
@@ -100,9 +88,9 @@ public boolean setStock(int nuevoStock){
 }
 
 //=====================STOCK MINIMO====================
-public int getStockMinimo(){ return stockMinimo;}
+public final int getStockMinimo(){ return stockMinimo;}
 
-public boolean setStockMinimo(int nuevoStockMinimo){
+public final boolean setStockMinimo(int nuevoStockMinimo){
     if (nuevoStockMinimo>=0){
         stockMinimo=nuevoStockMinimo;
         return true;
@@ -111,17 +99,17 @@ public boolean setStockMinimo(int nuevoStockMinimo){
 }
 
 //=====================STOCK VENDIDO====================
-public int getStockVendido(){ return stockVendido;}
+public final int getStockVendido(){ return stockVendido;}
 
 //Descuenta del stock y suma a lo vendido (la usa Factura.agregaritem)
-public void registrarVenta(int cantidad) {
+public final void registrarVenta(int cantidad) {
     if (cantidad > 0 && cantidad <= stock) {
         stockVendido += cantidad;
         stock -= cantidad;
     }
 }
 
-public boolean setStockVendido(int vendido){
+public final boolean setStockVendido(int vendido){
     if (vendido>=0){
         stockVendido=vendido;
         return true;
@@ -130,9 +118,9 @@ public boolean setStockVendido(int vendido){
 }
 
 //=====================GARANTIA====================
-public int getGarantia(){ return garantia;}
+public final int getGarantia(){ return garantia;}
 
-public boolean setGarantia(int nuevaGarantia){ 
+public final boolean setGarantia(int nuevaGarantia){ 
     if (nuevaGarantia>=0){
         garantia=nuevaGarantia;
         return true;
@@ -141,10 +129,10 @@ public boolean setGarantia(int nuevaGarantia){
 }
 
 //=====================PRECIO MINIMO====================
-public int getPrecioMinimo(){ return costoCompra+gananciaMinima;}
+public final int getPrecioMinimo(){ return costoCompra+gananciaMinima;}
 
 //=====================ID====================
-public int getID(){return ID;}
+public final int getID(){return ID;}
     
 
 //=====================METODOS PRINCIPALES====================
@@ -165,7 +153,7 @@ public boolean reponer(int cantidad){
 public boolean descontar(int cantidad, boolean dañado){
  if (cantidad>=0 && getStock()>=cantidad && !dañado){
         stock-=cantidad;
-        stockVendido+=cantidad; //Modifica el stockVendido
+        stockVendido+=cantidad;
         return true;
     }
     else if(cantidad>=0 && getStock()>=cantidad && dañado){
@@ -179,17 +167,19 @@ public boolean descontar(int cantidad, boolean dañado){
 public boolean hayStock(){
     return stock>0;
 }
+
 public boolean hayStockSobra(){
-    //Para mostrar alerta sobre si hay que reponer o no
     return stock>=stockMinimo;
 }
 
 //=============TO STRING==============
 public String toString(){
     
-    String texto= ID+". "+nombre+" -- ("+categoria+") ---> Stock: "+stock // + "/" +stockMinimo
+    String texto= ID+". "+nombre+" -- ("+getCategoria()+") ---> Stock: "+stock
     + " -- Precio minimo "+getPrecioMinimo()+"$ c/u. En " +ubicacion;
     return texto;
 }
+
+public abstract String detalle();
 
 }

@@ -1,4 +1,6 @@
+package modelo;
 import java.util.ArrayList;
+
 
 public class Factura{
   private static ArrayList<Factura> registro = new ArrayList<>();

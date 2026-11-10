@@ -1,5 +1,7 @@
 import java.util.Scanner;
-import util.* ;
+
+import servicio.Tienda;
+
 
 public class Main{
     static Scanner sc = new Scanner(System.in);
