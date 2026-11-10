@@ -3,18 +3,29 @@ package modelo;
 public abstract class Producto{
     protected static int contadorId=1;
 
-    private final int ID;
-    private String nombre;
-    private String ubicacion;
+    protected final int ID;
+
+    protected String nombre;
+    protected String ubicacion;
+
+    //Categoria se quitó, ya no es el atributo sino el nombre de la clase (ver getCategoria)
     
-    private int costoCompra;
-    private int gananciaMinima;
-    private int stock;
-    private int stockMinimo;
-    private int stockVendido;
-    private int garantia;
+    protected int costoCompra;
+    protected int gananciaMinima;
+    protected int stock;
+    protected int stockMinimo;
+    protected int stockVendido;
+    protected int garantia;
     
+    //Garantia se quitó del constructor, ahora lo asigna la clase por defecto (aun se puede usar setGarantia para cassos especiales)
     
+    /*
+    Para no pasar tantos parametros se pasan 2 listas
+    El orden de las listas es el siguiente:
+
+    param1[]={nombre,ubicacion}         Strings
+    param2[]={costoCompra,gananciaMinima,stock,stockMinimo}           ints
+    */
     public Producto(String[] param1, int[] param2){
         
         this.ID=contadorId++;
@@ -25,7 +36,6 @@ public abstract class Producto{
         this.gananciaMinima=param2[1];
         this.stock=param2[2];
         this.stockMinimo=param2[3];
-        this.garantia=param2[4];
     }
 
 //=====================NOMBRE====================
