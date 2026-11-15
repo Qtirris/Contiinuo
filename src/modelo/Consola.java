@@ -18,15 +18,18 @@ public class Consola extends Producto {
 
     public Consola(String[] param1 , int[] param2, boolean[] param3){
         super(param1,param2);
-        this.plataforma=param1[3];
+        this.plataforma=param1[2];
         this.original=param3[0];
         this.chipeada=param3[1];
         this.portatil=param3[2];
-        this.garantia=6;
+        setGarantia(6);
     }
 
+	//public static Consola buscarPorPlataforma(String plataforma){
+
+    //}
     public String detalle(){
-        String detalle = "Consola " +nombre+ "\n"+ "Original: "+ (original?"Si":"No")+"\n"+
+        String detalle = "Consola " +getNombre()+ "\n"+ "Original: "+ (original?"Si":"No")+"\n"+
         "Portatil: "+ (portatil?"Si":"No")+"\n"+"Chipeada: "+ (chipeada?"Si":"No")+"\n"+
         " Plataforma: "+plataforma;
 

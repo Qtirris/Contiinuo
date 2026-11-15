@@ -1,30 +1,33 @@
 package modelo;
 
 public class Sonido extends Producto {
+    private String marca;
     private boolean original;
     private boolean microfono;
-    private boolean bateria;
+    private boolean bateria; //Si es recargable o es solo con corriente
     private int potencia;
     private tipoSonido tipo;
-    private enum tipoSonido {CABINA, BAFLE, PARLANTE, AUDIFONO, RADIO};
+    public static enum tipoSonido {CABINA, BAFLE, PARLANTE, AUDIFONO, RADIO};
     
     /*
     Se añade una tercera lista con caracteristicas especiales de la clase Sonido
     
     param3[]={original,microfono,bateria}
-    Se añade un elemento nuevo a `param1`
+    Se añade un elemento nuevo a `param2` y `param1`
 
+    param1[]={nombre,ubicacion,marca}
     param2[]={costoCompra,gananciaMinima,stock,stockMinimo,potencia}         Strings
     */
 
     public Sonido(String[] param1 , int[] param2, boolean[] param3, tipoSonido tipo){
         super(param1,param2);
+        this.marca=param1[2];
         this.potencia=param2[4];
         this.original=param3[0];
         this.microfono=param3[1];
         this.bateria=param3[2];
         this.tipo=tipo;
-        this.garantia=setGarantiaDefecto(tipo);
+        setGarantiaDefecto(tipo);
     }
 
     private int setGarantiaDefecto(tipoSonido tipo){
@@ -47,7 +50,7 @@ public class Sonido extends Producto {
         return texto;
     }
     public String detalle(){
-        String detalle = tipoSonidoTexto(tipo)+" " +nombre+ "\n"+ "Potencia: "+potencia+
+        String detalle = tipoSonidoTexto(tipo)+" " +getNombre()+ "\n"+"Marca: "+marca+ "\n"+ "Potencia: "+potencia+
         "Original: "+ (original?"Si":"No")+"\n"+"Microfono: "+ (microfono?"Si":"No")+"\n"+
         "Bateria: "+ (bateria?"Si":"No")+"\n";
 

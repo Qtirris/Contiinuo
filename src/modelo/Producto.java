@@ -1,21 +1,21 @@
 package modelo;
 //ESTA VA A SER LA CLASE ABSTACTA
 public abstract class Producto{
-    protected static int contadorId=1;
+    private static int contadorId=1;
 
-    protected final int ID;
+    private final int ID;
 
-    protected String nombre;
-    protected String ubicacion;
+    private String nombre;
+    private String ubicacion;
 
     //Categoria se quitó, ya no es el atributo sino el nombre de la clase (ver getCategoria)
     
-    protected int costoCompra;
-    protected int gananciaMinima;
-    protected int stock;
-    protected int stockMinimo;
-    protected int stockVendido;
-    protected int garantia;
+    private int costoCompra;
+    private int gananciaMinima;
+    private int stock;
+    private int stockMinimo;
+    private int stockVendido;
+    private int garantia;
     
     //Garantia se quitó del constructor, ahora lo asigna la clase por defecto (aun se puede usar setGarantia para cassos especiales)
     
