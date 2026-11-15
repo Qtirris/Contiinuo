@@ -25,15 +25,13 @@ public class Consola extends Producto {
         setGarantia(6);
     }
 
-	//public static Consola buscarPorPlataforma(String plataforma){
-
-    //}
-    public String detalle(){
-        String detalle = "Consola " +getNombre()+ "\n"+ "Original: "+ (original?"Si":"No")+"\n"+
+    public String getPlataforma(){return plataforma;}
+    public void detalle(){
+        String detalle = "Consola: " +getNombre()+ "\n"+ "Original: "+ (original?"Si":"No")+"\n"+
         "Portatil: "+ (portatil?"Si":"No")+"\n"+"Chipeada: "+ (chipeada?"Si":"No")+"\n"+
-        " Plataforma: "+plataforma;
+        "Plataforma: "+plataforma;
 
-        return detalle;
+        System.out.println( detalle);
     }
 }
  

@@ -190,6 +190,6 @@ public String toString(){
     return texto;
 }
 
-public abstract String detalle();
+public abstract void detalle();
 
 }

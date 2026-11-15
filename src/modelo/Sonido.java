@@ -30,6 +30,9 @@ public class Sonido extends Producto {
         setGarantiaDefecto(tipo);
     }
 
+    public String getMarca(){return marca;}
+    public tipoSonido getTipo(){return tipo;}
+
     private int setGarantiaDefecto(tipoSonido tipo){
         switch (tipo) {
             case CABINA:
@@ -49,12 +52,13 @@ public class Sonido extends Producto {
         String texto= tipo.name().charAt(0)+tipo.name().substring(1).toLowerCase();
         return texto;
     }
-    public String detalle(){
+
+    public void detalle(){
         String detalle = tipoSonidoTexto(tipo)+" " +getNombre()+ "\n"+"Marca: "+marca+ "\n"+ "Potencia: "+potencia+
         "Original: "+ (original?"Si":"No")+"\n"+"Microfono: "+ (microfono?"Si":"No")+"\n"+
         "Bateria: "+ (bateria?"Si":"No")+"\n";
 
-        return detalle;
+        System.out.println( detalle);
     }
 }
  

@@ -42,10 +42,11 @@ public class PruebasInventario {
         
         //===ACTUALIZAR PRODUCTOS===
         local.retirarProducto(9);
-        local.retirarProducto(6);
+        local.retirarProducto(local.buscarPorId(6));
         local.retirarProducto(2);
 
-        local.registrarProducto(new Consola(new String[]{"Xbox 720","Arriba","Xbox"},new int[]{300_000,200_000,6,7},new boolean[]{true,false,false}));
+        local.registrarProducto(new Consola(new String[]{"PlayStation 4","Arriba","PlayStation"},new int[]{300_000,200_000,6,7},new boolean[]{true,false,false}));
+        local.registrarProducto(new Consola(new String[]{"PlayStation 5","Arriba","PlayStation"},new int[]{300_000,200_000,9,7},new boolean[]{true,false,false}));
         local.registrarProducto(new Sonido(new String[]{"JBL BOOMBOX4","Abajo","JBL"},new int[]{60_000,50_000,3,4,30},new boolean[]{false,false,true},Sonido.tipoSonido.BAFLE));
         //===BUSCAR POR NOMBRE Y SETTERS Y GETTERS===
         ArrayList<Producto> productosPorNombre=local.buscarPorNombre("xbox");
@@ -61,6 +62,7 @@ public class PruebasInventario {
         productoPorNombre.calcularGanancia(3_000_000);
         productoPorNombre.reponer(2);
         productoPorNombre.descontar(0,false); // deberian quedar 1+2-0=3
+        productoPorNombre.detalle();
         System.out.println("Stock Vendido de Xbox720: "+productoPorNombre.getStockVendido());
         
         System.out.println("\n=========================================================================\n");

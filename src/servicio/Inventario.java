@@ -2,7 +2,7 @@ package servicio;
 
 import java.util.ArrayList;
 
-import modelo.Producto;
+import modelo.*;
 
 public class Inventario{
 
@@ -93,4 +93,39 @@ public class Inventario{
         }
         System.out.print( texto);
     }
+    //================BUSQUEDA ESPECIFICA DE CLASES HEREDADAS=======
+    //======CONSOLA=======
+    public ArrayList<Consola> buscarPorPlataforma(String plataforma){
+        ArrayList<Consola> retornados=new ArrayList<>();
+        
+        for(Producto p:Inv){
+            if(!p.getCategoria().equals("Consola")){continue;}//Descarta las que no son consolas
+            if(!((Consola) p).getPlataforma().equals(plataforma)){continue;};//Descarta las que no son de la misma plataforma
+            retornados.add(((Consola)p));
+        }
+        return retornados;
+    }
+    //======SONIDO=======
+    public ArrayList<Sonido> buscarPorMarca(String marca){
+        ArrayList<Sonido> retornados=new ArrayList<>();
+        
+        for(Producto p:Inv){
+            if(!p.getCategoria().equals("Consola")){continue;}//Descarta las que no son consolas
+            if(!((Sonido) p).getMarca().equals(marca)){continue;};//Descarta las que no son de la misma plataforma
+            retornados.add(((Sonido)p));
+        }
+        return retornados;
+    }
+    public ArrayList<Sonido> buscarPorTipo(Sonido.tipoSonido tipo){
+        ArrayList<Sonido> retornados=new ArrayList<>();
+        
+        for(Producto p:Inv){
+            if(!p.getCategoria().equals("Consola")){continue;}//Descarta las que no son consolas
+            if(!((Sonido) p).getTipo().equals(tipo)){continue;};//Descarta las que no son de la misma plataforma
+            retornados.add(((Sonido)p));
+        }
+        return retornados;
+    }
+    //======ACCESORIO=======
+    //======VARIOS=======
 }
