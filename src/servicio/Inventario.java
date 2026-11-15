@@ -54,7 +54,7 @@ public class Inventario{
     }
 
     public Producto buscarPorId(int id) {
-        for (int i=0; i<=Inv.size(); i++) {
+        for (int i=0; i<Inv.size(); i++) {
             Producto p = Inv.get(i);
             if (p!=null && p.getID()==id) {
                 return p;
@@ -70,16 +70,16 @@ public class Inventario{
         }
     }
 
-    public String porAgotarse(){
+    public void porAgotarse(){
         String porAgotarse="";
         for (Producto p: Inv){
             if (p==null|| p.hayStockSobra()){continue;}
             porAgotarse+="\t--"+p.getNombre()+"\n";
         }
-        return porAgotarse;
+        System.out.println(porAgotarse);
     }
 
-    public String revisarStock(){
+    public void revisarStock(){
         //Revisa que tal vamos de stock (Si necesita o no reposición o si no hay)
         //Se piensa cambiar a que devuelva un array de boolean con cada indice siendo el estado del stock de un producto (de pronto)
         String texto = "";
@@ -89,8 +89,8 @@ public class Inventario{
 
             String reposicion = p.hayStockSobra()?" -(No necesita reposición)":" -(Necesita reposición)";
 
-            texto+=p.getNombre()+"-->"+p.getStock()+"/"+p.getStockMinimo()+reposicion;
+            texto+=p.getNombre()+"-->"+p.getStock()+"/"+p.getStockMinimo()+reposicion+"\n";
         }
-        return texto;
+        System.out.print( texto);
     }
 }
