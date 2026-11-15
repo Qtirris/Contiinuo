@@ -63,5 +63,5 @@ public class Factura{
   public static void terminarDia(){
     registro.clear();
   }
-  public registro getposition(int eleccion){return registro.get(eleccion - 1);}
+  public factura getposition(int eleccion){return registro.get(eleccion - 1);}
 }
