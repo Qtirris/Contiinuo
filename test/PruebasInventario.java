@@ -1,40 +1,34 @@
 /*
 Clase para hacer pruebas mientras las clases no estan eonectadas en Contiinuo
-new Producto("Bafle1","Sonido","Estante 1",10_000, 5_000, 10, 3, 0))
-new Producto("Xbox360","Consolas","Estante 1",500_000, 120_000, 5, 2, 6))
-new Producto("Radio1","Sonido","Repisa",70_000, 30_000, 4, 0, 3))
-new Producto("Bafle2","Sonido","Mostrador",600_000, 300_000, 8, 2, 6))
-new Producto("Power Bank","Otros","Colgado",50_000, 20_000, 3, 0, 1))
-new Producto("Bafle3","Sonido","Estante 1",10_000, 12_000, 10, 3, 0))
-new Producto("Xbox720","Consolas","Estante 1",500_000, 130_000, 5, 2, 6))
-new Producto("Radio2","Sonido","Repisa",70_000, 10_000, 4, 0, 3))
-new Producto("Bafle4","Sonido","Mostrador",600_000, 100_000, 8, 2, 6))
-new Producto("Power Bank2","Otros","Colgado",50_000, 10_000, 3, 0, 1))
-*/
+new Consola(new String[]{"Xbox 360","Arriba","Xbox"},new int[]{300_000,200_000,3,1},new boolean[]{true,true,false}));
+new Consola(new String[]{"Xbox One","Arriba","Xbox"},new int[]{500_000,300_000,2,2},new boolean[]{true,false,false}));
+new Consola(new String[]{"Nintendo Switch","Abajo","Nintendo"},new int[]{800_000,200_000,5,3},new boolean[]{true,false,true}));
+new Sonido(new String[]{"GEDI-G 1016","Derecha","GEDI-G"},new int[]{150_000,60_000,7,3,100},new boolean[]{true,true,true},Sonido.tipoSonido.CABINA));
+new Sonido(new String[]{"NIA 2040","IZquierda","NIA"},new int[]{250_000,110_000,2,1,150},new boolean[]{true,true,false},Sonido.tipoSonido.CABINA));
+new Sonido(new String[]{"AIIR PODS","Derecha","GEDI-G"},new int[]{20_000,50_000,7,3,10},new boolean[]{false,true,true},Sonido.tipoSonido.AUDIFONO));
+new Sonido(new String[]{"JBL BOOMBOX3","Abajo","JBL"},new int[]{60_000,50_000,3,4,30},new boolean[]{false,false,true},Sonido.tipoSonido.BAFLE));*/
 
-import modelo.Producto;
+import java.util.ArrayList;
+
+import modelo.*;
 import servicio.Inventario;
 
 public class PruebasInventario {
     public static void main(String[] args) {
         Inventario local= new Inventario();
         //===REGISTRAR PRODUCTOS===
-        local.registrarProducto(new Producto("Bafle1","Sonido","Estante 1",10_000, 5_000, 10, 30, 0));
-        local.registrarProducto(new Producto("Xbox360","Consolas","Estante 1",500_000, 120_000, 5, 2, 6));
-        local.registrarProducto(new Producto("Radio1","Sonido","Repisa",70_000, 30_000, 4, 0, 3));
-        local.registrarProducto(new Producto("Bafle2","Sonido","Mostrador",600_000, 300_000, 8, 2, 6));
-        local.registrarProducto(new Producto("Power Bank","Otros","Colgado",50_000, 20_000, 3, 0, 1));
-        local.registrarProducto(new Producto("Bafle3","Sonido","Estante 1",10_000, 12_000, 10, 3, 0));
-        local.registrarProducto(new Producto("Xbox720","Consolas","Estante 1",500_000, 130_000, 5, 2, 6));
-        local.registrarProducto(new Producto("Radio2","Sonido","Repisa",70_000, 10_000, 4, 0, 3));
-        local.registrarProducto(new Producto("Bafle4","Sonido","Mostrador",600_000, 100_000, 8, 2, 6));
-        local.registrarProducto(new Producto("Power Bank2","Otros","Colgado",50_000, 10_000, 3, 15, 1));
+        local.registrarProducto(new Consola(new String[]{"Xbox 360","Arriba","Xbox"},new int[]{300_000,200_000,3,1},new boolean[]{true,true,false}));
+        local.registrarProducto(new Consola(new String[]{"Xbox One","Arriba","Xbox"},new int[]{500_000,300_000,2,2},new boolean[]{true,false,false}));
+        local.registrarProducto(new Consola(new String[]{"Nintendo Switch","Abajo","Nintendo"},new int[]{800_000,200_000,5,3},new boolean[]{true,false,true}));
+        local.registrarProducto(new Sonido(new String[]{"GEDI-G 1016","Derecha","GEDI-G"},new int[]{150_000,60_000,7,3,100},new boolean[]{true,true,true},Sonido.tipoSonido.CABINA));
+        local.registrarProducto(new Sonido(new String[]{"NIA 2040","IZquierda","NIA"},new int[]{250_000,110_000,2,1,150},new boolean[]{true,true,false},Sonido.tipoSonido.CABINA));
+        local.registrarProducto(new Sonido(new String[]{"AIIR PODS","Derecha","GEDI-G"},new int[]{20_000,50_000,7,3,10},new boolean[]{false,true,true},Sonido.tipoSonido.AUDIFONO));
+        local.registrarProducto(new Sonido(new String[]{"JBL BOOMBOX3","Abajo","JBL"},new int[]{60_000,50_000,3,4,30},new boolean[]{false,false,true},Sonido.tipoSonido.BAFLE));
         
         //===MOSTRAR===
         System.out.println("\n========================INICIO PRUEBAS===================================\n");
         
         local.mostrar();
-        System.out.println("Lleno? "+local.estaLleno());
         
         System.out.println("\n=========================================================================\n");
         
@@ -51,13 +45,12 @@ public class PruebasInventario {
         local.retirarProducto(6);
         local.retirarProducto(2);
 
-        local.registrarProducto(new Producto("PS2","Consolas","Mostrador",300_000, 60_000, 4, 0, 3));
-        local.registrarProducto(new Producto("JBL","Sonido","Mostrador",600_000, 1400_000, 1, 7, 6));
-        local.registrarProducto(new Producto("Caragador","Otros","Colgado",5_000, 10_000, 20, 15, 1));
-        local.registrarProducto(new Producto("Caragador2","Otros","Colgado",5_000, 10_000, 20, 15, 1));
-        
+        local.registrarProducto(new Consola(new String[]{"Xbox 720","Arriba","Xbox"},new int[]{300_000,200_000,6,7},new boolean[]{true,false,false}));
+        local.registrarProducto(new Sonido(new String[]{"JBL BOOMBOX4","Abajo","JBL"},new int[]{60_000,50_000,3,4,30},new boolean[]{false,false,true},Sonido.tipoSonido.BAFLE));
         //===BUSCAR POR NOMBRE Y SETTERS Y GETTERS===
-        Producto productoPorNombre=local.buscarPorNombre("xbox720");
+        ArrayList<Producto> productosPorNombre=local.buscarPorNombre("xbox");
+        System.out.println(productosPorNombre);
+        Producto productoPorNombre=productosPorNombre.get(0);
         productoPorNombre.setNombre("NuevoXbox720");
         productoPorNombre.setUbicacion("NuevaUbi");
         productoPorNombre.setCostoCompra(10_000);
@@ -73,7 +66,6 @@ public class PruebasInventario {
         System.out.println("\n=========================================================================\n");
         
         local.mostrar();
-        System.out.println("Lleno? "+local.estaLleno());
 
         System.out.println("\n=========================================================================\n");
         
