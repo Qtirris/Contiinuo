@@ -41,10 +41,13 @@ public class Varios extends Producto {
             case GAMEPAD:
             case POWERBANK:
                 setGarantia( 3);
+                break;
             case CABLE:
                 setGarantia(  1);
+                break;
             default:
                 setGarantia( 0);
+                break;
         }
     }
 

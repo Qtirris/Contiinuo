@@ -179,7 +179,7 @@ public boolean hayStock(){
 }
 
 public boolean hayStockSobra(){
-    return stock>=stockMinimo;
+    return stock>stockMinimo;
 }
 
 //=============TO STRING==============

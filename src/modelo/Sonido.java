@@ -38,14 +38,19 @@ public class Sonido extends Producto {
             case CABINA:
             case BAFLE:
                 setGarantia(6);
+                break;
             case PARLANTE:
                 setGarantia(3);
+                break;
             case AUDIFONO:
                 setGarantia(2);
+                break;
             case RADIO:
                 setGarantia(1);
+                break;
             default:
                 setGarantia(0);
+                break;
         }
     }
     private String tipoSonidoTexto(tipoSonido tipo){//Es solo para que la primera quede en mayuscula y el retso el minuscula
