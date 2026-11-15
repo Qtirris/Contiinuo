@@ -99,9 +99,9 @@ public class Inventario{
         ArrayList<Consola> retornados=new ArrayList<>();
         
         for(Producto p:Inv){
-            if(!p.getCategoria().equals("Consola")){continue;}//Descarta las que no son consolas
-            if(!((Consola) p).getPlataforma().equals(plataforma)){continue;};//Descarta las que no son de la misma plataforma
-            retornados.add(((Consola)p));
+            if (p instanceof Consola c && c.getPlataforma() == plataforma) {
+            retornados.add(c);
+        }
         }
         return retornados;
     }
@@ -110,9 +110,9 @@ public class Inventario{
         ArrayList<Sonido> retornados=new ArrayList<>();
         
         for(Producto p:Inv){
-            if(!p.getCategoria().equals("Consola")){continue;}//Descarta las que no son consolas
-            if(!((Sonido) p).getMarca().equals(marca)){continue;};//Descarta las que no son de la misma plataforma
-            retornados.add(((Sonido)p));
+            if (p instanceof Sonido s && s.getMarca() == marca) {
+            retornados.add(s);
+        }
         }
         return retornados;
     }
@@ -120,12 +120,20 @@ public class Inventario{
         ArrayList<Sonido> retornados=new ArrayList<>();
         
         for(Producto p:Inv){
-            if(!p.getCategoria().equals("Consola")){continue;}//Descarta las que no son consolas
-            if(!((Sonido) p).getTipo().equals(tipo)){continue;};//Descarta las que no son de la misma plataforma
-            retornados.add(((Sonido)p));
+            if (p instanceof Sonido s && s.getTipo() == tipo) {
+            retornados.add(s);
+        }
         }
         return retornados;
     }
-    //======ACCESORIO=======
     //======VARIOS=======
+    public ArrayList<Varios> buscarPorTipo(Varios.tipoVarios tipo){
+    ArrayList<Varios> retornados = new ArrayList<>();
+    for (Producto p : Inv) {
+        if (p instanceof Varios v && v.getTipo() == tipo) {
+            retornados.add(v);
+        }
+    }
+    return retornados;
+}
 }
