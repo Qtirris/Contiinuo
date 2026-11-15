@@ -33,19 +33,19 @@ public class Sonido extends Producto {
     public String getMarca(){return marca;}
     public tipoSonido getTipo(){return tipo;}
 
-    private int setGarantiaDefecto(tipoSonido tipo){
+    private void setGarantiaDefecto(tipoSonido tipo){
         switch (tipo) {
             case CABINA:
             case BAFLE:
-                return 6;
+                setGarantia(6);
             case PARLANTE:
-                return 3;
+                setGarantia(3);
             case AUDIFONO:
-                return 2;
+                setGarantia(2);
             case RADIO:
-                return 1;
+                setGarantia(1);
             default:
-                return 0;
+                setGarantia(0);
         }
     }
     private String tipoSonidoTexto(tipoSonido tipo){//Es solo para que la primera quede en mayuscula y el retso el minuscula
@@ -55,7 +55,7 @@ public class Sonido extends Producto {
 
     public void detalle(){
         String detalle = tipoSonidoTexto(tipo)+" " +getNombre()+ "\n"+"Marca: "+marca+ "\n"+ "Potencia: "+potencia+
-        "Original: "+ (original?"Si":"No")+"\n"+"Microfono: "+ (microfono?"Si":"No")+"\n"+
+        "\n"+"Original: "+ (original?"Si":"No")+"\n"+"Microfono: "+ (microfono?"Si":"No")+"\n"+
         "Bateria: "+ (bateria?"Si":"No")+"\n";
 
         System.out.println( detalle);
