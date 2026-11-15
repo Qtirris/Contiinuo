@@ -1,181 +1,96 @@
 package servicio;
 
+import java.util.ArrayList;
+
 import modelo.Producto;
 
 public class Inventario{
-    /*
-    Como aun no se puedne usar listas ni arrays ni cosas por el estilo
-    vamos a definir una cantidad maxima de porductos en 10.
-    */
-    
-    private static final int MAXIMO=10;
-    private int numeroProductos = 0;
-    
-    //Ya no son staticos ni privados y se agrego getProducto
-    private Producto producto1;
-    private Producto producto2;
-    private Producto producto3;
-    private Producto producto4;
-    private Producto producto5;
-    private Producto producto6;
-    private Producto producto7;
-    private Producto producto8;
-    private Producto producto9;
-    private Producto producto10;
 
-    //Devuelve el producto de la casilla correpondiente
-    public Producto getProducto(int casilla) {
-        switch (casilla) {
-            case 1:  
-            return producto1;
-            case 2:  
-            return producto2;
-            case 3:  
-            return producto3;
-            case 4:  
-            return producto4;
-            case 5:  
-            return producto5;
-            case 6:  
-            return producto6;
-            case 7:  
-            return producto7;
-            case 8:  
-            return producto8;
-            case 9:  
-            return producto9;
-            case 10: 
-            return producto10;
+    private ArrayList<Producto> Inv = new ArrayList<>();
 
-            default: 
-            return null;
-        }
-    }
-
-    private void asignar(int casilla, Producto producto) {
-        switch (casilla) {
-            case 1:  
-            producto1 = producto;  
-            break;
-            case 2:  
-            producto2 = producto;  
-            break;
-            case 3:  
-            producto3 = producto;  
-            break;
-            case 4:  
-            producto4 = producto;  
-            break;
-            case 5:  
-            producto5 = producto;  
-            break;
-            case 6:  
-            producto6 = producto;  
-            break;
-            case 7:  
-            producto7 = producto;  
-            break;
-            case 8:  
-            producto8 = producto;  
-            break;
-            case 9:  
-            producto9 = producto;  
-            break;
-            case 10: 
-            producto10 = producto; 
-            break;
-
-            default: 
-            break;
-        }
-    }
-   public boolean registrarProducto(Producto producto) {
+    public boolean registrarProducto(Producto producto) {
         if (producto ==null) {
             return false;
         }
-        for (int casilla=1; casilla<= MAXIMO; casilla++) {
-            if (getProducto(casilla)==null) {
-                asignar(casilla, producto);
-                numeroProductos++;
-                return true;
-            }
+        if (!Inv.contains(producto)){
+            Inv.add(producto);
+            return true;
         }
-        return false;   //El inventario esta lleno llenisimo
+        return false;   //EL producto ya esta dentro/
     }
 
-    public boolean retirarProducto(int id) {//Mirar si es mejor retirarlo por ID o por casilla
-        for (int casilla = 1; casilla <= MAXIMO; casilla++) {
-            Producto p = getProducto(casilla);
-            if (p!= null && p.getID()==id) {
-                asignar(casilla, null);
-                numeroProductos--;
-                return true;
-            }
+    public boolean retirarProducto(int id) {//Recibe ID
+        Producto p = buscarPorId(id);
+        if(p!=null){
+            Inv.remove(p);
+            return true;
         }
         return false;
     }
 
-    public Producto buscarPorNombre(String nombre) {
-        if (nombre==null) {
+    public boolean retirarProducto(Producto p) {//Este recibe un Producto como parametro
+        if(Inv.contains(p)){
+            Inv.remove(p);
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Producto> buscarPorNombre(String nombre) {
+        /*
+        Esto ahora devuelve un ArrayList con todos los productos que contienen al nombre (asi como pide la guia)
+        Para seleccionar el buscado Inv.get(retornados.get(i)) siendo i el indice del producto en `retornados`
+        */
+        ArrayList<Producto> retornados= new ArrayList<>();
+        nombre=nombre.trim().toLowerCase();
+        
+        if (nombre.isEmpty()) {
             return null;
         }
-        String buscado = nombre.trim();
-        for(int casilla=1; casilla<= MAXIMO; casilla++) {
-            Producto producto = getProducto(casilla);
-            if (producto!= null && producto.getNombre().equalsIgnoreCase(buscado)) {
-                return producto;
-            }
+        for(Producto p:Inv) {
+            if(p.getNombre().toLowerCase().contains(nombre)){retornados.add(p);}
         }
-        return null;
+        return retornados;
     }
 
     public Producto buscarPorId(int id) {
-        for (int casilla=1; casilla<=MAXIMO; casilla++) {
-            Producto producto = getProducto(casilla);
-            if (producto!=null && producto.getID()==id) {
-                return producto;
+        for (int i=0; i<=Inv.size(); i++) {
+            Producto p = Inv.get(i);
+            if (p!=null && p.getID()==id) {
+                return p;
             }
         }
         return null;
     }
-    public boolean estaLleno(){
-        return numeroProductos==MAXIMO;
-    }
     
     public void mostrar(){
-        for (int casilla=1;casilla<=MAXIMO;casilla++){
-            Producto producto = getProducto(casilla);
-
-            if (producto==null){continue;}
-
-            System.out.println(producto);
+        for (Producto p: Inv){
+            if (p==null){continue;}//Por si las moscas lo dejo, no vaya y sea haya un producto en null :(
+            System.out.println(p);
         }
     }
 
     public String porAgotarse(){
         String porAgotarse="";
-        for (int casilla=1;casilla<=MAXIMO;casilla++){
-            Producto producto = getProducto(casilla);
-
-            if (producto==null|| producto.hayStockSobra()){continue;}
-
-            porAgotarse+="\t--"+producto.getNombre()+"\n";
+        for (Producto p: Inv){
+            if (p==null|| p.hayStockSobra()){continue;}
+            porAgotarse+="\t--"+p.getNombre()+"\n";
         }
         return porAgotarse;
     }
 
-    public void revisarStock(){
+    public String revisarStock(){
         //Revisa que tal vamos de stock (Si necesita o no reposición o si no hay)
         //Se piensa cambiar a que devuelva un array de boolean con cada indice siendo el estado del stock de un producto (de pronto)
-        for (int casilla=1;casilla<=MAXIMO;casilla++){
-            Producto producto = getProducto(casilla);
+        String texto = "";
+        for (Producto p: Inv){
 
-            if (producto==null){continue;}
+            if (p==null){continue;}
 
-            String reposicion = producto.hayStockSobra()?" -(No necesita reposición)":" -(Necesita reposición)";
+            String reposicion = p.hayStockSobra()?" -(No necesita reposición)":" -(Necesita reposición)";
 
-            System.out.println(producto.getNombre()+"--> "
-            +producto.getStock()+"/"+producto.getStockMinimo()+reposicion);
+            texto+=p.getNombre()+"-->"+p.getStock()+"/"+p.getStockMinimo()+reposicion;
         }
+        return texto;
     }
 }
