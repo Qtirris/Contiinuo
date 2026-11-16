@@ -1,5 +1,6 @@
 package app;
 
+import servicio.Lector;
 import servicio.Tienda;
 import modelo.Factura;
 
