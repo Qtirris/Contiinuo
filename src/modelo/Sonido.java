@@ -58,12 +58,12 @@ public class Sonido extends Producto {
         return texto;
     }
 
-    public void detalle(){
+    public String detalle(){
         String detalle = tipoSonidoTexto(tipo)+" " +getNombre()+ "\n"+"Marca: "+marca+ "\n"+ "Potencia: "+potencia+
         "\n"+"Original: "+ (original?"Si":"No")+"\n"+"Microfono: "+ (microfono?"Si":"No")+"\n"+
         "Bateria: "+ (bateria?"Si":"No")+"\n";
 
-        System.out.println( detalle);
+        return detalle;
     }
 }
  

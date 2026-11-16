@@ -100,7 +100,7 @@ public class Inventario{
         return String.format("%-" + ANCHO_CASILLA + "s", " " + texto);//Formatea a la izq y rellena con espacios
     }
 
-    public void revisarStock(){
+    public String revisarStock(){
         Producto[][] cuadricula = armarCuadricula();
         int porReponer = 0;
         int agotados = 0;
@@ -144,7 +144,7 @@ public class Inventario{
 
         texto += "\nOK = stock suficiente   ! = necesita reposición   X = agotado\n";
         texto += "Resumen: " + porReponer + " por reponer, " + agotados + " agotado(s).\n";
-        System.out.print(texto);
+        return texto;
     }
     //================BUSQUEDA ESPECIFICA DE CLASES HEREDADAS=======
     //======CONSOLA=======

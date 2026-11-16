@@ -201,6 +201,6 @@ public String toString(){
     return texto;
 }
 
-public abstract void detalle();
+public abstract String detalle();
 
 }

@@ -29,7 +29,9 @@ public class Tienda {
     public Tienda() {
         this.inventario = new Inventario();
         this.caja = new Caja();
-        this.contabilidad = new Contabilidad(this.caja, this.inventario);
+        // Contabilidad todavía pide un Scanner en su constructor, pero solo lo usa en su viejo
+        // mostrarMenu(), que ya no se llama (el menú está en Main). Por eso se le pasa null.
+        this.contabilidad = new Contabilidad(this.caja, this.inventario, null);
         this.consecutivoFactura = 1;
         this.ultimoComprobante = "";
         this.ultimaFactura = "";
@@ -210,7 +212,13 @@ public class Tienda {
         if (factura.getNumero() == 0) {
             return "No se agregaron productos. Venta cancelada.";
         }
-        this.ultimaFactura = "======= FACTURA #" + consecutivoFactura + " =======\n" + factura;
+        // El texto de la factura se arma con los getters de Factura.
+        this.ultimaFactura = "======= FACTURA #" + consecutivoFactura + " =======\n"
+                + "Cliente: " + factura.getNombreCliente() + "\n"
+                + "Telefono: " + factura.getTelefono() + "\n"
+                + "Forma de pago: " + factura.getMedioDePago() + "\n"
+                + factura.getDetalle() + "\n"
+                + "Total a pagar: $" + factura.getTotal();
         caja.registrarVenta(factura);
         consecutivoFactura++;
         return null;
@@ -281,8 +289,15 @@ public class Tienda {
 
     // ---------- LISTAS Y REPORTES ----------
     public String listaDeCompras() {
-        String lista = inventario.porAgotarse();   // "" si no hay nada por agotarse
-        if (lista.trim().isEmpty()) {
+        // Se recorre el inventario y se anotan los que llegaron al stock mínimo o están por debajo.
+        String lista = "";
+        for (int i = 0; i < inventario.getCantidadProductos(); i++) {
+            Producto p = inventario.getProducto(i);
+            if (p != null && !p.hayStockSobra()) {
+                lista += "\t--" + p.getNombre() + "\n";
+            }
+        }
+        if (lista.isEmpty()) {
             return "No hay productos por agotarse.";
         }
         return "=== LISTA DE COMPRAS ===\nEstá por agotarse:\n" + lista;

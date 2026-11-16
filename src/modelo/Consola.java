@@ -26,12 +26,12 @@ public class Consola extends Producto {
     }
 
     public String getPlataforma(){return plataforma;}
-    public void detalle(){
+    public String detalle(){
         String detalle = "Consola: " +getNombre()+ "\n"+ "Original: "+ (original?"Si":"No")+"\n"+
         "Portatil: "+ (portatil?"Si":"No")+"\n"+"Chipeada: "+ (chipeada?"Si":"No")+"\n"+
         "Plataforma: "+plataforma;
 
-        System.out.println( detalle);
+        return detalle;
     }
 }
  

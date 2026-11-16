@@ -58,7 +58,7 @@ public class Varios extends Producto {
     }
 
     @Override
-    public void detalle(){
+    public String detalle(){
         String detalle = tipoTexto() + ": " + getNombre() + "\n"
                 + "Marca: " + (marca.isEmpty() ? "Sin marca" : marca) + "\n"
                 + "Original: " + (original ? "Si" : "No") + "\n";
@@ -67,6 +67,6 @@ public class Varios extends Producto {
             detalle += "Especificacion: " + especificacion + "\n";
         }
 
-        System.out.println(detalle);
+        return detalle;
     }
 }
