@@ -24,7 +24,7 @@
 
 1. Descargar la ultima versión en el apartado de Releases del repositorio `https://github.com/Qtirris/Contiinuo`.
 
-2. Descomprimir el archivo `.zip` descargado y acceder a la carpeta `src/`.
+2. Descomprimir el archivo `.zip` descargado y acceder a la carpeta `src/app/`.
 
 3. En caso de tener un IDE instalado (como VSCode) que permita ejecutar archivos `.java` , ejecute `Main.java`.  
 De lo contrario será necesario que primero compile todas las clases en la carpeta y luego ejecute la clase `Main`.
