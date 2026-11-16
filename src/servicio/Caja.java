@@ -10,19 +10,27 @@ public class Caja {
     private int totalVendido;
     private int gananciaTotal;
 
-    // Totales por medio de pago, se quito nequi y solo nos quedamos con tranferencias 
+    // Totales por medio de pago
     private int totalEfectivo;
     private int totalTransferencia;
     private int totalOtros;
+    private int totalNequi; 
+
+    private Factura[] facturas = new Factura[100];
+    private int cantidadFacturas = 0; 
 
     // Este constructor inicia la jornada del día desde 0
     public Caja() {
-        this.facturasEmitidas = 0;
-        this.totalVendido = 0;
-        this.gananciaTotal = 0;
-        this.totalEfectivo = 0;
-        this.totalTransferencia = 0;
-        this.totalOtros = 0;
+        facturasEmitidas = 0;
+        totalVendido = 0;
+        gananciaTotal = 0;
+
+        totalEfectivo = 0;
+        totalTransferencia = 0;
+        totalOtros = 0;
+
+        cantidadFacturas = 0; 
+        totalNequi = 0; 
     }
 
     // Suma el total y la ganancia de la factura, la clasifica por medio de pago
@@ -33,26 +41,54 @@ public class Caja {
             return false;
         }
 
-        int total = factura.getTotal();
-        totalVendido += total;
-        gananciaTotal += factura.getGanancia();
+        if (cantidadFacturas >= facturas.length){
+            System.out.println("No se pueden registrar más facturas. "); 
+            return false; 
+        }
+
+        facturas[cantidadFacturas] = factura; 
+        cantidadFacturas++; 
+
         facturasEmitidas++;
+        totalVendido += factura.getTotal(); 
+        gananciaTotal += factura.getGanancia();
 
         String medio = factura.getMedioDePago();
-        medio = (medio == null) ? "" : medio.trim().toLowerCase();
+
+        if (medio == null) {
+            medio = "otros"; 
+        } else {
+            medio = medio.trim().toLowerCase(); 
+        }
 
         switch (medio) {
             case "efectivo":
-                totalEfectivo += total;
+                totalEfectivo += factura.getTotal();
+                break;
+            case "nequi":
+                totalNequi += factura.getTotal();
                 break;
             case "transferencia":
-                totalTransferencia += total;
-                break;
+            case "transferencias":
+                totalTransferencia += factura.getTotal(); 
+                break; 
             default:
-                totalOtros += total;
+                totalOtros += factura.getTotal();
+                break; 
         }
-
         return true;
+    }
+
+    public int getCantidadFacturas() {
+        return cantidadFacturas; 
+    }
+
+    public Factura getFactura(int posicion){
+
+        if (posicion < 0 || posicion >= cantidadFacturas){
+            return null; 
+        }
+        return facturas[posicion]; 
     }
 
     // Reporte de ventas por medio de pago (siempre devuelve texto)
@@ -64,9 +100,9 @@ public class Caja {
 
         return "====== VENTAS POR MEDIO DE PAGO ======\n"
                 + "Efectivo: " + formatoPesos(totalEfectivo) + "\n"
-                + "Transferencia: " + formatoPesos(totalTransferencia) + "\n"
-                + "Otros medios de pago: " + formatoPesos(totalOtros) + "\n"
-                + "Total vendido: " + formatoPesos(totalVendido) + "\n"
+                + "Nequi: " + formatoPesos(totalNequi) + "\n"
+                + "Transferencias: " + formatoPesos(totalTransferencia) + "\n"
+                + "Otros: " + formatoPesos(totalOtros) + "\n"
                 + "=====================================";
     }
 
@@ -97,5 +133,17 @@ public class Caja {
     public int getFacturasEmitidas() { return facturasEmitidas; }
     public int getTotalVendido() { return totalVendido; }
     public int getGananciaTotal() { return gananciaTotal; }
+
+    public int getTotalNequi() {
+        return totalNequi;
+    }
+
+    public int getTotalEfectivo() {
+        return totalEfectivo; 
+    }
+
+    public int getTotalTransferencia() {
+        return totalTransferencia;
+    }
 }
 
