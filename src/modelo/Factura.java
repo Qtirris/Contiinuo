@@ -33,17 +33,44 @@ public class Factura{
   public String getDetalle(){return this.detalle;}
 
   public void agregarItem(Producto punto,int canti, int precioVenta){//me acorde de vectores :v
-    if(precioVenta<0){
-      System.out.println("Precio inválido.");
-      return;
+    if (punto == null) {
+        System.out.println("Producto inválido.");
+        return;
     }
-    detalle += "-"+punto.getNombre()+" ---- ("+canti+")"+" $ "+precioVenta+" c/u ---->"+" $"+canti*precioVenta+""+"\n";
+
+    if (canti <= 0) {
+        System.out.println("La cantidad debe ser mayor que cero.");
+        return;
+    }
+
+    if (canti > punto.getStock()) {
+        System.out.println("No hay suficiente stock disponible.");
+        return;
+    }
+
+    if (precioVenta < 0) {
+        System.out.println("Precio inválido.");
+        return;
+    }
+
+    int totalProducto = precioVenta * canti;
+
+    int gananciaProducto = punto.calcularGanancia(precioVenta) * canti;
+
+    detalle += "-" + punto.getNombre()
+            + " ---- (" + canti + ")"
+            + " $ " + precioVenta + " c/u ---->"
+            + " $" + totalProducto + "\n";
+
     numeroProductos += canti;
-    //punto.stockVendido+=canti;
-    total+=precioVenta*canti;
-    setGanancia(punto.calcularGanancia(precioVenta),canti);
+    total += totalProducto;
+
+    setGanancia(punto.calcularGanancia(precioVenta), canti);
+
     punto.registrarVenta(canti);
-  }
+
+    punto.registrarGanancia(gananciaProducto);
+  } 
 
   public void imprimir(){
     System.out.println("Cliente: " + this.nombreCliente);

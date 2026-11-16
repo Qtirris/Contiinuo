@@ -104,7 +104,7 @@ public String generarReporteProductos() {
 
     Producto masVendido = null;
 
-    for (int i = 1; i <= 10; i++) {
+    for (int i = 0; i < inventario.getCantidadProductos(); i++) {
         Producto actual = inventario.getProducto(i);
 
         if (actual != null) {
@@ -133,7 +133,7 @@ public String generarReporteProductosMenosVendidos() {
 
     Producto menosVendido = null;
 
-    for (int i = 1; i<= 10; i++) {
+    for (int i = 0; i < inventario.getCantidadProductos(); i++) {
 
         Producto actual = inventario.getProducto(i);
 
@@ -163,21 +163,17 @@ public String generarReporteProductosMasRentables() {
     Producto masRentable = null;
     int mayorGanancia = 0;
 
-    for (int i = 1; i <= 10; i++) {
+    for (int i = 0; i < inventario.getCantidadProductos(); i++) {
         Producto actual = inventario.getProducto(i);
 
         if (actual != null && actual.getStockVendido() > 0) {
+            int gananciaTotal = actual.getGananciaAcumulada();
 
-            int gananciaPorUnidad =
-                    actual.getPrecioMinimo() - actual.getCostoCompra();
-
-            int gananciaTotal =
-                    gananciaPorUnidad * actual.getStockVendido();
-
-            if (masRentable == null || gananciaTotal > mayorGanancia) {
-                masRentable = actual;
+            if (masRentable == null || gananciaTotal > mayorGanancia){
+                masRentable = actual; 
                 mayorGanancia = gananciaTotal;
             }
+        
         }
     }
 
@@ -189,7 +185,7 @@ public String generarReporteProductosMasRentables() {
     return "====== PRODUCTO QUE GENERA MÁS GANANCIAS ======\n"
             + "Producto: " + masRentable.getNombre() + "\n"
             + "Unidades vendidas: " + masRentable.getStockVendido() + "\n"
-            + "Ganancia estimada: $" + mayorGanancia;
+            + "Ganancia total: $" + mayorGanancia;
 
 }
 

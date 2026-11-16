@@ -8,6 +8,9 @@ public class Inventario{
 
     private ArrayList<Producto> Inv = new ArrayList<>();
 
+    private static final int COLUMNAS = 5;
+    private static final int ANCHO_CASILLA = 14;
+
     public boolean registrarProducto(Producto producto) {
         if (producto ==null) {
             return false;
@@ -79,19 +82,69 @@ public class Inventario{
         System.out.println(porAgotarse);
     }
 
-    public void revisarStock(){
-        //Revisa que tal vamos de stock (Si necesita o no reposición o si no hay)
-        //Se piensa cambiar a que devuelva un array de boolean con cada indice siendo el estado del stock de un producto (de pronto)
-        String texto = "";
-        for (Producto p: Inv){
+    private Producto[][] armarCuadricula(){
+        int filas = Math.max(1, (Inv.size() + COLUMNAS - 1) / COLUMNAS); //Esto hace que hayan suficientes filas (quedan alguno en blanco)
+        Producto[][] cuadricula = new Producto[filas][COLUMNAS];
 
-            if (p==null){continue;}
-
-            String reposicion = p.hayStockSobra()?" -(No necesita reposición)":" -(Necesita reposición)";
-
-            texto+=p.getNombre()+"-->"+p.getStock()+"/"+p.getStockMinimo()+reposicion+"\n";
+        for (int i = 0; i < Inv.size(); i++) {
+            cuadricula[i / COLUMNAS][i % COLUMNAS] = Inv.get(i);
         }
-        System.out.print( texto);
+        return cuadricula;
+    }
+
+    private String ajustar(String texto){
+        int maximo = ANCHO_CASILLA - 1;     //el primer caracter siempre es un espacio
+        if (texto.length() > maximo) {
+            texto = texto.substring(0, maximo - 1) + ".";
+        }
+        return String.format("%-" + ANCHO_CASILLA + "s", " " + texto);//Formatea a la izq y rellena con espacios
+    }
+
+    public void revisarStock(){
+        Producto[][] cuadricula = armarCuadricula();
+        int porReponer = 0;
+        int agotados = 0;
+
+        String separador = "        +";
+        for (int c = 0; c < COLUMNAS; c++) {
+            separador += "-".repeat(ANCHO_CASILLA) + "+";
+        }
+
+        String texto = "         ";
+        for (int c = 0; c < COLUMNAS; c++) {
+            texto += String.format("%-" + (ANCHO_CASILLA + 1) + "s", " Col " + (c + 1));
+        }
+        texto += "\n" + separador + "\n";
+
+        for (int f = 0; f < cuadricula.length; f++) {
+            String lineaNombre = String.format("%-8s", "Fila " + (f + 1)) + "|";
+            String lineaEstado = "        |";
+
+            for (int c = 0; c < COLUMNAS; c++) {
+                Producto p = cuadricula[f][c];
+
+                if (p == null) {
+                    lineaNombre += ajustar("libre") + "|";
+                    lineaEstado += ajustar("") + "|";
+                } else {
+                    String estado = "OK";
+                    if (p.getStock() == 0) {
+                        estado = "X";
+                        agotados++;
+                    } else if (!p.hayStockSobra()) {
+                        estado = "!";
+                        porReponer++;
+                    }
+                    lineaNombre += ajustar(p.getNombre()) + "|";
+                    lineaEstado += ajustar(String.format("ID %-3d %s", p.getID(), estado)) + "|";
+                }
+            }
+            texto += lineaNombre + "\n" + lineaEstado + "\n" + separador + "\n";
+        }
+
+        texto += "\nOK = stock suficiente   ! = necesita reposición   X = agotado\n";
+        texto += "Resumen: " + porReponer + " por reponer, " + agotados + " agotado(s).\n";
+        System.out.print(texto);
     }
     //================BUSQUEDA ESPECIFICA DE CLASES HEREDADAS=======
     //======CONSOLA=======
@@ -136,4 +189,36 @@ public class Inventario{
     }
     return retornados;
 }
+
+// Devuelve la cantidad de productos registrados
+public int getCantidadProductos() {
+return Inv.size();
+}
+
+// Devuelve un producto según su posición en el ArrayList
+public Producto getProducto(int posicion) {
+if (posicion >= 0 && posicion < Inv.size()) {
+return Inv.get(posicion);
+}
+return null;
+}
+
+public boolean estaLleno() {
+    return Inv.size() >= 10; 
+}
+
+public Producto buscarProductoPorNombre(String nombre) {
+    if (nombre == null || nombre.trim().isEmpty()) {
+        return null;
+    }
+
+    for (Producto p : Inv) {
+        if (p.getNombre().equalsIgnoreCase(nombre.trim())) {
+            return p;
+        }
+    }
+
+    return null;
+}
+
 }

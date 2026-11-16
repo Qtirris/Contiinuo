@@ -133,6 +133,7 @@ public class Caja {
     public int getFacturasEmitidas() { return facturasEmitidas; }
     public int getTotalVendido() { return totalVendido; }
     public int getGananciaTotal() { return gananciaTotal; }
+<<<<<<< HEAD
 
     public int getTotalNequi() {
         return totalNequi;
@@ -147,3 +148,6 @@ public class Caja {
     }
 }
 
+=======
+}
+>>>>>>> 72152f1d63433603936e374903a3ddf6a8624f78

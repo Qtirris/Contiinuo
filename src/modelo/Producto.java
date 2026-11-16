@@ -16,6 +16,7 @@ public abstract class Producto{
     private int stockMinimo;
     private int stockVendido;
     private int garantia;
+    private int gananciaAcumulada = 0; 
     
     //Garantia se quitó del constructor, ahora lo asigna la clase por defecto (aun se puede usar setGarantia para cassos especiales)
     
@@ -117,6 +118,16 @@ public final void registrarVenta(int cantidad) {
         stockVendido += cantidad;
         stock -= cantidad;
     }
+}
+
+// Devuelve las ganancias acumuladas del producto
+public final int getGananciaAcumulada() {
+    return gananciaAcumulada;
+}
+
+// Registra las ganancias generadas por una venta
+public final void registrarGanancia(int ganancia) {
+    gananciaAcumulada += ganancia;
 }
 
 public final boolean setStockVendido(int vendido){
