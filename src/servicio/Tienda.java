@@ -1,28 +1,41 @@
 package servicio;
-import java.util.Scanner;
 
-import modelo.Factura;
+import.java.util.ArrayList;
+
 import modelo.Producto;
+import modelo.Factura;
+import modelo.Consola;
+import modelo.Sonido;
+import modelo.Varios;
 
-//es de vital importancia para leer los datos proporcionados por el usuario
-//y para asi seguir las reglas de las otras clases.
+//Se declara a la clase tienda como parte del paquete servicio y se importa la carpeta modelo y sus clases, para poder
+//leerlas.
 
 public class Tienda {
     //atributos de la clase contiinuo, vitales para el funcionamiento del programa.
+
+    // La cuadrícula del inventario tiene 5 columnas (debe coincidir con Inventario.COLUMNAS).
+    private static final int COLUMNAS = 5;
+
     private Inventario inventario;
     private Caja caja;
-    private Contabilidad contabilidad; 
+    private Contabilidad contabilidad;
     private int consecutivofactura;
-    private Scanner sc;
+    private string ultimoComprobante;
+    private String ultimaFactura;
+
+    //Tienda ya no imprime, lo hace main, entonces guarda los datos y en ultimoComprobante y ultimaFactura para que
+    //main lo muestre.
 
 
-    public Tienda(Scanner sc){
+    public Tienda(){
         //Constructor y parámetros
         this.inventario= new Inventario();
         this.caja=new Caja();
         this.contabilidad=new Contabilidad(this.caja, this.inventario, sc);
         this.consecutivofactura=1;
-        this.sc=sc;
+        this.ultimoComprobante= "";
+        this.ultimaFactura= "";
     }
 
     //getters, para que las otras clases puedan tomar estos atributos.
@@ -37,383 +50,278 @@ public class Tienda {
         return consecutivofactura;
     }
 
+    public String getUltimoComprobante(){
+        return ultimoComprobante;
+    }
+
+    public String getUltimaFactura(){
+        return ultimaFactura;
+    }
+
     //Métodos, para retornar.
 
     //listaDeCompras, muestra los productos que se estan acabando y hace una lista en base a ello.
 
     public void listaDeCompras(){
-        System.out.println();
-        System.out.println("=== LISTA DE COMPRAS ===");
-        System.out.println();
-
-        System.out.println(inventario.porAgotarse().trim().isEmpty()?
-        "No hay productos por agotarse":"Está por agotarse:\n"+inventario.porAgotarse());
+        String lista= inventario.porAgotarse;
+        if(lista.trim().isEmpty()){
+            return "No hay productos por agotarse.";
+        }
+        return "===LISTA DE COMPRAS===\nEstá por agotarse:\n"+lista;
     }
 
 
 
     //registrar un producto nuevo.
 
-    public void registrarProducto(){
-        System.out.println();
-        System.out.println("====REGISTRAR PRODUCTO====");
-        System.out.println();
-
-        //REGLA, la bodega tiene maximo 10 productos.
+    public void registrarProducto(int tipo, String[] textos, int[] numeros, boolean[] banderas, int subtipo ){
+        if (textos[0] == null || texto[0].trim().isEmpty()){
+            return "El nombre no puede estar vacío.";
+        }
+        for (int i=0; i < numeros.length; i++){
+            if(numeros[i] < 0){
+                return "Datos inválidos: ningún número puede ser negativo.";
+            }
+        }
         if(inventario.estaLleno()){
-            System.out.println("El inventario está lleno (máximo 10 productos");
-            return;
+            return "El inventario está lleno.";
         }
-
-        String nombre= "";
-        while (nombre.equals("")){
-            System.out.print("Nombre: ");
-            nombre = sc.nextLine();
-        }
-
-        //REGLA, no puede haber dos productos con el mismo nombre
-        if(inventario.buscarPorNombre(nombre) != null) {
-            System.out.println("Ya existe un producto con ese nombre.");
-            return;
-        }
-
-        System.out.print("Categoria: ");
-        String categoria = sc.nextLine();
-
-        System.out.print("Ubicación: ");
-        String ubicacion = sc.nextLine();
-
-        int costo = leerEnteros("Costo de compra: ");
-        int gananciaMinima = leerEnteros("Ganancia mínima: ");
-        int stock= leerEnteros("Stock inicial: ");
-        int stockMinimo= leerEnteros("Stock mínimo: ");
-        int garantia = leerEnteros("Meses de garantía (0 si no tiene): ");
-
-        //Mismo orden que el constructor de producto para que no haya problemas.
-
-        Producto prdt= new Producto(nombre,categoria,ubicacion,costo, gananciaMinima, stock, stockMinimo, garantia);
-
-        if(inventario.registrarProducto(prdt)){
-            System.out.println();
-            System.out.println("Producto registrado: "+prdt);
-            System.out.println();
-
-        } else {
-            System.out.println("No se pudo registrar el producto.");
-        }
-    }
-
-    //Creamos el ayudante para leer números enteros.
-
-    private int leerEnteros(String nombre){
-        System.out.print(nombre);
-        int valor = Integer.parseInt(sc.nextLine());
-        while ( valor < 0){
-            System.out.print("El valor no puede ser negativo.");
-            valor=Integer.parseInt(sc.nextLine());
-        }
-
-        return valor;
-    }
-
-    //Reponer sotck, se compra mercancia de un producto para reponer el stock.
-
-    public void reponerProducto(){
-        System.out.println();
-        System.out.println("===REPONER STOCK===");
-        System.out.println();
-
-        //1. Se busca producto en la bodega.
-
-        System.out.print("Nombre del producto: ");
-        String nombre = sc.nextLine();
-        Producto prdt = inventario.buscarPorNombre(nombre);
-
-        if(prdt == null) {
-            System.out.print("Ese producto no existe. ¿Quieres registrarlo ahora? (s/n): ");
-            if (sc.nextLine().equals("s")) {
-                registrarProducto();
-            }
-            return;//se sale de la reposicion y se hace de nuevo con el producto ya creado.
-        }
-
-            //2.Pedir los datos de la compra
-            System.out.println();
-            int cantidad = leerEnteros("Cantidad comprada: ");
-            System.out.println();
-
-            while(cantidad == 0){
-                System.out.println("Debe ser mayor que 0.");
-
-                System.out.println();
-                cantidad = leerEnteros("Cantidad comprada: ");
-                System.out.println();
-
-            }
-            
-            int costoUnitario =leerEnteros("Costo por unidad: ");
-            System.out.println();
-
-            while (costoUnitario == 0){
-                System.out.println("Debe ser mayor que 0.");
-                System.out.println();
-                costoUnitario = leerEnteros("Costo por unidad: ");
-                System.out.println();
-            }
-
-            System.out.print("Proveedor: ");
-            String proveedor = sc.nextLine();
-
-            //3. Guardar el costo de antes, para compararlo después.
-            int costoAnterior = prdt.getCostoCompra();
-
-            //4. El producto suma al stock y actualiza su costo
-            prdt.reponer(cantidad);
-            prdt.setCostoCompra(costoUnitario);
-
-            //REGLA, si el costo subió se alerta al usuario.
-            if(costoUnitario > costoAnterior){
-                System.out.println("OJO: el costo subió. Conviene revisar la ganancia mínima.");
-            }
-
-            //5. Comprobante de compra.
-            System.out.println();
-            System.out.println("=== COMPROBANTE DE COMPRA ===");
-            System.out.println();
-            System.out.println("Proveedor: "+ proveedor);
-            System.out.println("Producto: "+prdt.getNombre());
-            System.out.println("Cantidad: "+cantidad);
-            System.out.println("Costo por unidad: $"+costoUnitario);
-            System.out.println("Tota: $"+(cantidad * costoUnitario));
-            System.out.println("Stock actual: "+prdt.getStock());
-
-    }
-
-
-    //Metodo retirar producto del inventario.
-
-    public void retirarProducto(){
-        System.out.println();
-        System.out.println("===RETIRAR PRODUCTO===");
-        System.out.println();
-
-        System.out.print("Nombre del producto: ");
-        String nombre = sc.nextLine();
-        Producto prdt = inventario.buscarPorNombre(nombre);
-
-        if(prdt == null){
-            System.out.println("No se encontró ese producto.");
-            return;
-        }
-
-        System.out.println(prdt);
-        System.out.print("¿Seguro que quieres retirarlo del inventario? (s/n): ");
-
-        if(sc.nextLine().equals("s")){
-            //el inventario retira el producto por su ID.
-            if(inventario.retirarProducto(prdt.getID())){
-                System.out.println("Producto retirado: "+prdt.getNombre());
-
-            } else {
-                System.out.println("No se pudo retirar el producto.");
-            }
-
-        } else {
-            System.out.println("Operación cancelada.");
-        }
-    }
-
-    public void administrarInventario(){
-        int opcion= -1;
-        while (opcion != 0){
-            System.out.println();
-            System.out.println("===ADMINISTRAR INVENTARIO===");
-            System.out.println();
-
-            System.out.println("1.  Registrar producto.");
-            System.out.println("2.  Reponer stock.");
-            System.out.println("3.  Retirar producto.");
-            System.out.println("4.  Ver inventario.");
-            System.out.println("5.  Lista de compras.");
-            System.out.println("0.  Volver.");
-
-            System.out.println();
-            opcion= leerEnteros("Opción: ");
-            System.out.println();
-
-            switch (opcion){
-                case 1: registrarProducto(); break;
-                case 2: reponerProducto(); break;// Reponer Stock
-                case 3: retirarProducto(); break;
-                case 4: inventario.mostrar(); break;
-                case 5: listaDeCompras(); break;
-                case 0: break;
-                default: System.out.println("opción no válida. Intenta de nuevo."); break;
-            }
-        }
-    }
-
-    // Se crea la regla para buscar productos, en donde se llama a inventario para ver si está.
-    public void buscarProducto() {
-        System.out.println();
-        System.out.println("===BUSCAR PRODUCTO===");
-        System.out.println();
-
-        System.out.print("Nombre del producto: ");
-        String nombreproducto = sc.nextLine();
-        Producto prdt = inventario.buscarPorNombre(nombreproducto);
-
-        if (prdt == null) {
-            System.out.println("No se encontró ese producto.");
-            return;
-
-        }
-
-        System.out.println(prdt); //nombre, stock, ubicacion, garantia
-
-        System.out.print("¿Quiere cambiar su ubicación(s/n): ");
-        if (sc.nextLine().equals("s")) {
-            System.out.print("Nueva ubicación: ");
-            String nueva = sc.nextLine();
-            prdt.setUbicacion(nueva);
-            System.out.println("Ubicación actualizada "+prdt);
-
-        }
-        else if(!sc.nextLine().equals("n")){System.out.println("Opción inválida.");}
-        System.out.println();
-    }
-
-    //Llama a caja para obtener los datos del cierre del dia e imprimirlos.
-    public void cerrarDia(){
-        System.out.println();
-        System.out.println("===CIERRE DEL DÍA===");
-        System.out.println();
-
-        System.out.println(caja.resumenDelDia());}
-
-
-    public void abrirContabilidad() {
-        contabilidad.mostrarMenu();
-    }
-
-    //Llama a contabilidad para obtener el resumen contable e imprimirlo.
-    public void mostrarResumenContable(){
-        System.out.println(contabilidad.generarResumenGeneral());
-    }
-
-    public void registrarVenta(){
-        System.out.println();
-        System.out.println("=== NUEVA VENTA ===");
-        System.out.println();
-
-        //1. Datos del cliente.
-
-        System.out.print("Nombre del cliente: ");
-        String cliente = sc.nextLine();
-        System.out.print("Telefono del cliente: ");
-        String telefono = sc.nextLine();
-
-        //Regla, sin fiado. Solo efectivo o transferencia.
-
-        String med = "";
-        while(med.equals("")){
-            System.out.println();
-            System.out.println("Medio de pago: 1. Efectivo 2. Transferencia");
-            System.out.println();
-
-            int opcionPago= leerEnteros("Opción: ");
-            System.out.println();
-            if(opcionPago == 1){
-                med = "Efectivo";
-            } else if (opcionPago == 2){
-                med = "Transferencia";
-            }
-            else{
-                System.out.println("Solo se acepta afectivo o transferencia(no se fía).");
-            }
-        }
-
-        Factura factura = new Factura(cliente,telefono,med);
-
-        //2. Ciclo de productos, es decir se repiten hasta que escriban 0.
-        int items = 0;
-        while(true){
-            System.out.print("Producto (0 para terminar): ");
-            String nombre = sc.nextLine();
-            System.out.println();
-            if(nombre.equals("0")){
+        Producto p;
+        switch(tipo){
+            case 1:
+                p=new Consola(textos, numeros, banderas);
                 break;
-            }
-            Producto prdt= inventario.buscarPorNombre(nombre);
-            if(prdt == null){
-                System.out.println("Ese producto no existe.");
-                continue;
-            }
-            System.out.println();
-            int cantidad = leerEnteros("Cantidad: ");
-            System.out.println();
-            while(cantidad == 0){
-                System.out.println("Debe ser mayor que 0.");
-                System.out.println();
-                cantidad = leerEnteros("Cantidad: ");
-                System.out.println();
-            }
 
-            //Regla, stock suficiente
-            if(prdt.getStock()<cantidad){
-                System.out.println();
-                System.out.println("Stock insuficiente. Disponibles: "+ prdt.getStock());
-                System.out.println();
-                continue;
-            }
+            case 2:
+                if (subtipo < 1 || subtipo > Sonido.tipoSonido.values().length) {
+                    return "Clase de sonido no válida.";
+                }
+                p = new Sonido(textos, numeros, banderas, Sonido.tipoSonido.values()[subtipo - 1]);
+                break;
+            case 3:
+                if (subtipo < 1 || subtipo > Varios.tipoVarios.values().length) {
+                    return "Clase de producto no válida.";
+                }
+                p = new Varios(textos, numeros, banderas[0], Varios.tipoVarios.values()[subtipo - 1]);
+                break;
 
-            //REGÑA, ganancia minima (el precio no puede ser menor al precio minimo)
-            System.out.println();
-            int precio= leerEnteros("Precio final por unidad(presione 0 para omitir este producto: ");
-            System.out.println();
-
-            while(precio !=0 && precio < prdt.getPrecioMinimo()){
-                System.out.println("Precio muy bajo. El mínimo es "+prdt.getPrecioMinimo());
-                System.out.println();
-                precio = leerEnteros("Precio final por unidad ( presione 0 para omitir este producto: ");
-                System.out.println();
-
-            }
-            if(precio == 0){
-                System.out.println("Producto omitido.");
-                continue;
-            }
-
-            //todo valido: la factura anota el producto y el mismo descuenta su stock.
-
-            factura.agregarItem(prdt, cantidad, precio);
-            items++;
-
-            //REGLA, alerta de reposicion
-            if(!prdt.hayStockSobra()){
-                System.out.println("¡Toca comprar!"+prdt.getNombre()+"está en el stock mínimo o por debajo.");
-            }
+            default:
+                return "Tipo de producto no válido.";
         }
 
-        //3. si no se agrega nada no hay factura.
-        if(items == 0){
-            System.out.println("No se agregaron productos. Venta cancelada.");
-            return;
+        if (!inventario.registrarProducto(p)){
+            return "No se pudo registrar el producto.";
+        }
+        return null;
+    }
+
+    public String reponerProducto( int id, int cantidad, int costoUnitario, String proveedor){
+        prodcuto p= inventario.buscarPorId(id);
+        if(p==null){
+            return "Ese producto no existe.";
+        }
+        if(cantidad <=0 || costoUnitario <=0){
+            return "La cantidad y el costo deben ser mayores que 0.";
         }
 
-        //4. Mostrar la factura, guardarla y registrarla en caja
-        System.out.println();
-        System.out.println("======= FACTURA #"+ consecutivofactura + " =======" );
-        System.out.println();
-        
-        factura.imprimir();
-        factura.guardar();
-        consecutivofactura++;
-        //la proxima factura tendrá el número siguiente.
+        int costoAnterior = p.getCostoCompra(); //Se guarda antes de cambiarlo para comparar.
+        p.reponer(cantidad);
+        p.setCostoCompra(costoUnitario);
+
+        String texto = "=== COMPROBANTE DE COMPRA ===\n"
+                +"Proveedor: "+proveedor+"\n"
+                +"Producto: "+p.getNombre()+"\n"
+                +"Cantidad: "+cantidad+"\n"
+                +"Costo por unidad: $"+costoUnitario+"\n"
+                +"Total: $"+(cantidad * costoUnitario)+ "\n"
+                +"Stock actual: "+p.getStock();
+        if(costoUnitario > costoAnterior){
+            texto += "\nOJO: el costo subió. Conviene revisar la ganancia mínima.";
+        }
+        this.ultimoComprobante = texto;
+        return null;
+    }
+
+    //Se retiran productor por ID.
+    public boolean retirarProducto(int id){
+        return inventario.retirarProdcuto(id);
+
+    }
+
+    //Devuelve factura, o null si el medio de pago no es valido.
+    public Factura iniciarVenta(String cliente, String telefono, int medio){
+        String pago;
+        if(medio == 1){
+            pago="Efectivo";
+        }else if(medio == 2){
+            pago="Transferencia";
+        } else{
+            return null;
+        }
+        return new Factura(liente, telefono, pago);
+    }
+
+    public String agregarItem(Factura factura, int id, int cantidad, int precioFinal) {
+        Producto p = inventario.buscarPorId(id);
+        if (p == null) {
+            return "Ese producto no existe.";
+        }
+        if (cantidad <= 0) {
+            return "La cantidad debe ser mayor que 0.";
+        }
+        if (p.getStock() < cantidad) {
+            return "Stock insuficiente. Disponibles: " + p.getStock();
+        }
+        if (precioFinal < p.getPrecioMinimo()) {
+            return "Precio muy bajo. El mínimo es " + p.getPrecioMinimo();
+        }
+        // OJO: Factura.agregarItem YA descuenta el stock (llama a p.registrarVenta).
+        // Por eso aquí NO se llama a p.descontar: se restaría dos veces.
+        factura.agregarItem(p, cantidad, precioFinal);
+        return null;
+    }
+
+    //true si el producto llegó al stock mínimo o quedó por debajo.
+
+    public boolean alertaReposicion(int in) {
+        Producto p = inventario.buscarPorId(id);
+        return p != null && p.getStock() <= p.getStockMinimo();
+    }
+
+    // Cierra la venta, registra en caja y avanza en el consecutivo. Devuelve error o null.
+    public String cerrarVenta(Factura factura){
+        if(factura.getNumero() == 0){
+            return "No se agregaron productos. Su venta será cancelada.";
+        }
+
+        this.ultimaFactura = "======== FACTURA #"+ consecutivoFactura+"========\n"+factura;
         caja.registrarVenta(factura);
+        consecutivofactura++;
+        return null;
     }
 
-    public String toString(){
-        return "Tienda [ próxima factura #"+ consecutivofactura;
+    // Búsqueda por parte del nombre, sin importar mayúsculas (la hace Inventario con contains).
+    public String buscarPorTexto(String texto) {
+        String lista = listarPorNombre(texto);
+        if (lista == null) {
+            return "Sin coincidencias.";
+        }
+        return lista;
     }
+
+    //ahora cumple la función de buscar por nombre.
+    private ArrayList<Producto> coincidencias(String nombre){
+        ArrayList<Producto> lista = inventario.buscarPorNombre(nombre);
+        if (lista == null) {
+            return new ArrayList<>();
+        }
+        return lista;
+    }
+}
+
+//Devuelve el ID del producto con ese nombre: 0 si no hay ninguna y -1 si hay varios.
+public int idPorNombre(String nombre){
+    ArrayList<Producto> lista = coincidencias(nombre);
+    if(lista,size() == 0){
+        return 0;
+    }
+
+    if(lista.size() > 1){
+        return -1;
+    }
+
+    return lista.get(0).getID();
+}
+
+//Texto con todos los productos de ese nombre(cada uno con su id). null si no hay.
+public String listarPorNombre(String nombre){
+    ArrayList<Producto> lista = coincidencias(nombre);
+    if(lista.size() == 0){
+        return null;
+    }
+    String texto = "";
+    for(int i = 0; i < lista.size(); i++){
+        texto += lista.get(i) + "\n";
+    }
+
+    return texto;
+}
+// Detalle completo de un producto. Aquí está el POLIMORFISMO: p.detalle() lo responde
+// cada subclase a su manera y nadie pregunta de qué tipo es.  null si no existe.
+public String detalleProducto(int id) {
+    Producto p = inventario.buscarPorId(id);
+    if (p == null) {
+        return null;
+    }
+    return p + "\n" + p.detalle() + "\nGarantía: " + p.getGarantia() + " meses";
+}
+public boolean cambiarUbicacion(int id, String nueva) {
+    Producto p = inventario.buscarPorId(id);
+    if (p == null) {
+        return false;
+    }
+    return p.setUbicacion(nueva);
+}
+
+// El usuario escribe fila y columna desde 1. La casilla (fila, columna) es la posición
+// (fila - 1) * COLUMNAS + (columna - 1) dentro de la lista del inventario.
+
+public String cuadricula() {
+    return inventario.revisarStock();
+}
+private Producto productoEn(int fila, int columna) {
+    if (fila < 1 || columna < 1 || columna > COLUMNAS) {
+        return null;
+    }
+    return inventario.getProducto((fila - 1) * COLUMNAS + (columna - 1));
+}
+public String consultarCasilla(int fila, int columna) {
+    Producto p = productoEn(fila, columna);
+    if (p == null) {
+        return null;   // casilla libre o posición que no existe
+    }
+    return p + "\n" + p.detalle() + "\nGarantía: " + p.getGarantia() + " meses";
+}
+public String reponerEnCasilla(int fila, int columna, int cantidad, int costoUnitario, String proveedor) {
+    Producto p = productoEn(fila, columna);
+    if (p == null) {
+        return "Esa casilla está libre.";
+    }
+    return reponerProducto(p.getID(), cantidad, costoUnitario, proveedor);
+}
+public boolean retirarDeCasilla(int fila, int columna) {
+    Producto p = productoEn(fila, columna);
+    return p != null && inventario.retirarProducto(p.getID());
+}
+
+//Llama a caja para obtener los datos del cierre del dia e imprimirlos.
+public void cerrarDia() {
+    return caja.resumenDelDia();
+}
+// Cada reporte devuelve un texto. Tienda se lo pide a Contabilidad (o a Caja) y Main lo imprime.
+public String resumenContable() {
+    return contabilidad.generarResumenGeneral();
+}
+public String reporteMasVendido() {
+    return contabilidad.generarReporteProductos();
+}
+public String reporteMenosVendido() {
+    return contabilidad.generarReporteProductosMenosVendidos();
+}
+public String reporteMasRentable() {
+    return contabilidad.generarReporteProductosMasRentables();
+}
+public String reporteMedioDePago() {
+    return contabilidad.generarReporteVentasPorMedioPago();
+}
+public String totalVendido() {
+    return "Total vendido: $" + caja.getTotalVendido();
+}
+public String gananciaTotal() {
+    return "Ganancias: $" + caja.getGananciaTotal();
+}
+
+public String toString(){return "Tienda [ próxima factura #"+ consecutivofactura;}
+
+
 }
