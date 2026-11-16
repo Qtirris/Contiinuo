@@ -136,4 +136,36 @@ public class Inventario{
     }
     return retornados;
 }
+
+// Devuelve la cantidad de productos registrados
+public int getCantidadProductos() {
+return Inv.size();
+}
+
+// Devuelve un producto según su posición en el ArrayList
+public Producto getProducto(int posicion) {
+if (posicion >= 0 && posicion < Inv.size()) {
+return Inv.get(posicion);
+}
+return null;
+}
+
+public boolean estaLleno() {
+    return Inv.size() >= 10; 
+}
+
+public Producto buscarProductoPorNombre(String nombre) {
+    if (nombre == null || nombre.trim().isEmpty()) {
+        return null;
+    }
+
+    for (Producto p : Inv) {
+        if (p.getNombre().equalsIgnoreCase(nombre.trim())) {
+            return p;
+        }
+    }
+
+    return null;
+}
+
 }

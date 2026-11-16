@@ -98,4 +98,3 @@ public class Caja {
     public int getTotalVendido() { return totalVendido; }
     public int getGananciaTotal() { return gananciaTotal; }
 }
-

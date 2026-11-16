@@ -416,11 +416,4 @@ public class Tienda {
     public String toString(){
         return "Tienda [ próxima factura #"+ consecutivofactura;
     }
-
-
-
-
-
-
-
 }
